@@ -4,10 +4,13 @@
  *
  * Description:
  *    Converts a specified file of binary data to ASCII readable
- *    hex format.  Output is dumped to the screen (i.e. <stdout>).
+ *    hex format ... except any binary values that can be mapped
+ *    to ASCII characters.
+ *
+ *    Output is dumped to the screen (i.e. <stdout>).
  *
  * COPYRIGHT:
- *    Copyright (c) 2016
+ *    Copyright (c) 2016 - 2024
  *        Tim MacAndrew (six_eight_squash@yahoo.com)
  *
  *    Permission to use, copy, modify, and/or distribute this software for any
@@ -26,6 +29,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 
 static void Read_File
@@ -140,7 +144,14 @@ static void Save_As_ASCII_Hex
 
    for (i = 0; i < length; i++)
    {
-       printf("%#.2x ", buf[i]);
+       if ( isalnum ((int) buf[i]) )
+       {
+           printf("'%c' ", (char) buf[i]);
+       }
+       else
+       {
+           printf("%#.2x ", buf[i]);
+       }
 
        if ( i != 0 )
        {
