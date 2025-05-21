@@ -247,9 +247,7 @@ static void Service (void)
        memset (message, 0, sizeof(message));
 
        printf("\tType message to send (type 'exit' to end)...: ");
-       scanf ("%s", message);
-
-       //printf("you typed...: %s\n", message);
+       fgets(message, sizeof(message), stdin);
 
        if ( strncmp (message, "exit", 4) == 0 )
        {
@@ -499,4 +497,5 @@ static int Get_Last_Error (void)
    #endif
 }
 
+/* EOF */
 

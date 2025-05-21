@@ -71,7 +71,6 @@ static void Shutdown (SOCKET which_socket);
 static void Show_Error (const char *msg);
 static void Show_Usage_And_Exit (void);
 static int  Get_Last_Error (void);
-static char *get_ip_str (const struct sockaddr *sa);
 
 static SOCKET listen_socket = 0;
 
@@ -95,7 +94,7 @@ int main (int argc, char **argv)
 
    if (argc != 2)
    {
-       Show_Usage_And_Exit ();
+       Show_Usage_And_Exit();
    }
 
    sscanf(argv[1], "%hu", &port_num);
@@ -138,8 +137,6 @@ static void Initialize (void)
           exit (EXIT_FAILURE);
       }
 
-   #else
-
    #endif
 
    memset (client_sockets, 0, sizeof(client_sockets));
@@ -164,12 +161,12 @@ static void Initialize (void)
 static void Open_Listen_Socket (const unsigned short port_num)
 
 {
-         int                status;
+   int                status;
 
-         /* don't expect too many clients at once */
-         int                backlog = 1;
-         struct sockaddr_in my_IP_address_info;
-         char               host_name[256];
+   /* don't expect too many clients at once */
+   int                backlog = 1;
+   struct sockaddr_in my_IP_address_info;
+   char               host_name[256];
 
    listen_socket = socket
                      (AF_INET,      /* domain   */
@@ -218,10 +215,15 @@ static void Open_Listen_Socket (const unsigned short port_num)
        exit (EXIT_FAILURE);
    }
 
+   struct sockaddr_in *sai = (struct sockaddr_in *) &my_IP_address_info;
+   char               *addr_string;
+
+   addr_string = inet_ntoa(sai->sin_addr);
+
    printf("---> Host name....: %s\n"
           "---> Address......: %s\n",
           host_name,
-          get_ip_str((struct sockaddr *) &my_IP_address_info));
+          addr_string);
 
    /*
     * Set it to the listening state.
@@ -433,9 +435,9 @@ static void Receive_Message (const unsigned int index)
               message);
 
        /*
-        * Send silly reply ...
+        * Send echo reply ...
         */
-       sprintf(message, "Message received and not understood\r\n\r\n");
+       sprintf(message, "Message received and understood\r\n\r\n");
 
        len = (int) strlen (message);
 
@@ -545,8 +547,8 @@ static void Show_Error
                (const char *msg)
 
 {
-         char buffer[1024];
-         int  err_num = 0;
+   char buffer[1024];
+   int  err_num = 0;
 
    memset (buffer, 0, sizeof(buffer));
 
@@ -619,77 +621,6 @@ static int Get_Last_Error (void)
       return errno;
 
    #endif
-}
-
-
-/*-------------------------------------------------------
- * FUNCTION: get_ip_str
- *
- * DESCRIPTION:
- *    Converts the 'address' from a 'struct sockaddr' to
- *    an ASCII string.
- *
- *    I modified it to return a pointer to a static
- *    buffer ... so it's not re-entrant.  Original version
- *    passed the input buffer ... and returned a pointer
- *    to the input buffer.  Easier to just return a string.
- *
- *    Also, for WIN32 port, downscoped to just 'inet_ntoa()'.
- *
- *    WARNING/ATTEN:
- *       I HAVE NOT TESTED THIS PART ON WIN BUILD
- *
- *    Taken from:
- *
- *       https://gist.github.com/jkomyno/45bee6e79451453c7bbdc22d033a282e
- *
- *    Convert a struct sockaddr address to a string, IPv4 and IPv6:
- *
- *-------------------------------------------------------*/
-static char *get_ip_str (const struct sockaddr *sa)
-
-{
-    static char addr_string[256];
-
-    memset (addr_string, 0, sizeof(addr_string));
-
-    #ifdef WIN32
-
-       {
-           struct sockaddr_in *sa_in;
-
-           sa_in = (struct sockaddr_in *) sa;
-
-           inet_ntoa ( sa_in->sin_addr );
-       }
-
-    #else
-
-       switch(sa->sa_family)
-       {
-           case AF_INET:
-               inet_ntop
-                  (AF_INET,
-                   &(((struct sockaddr_in *)sa)->sin_addr),
-                   addr_string, sizeof(addr_string));
-
-               break;
-
-           case AF_INET6:
-               inet_ntop
-                  (AF_INET6,
-                   &(((struct sockaddr_in6 *)sa)->sin6_addr),
-                   addr_string, sizeof(addr_string));
-
-               break;
-
-           default:
-               strncpy(addr_string, "Unknown AF", 11);
-       }
-
-    #endif
-
-    return addr_string;
 }
 
 /* EOF */
