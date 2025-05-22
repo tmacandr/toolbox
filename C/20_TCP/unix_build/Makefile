@@ -7,7 +7,7 @@
 
 CC=gcc
 
-L_PATH=-L/lib/w32api
+L_PATH=
 
 L_LIB= 
 
