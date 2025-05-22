@@ -8,7 +8,7 @@ rem ==========================================================================
 
 set HERE=%cd%
 
-cd .\TCP_client\VS_6.0\Debug
+cd .\TCP_client\Debug
 
 set CLIENT_DEBUG=%cd%
 
@@ -16,7 +16,7 @@ start "TCP Client" /D %CLIENT_DEBUG% cmd /K .\client.exe 127.0.0.1 25555
 
 cd %HERE%
 
-cd .\TCP_server\VS_6.0\Debug
+cd .\TCP_server\Debug
 
 set SVR_DEBUG=%cd%
 
