@@ -168,6 +168,9 @@ static void Open_Listen_Socket (const unsigned short port_num)
    struct sockaddr_in my_IP_address_info;
    char               host_name[256];
 
+   struct sockaddr_in *sai = (struct sockaddr_in *) &my_IP_address_info;
+   char               *addr_string;
+
    listen_socket = socket
                      (AF_INET,      /* domain   */
                       SOCK_STREAM,  /* type     */
@@ -214,9 +217,6 @@ static void Open_Listen_Socket (const unsigned short port_num)
 
        exit (EXIT_FAILURE);
    }
-
-   struct sockaddr_in *sai = (struct sockaddr_in *) &my_IP_address_info;
-   char               *addr_string;
 
    addr_string = inet_ntoa(sai->sin_addr);
 
