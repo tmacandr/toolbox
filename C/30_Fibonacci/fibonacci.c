@@ -20,7 +20,7 @@
 *    Right back at ya, Dr DeVore ...
 *
 * COPYRIGHT:
-*    Copyright (c) 2016, Sally Recuas (Sally_Recuas@yahoo.com)
+*    Copyright (c) 2016, Tim MacAndrew
 *
 *    Permission to use, copy, modify, and/or distribute this software for any
 *    purpose with or without fee is hereby granted, provided that the above
