@@ -1,0 +1,49 @@
+@echo off
+rem * *************************************************************************
+rem * FILE: run_format.bat
+rem *
+rem * DESCRIPTION:
+rem *    DOS batch program to run the Tcl script that removes certain lines
+rem *    from the test file 'before.txt'
+rem * *************************************************************************
+
+set HERE=%cd%
+
+set TCL_SHELLS=C:\Tcl\bin\tclsh84.exe ^
+               C:\Tcl\bin\tclsh85.exe ^
+               C:\cygwin\bin\tclsh84.exe
+
+FOR %%i IN ( %TCL_SHELLS% ) DO (
+
+   IF EXIST %%i. (
+
+      echo TCL shell...: %%i
+
+      set Tcl_Shell=%%i
+
+      goto RUN
+   )
+
+)
+
+echo Can NOT find bin directory for Tcl
+
+goto DONE
+
+:RUN
+
+set PROFILE=before.txt
+
+IF EXIST %PROFILE%. (
+
+   %Tcl_Shell% format_file.tcl %PROFILE%
+
+) ELSE (
+
+   echo ***> ERROR - no input file %PROFILE% found
+
+)
+
+:DONE
+
+echo Done
