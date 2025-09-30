@@ -1,17 +1,14 @@
-From: MacAndrew, Tim -Gil <Tim.MacAndrew@itt.com>
-To: surf_lump@netzero.net <surf_lump@netzero.net>
-Subject: Serial Port I/O
-Date: Monday, January 26, 2004 1:30 PM
-
-
-/*----------------------------------------------------------------------
---
+/*------------------------------------------------------------------
 * FILE: RS232_test.cpp
 *
 * DESCRIPTION:
 *    Hello world to do serial I/O via COM1 on PC.
-*-----------------------------------------------------------------------
---*/
+*
+*       From: MacAndrew, Tim -Gil <Tim.MacAndrew@itt.com>
+*       To: surf_lump@netzero.net <surf_lump@netzero.net>
+*       Subject: Serial Port I/O
+*       Date: Monday, January 26, 2004 1:30 PM
+*-------------------------------------------------------------------*/
 #include <stdio.h>
 #include <io.h>
 #include <FCNTL.H>
@@ -76,12 +73,3 @@ int main (int argc,
    return 0;
 }
 
-
-       
-
-************************************
-This email and any files transmitted with it are proprietary and intended solely for the use of the individual or entity to whom they are addressed. If you have received this email
-in error please notify the sender. Please note that any views or opinions presented in this email are solely those of the author and do not necessarily represent those of ITT Industries, Inc.
-The recipient should check this email and any attachments for the presence of viruses. ITT Industries accepts no liability for any damage caused by any virus transmitted by this
-email.
-************************************
