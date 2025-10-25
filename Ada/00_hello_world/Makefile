@@ -45,7 +45,7 @@ EXE   = hello_world.exe
 $(EXE):
 	$(ADA) compile $(SRC)
 	$(ADA) bind -x hello_world.ali
-	$(ADA) link hello_world.ali $(LPATH)
+	$(ADA) link hello_world.ali $(LPATH) -o $(EXE)
 
 #
 # The "clean" target deletes the old executable.
