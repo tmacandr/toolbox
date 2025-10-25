@@ -2,21 +2,17 @@
 -- FILE: hello_world.ada
 --
 -- DESCRIPTION:
---    Hello world in Ada.  The "gcc" compiler notes say it
---    can handle Ada ... is that true?
+--    Hello world in Ada.
 --
---    Worked ... use these commands to compile, bind, and
---    link:
+--    Used the GNU "gnat" toolset for Ada compiler and
+--    linker.
 --
---       cc  -c hello_world.adb
---       gnatbind -x hello_world.ali
---       gnatlink hello_world.ali -L/lib/w32api
+--    For Ubuntu:
 --
---    Not sure what the 'gnatbind' is for ... never seen
---    that before.
+--       sudo apt install gnat
 --
---    Looks like the Linux community got together with the
---    GNAT folks ... interesting.
+--    Tried the 'gcc' compiler that says it has an Ada option,
+--    but that didn't work.  Go with "gnat".
 --**************************************************************
 
 
