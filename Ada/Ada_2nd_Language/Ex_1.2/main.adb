@@ -25,5 +25,7 @@ begin
 
    Problems.Compute_Difference_Of_Products;
 
+   Problems.Echo;
+
 end main;
 

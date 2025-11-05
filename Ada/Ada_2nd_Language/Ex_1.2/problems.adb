@@ -15,9 +15,7 @@ with Text_IO;
 --
 -- DESCRIPTION:
 --    Implements Exercise 1.2 (a) and (b)
---
---    This program reads in three numbers
---    and prints out their sums.     <-- This was the bug, invalid comment
+--    and (c).
 --*************************************
 package body Problems is
 
@@ -58,7 +56,8 @@ package body Problems is
    -- PROCEDURE: Compute_Difference_Of_Products
    --
    -- DESCRIPTION:
-   --    Main entry point of Ada program.
+   --    Exercise 1.2(b).  Find where the comment form
+   --    disrupts the statement.
    --*************************************
    procedure Compute_Difference_Of_Products is
 
@@ -79,6 +78,25 @@ package body Problems is
       Text_IO.New_Line;
 
    end Compute_Difference_Of_Products;
+
+
+   --*************************************
+   -- PROCEDURE: Echo
+   --
+   -- DESCRIPTION:
+   --    Exercise 1.2 (c).
+   --*************************************
+   procedure Echo is
+
+      X : Integer;
+
+   begin
+      Text_IO.Put_Line("---> Enter integer:");
+      Int_IO.Get(X);
+      Text_IO.Put_Line("---> You entered: ");
+      Int_IO.Put(X);
+      Text_IO.New_Line;
+   end Echo;
 
 end Problems;
 

@@ -20,5 +20,7 @@ package Problems is
 
    procedure Compute_Difference_Of_Products;
 
+   procedure Echo;
+
 end Problems;
 
