@@ -1,0 +1,13 @@
+It was the best of times, it was the worst of times.
+
+Alas, poor Yorik, I knew him well.
+
+You've installed Linux and everything is fine (naturally).  Then one day you make a change to your Windows or Windows NT system, and Linux stops working.  You no longer see the lilo boot prompt, so you can no longer specify that you want to boot Linux.
+
+1234567890
+!@#$%^&*()
+0987654321
+}{"':;?/><,'
+
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+abcdefghijklmnopqrstuvwxyz
