@@ -12,10 +12,10 @@
 
 HERE=`pwd`
 
-TCLSH=/usr/bin/tclsh
+KEY=3
 
-tclsh encrypt.tcl plain.txt cipher.txt 3
+tclsh encrypt_doc.tcl plain.txt cipher.txt $KEY
 
-tclsh decrypt_doc.tcl cipher.txt result.txt 3
+tclsh decrypt_doc.tcl cipher.txt result.txt $KEY
 
 echo "---> Done"
