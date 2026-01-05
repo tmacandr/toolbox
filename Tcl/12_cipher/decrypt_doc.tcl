@@ -61,15 +61,15 @@ proc decrypt_file { fromfile tofile key } {
 
       #puts "---> $i) char $c to integer $tmp"
 
-      if { $tmp <= $key } {
-         set adjust [expr 255 + $tmp - $key]
-         puts "+++> Back condition: from $tmp to $adjust"
+      if { $tmp < $key } {
+         set adjust [expr 255 + $tmp - $key + 1]
+         #puts "+++> Back condition: from $tmp to $adjust"
          set decrypt $adjust
       } else {
          set decrypt [expr $tmp - $key]
       }
 
-      puts "~~~>    shift integer $decrypt to $tmp"
+      puts "~~~>    $i) shift integer $decrypt to $tmp"
 
       set value [format %c $decrypt]
 

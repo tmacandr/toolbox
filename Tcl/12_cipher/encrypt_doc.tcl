@@ -65,14 +65,14 @@ proc encrypt_file { fromfile tofile key } {
       set encrypt [expr $tmp + $key]
 
       if { $encrypt > 255 } {
-         set adjust [expr $encrypt - 255]
+         set adjust [expr $encrypt - 256]
 
-         puts "+++> Wrap condition: from $tmp to $encrypt to $adjust"
+         #puts "+++> Wrap condition: from $tmp to $encrypt to $adjust"
 
          set encrypt $adjust
       }
 
-      puts "~~~>    shift integer $tmp to $encrypt"
+      puts "~~~>    $i) shift integer $tmp to $encrypt"
 
       set value [format %c $encrypt]
 
