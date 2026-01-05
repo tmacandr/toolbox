@@ -59,24 +59,15 @@ proc encrypt_file { fromfile tofile key } {
 
       scan $c %c tmp
 
-      #puts "________________________________"
-      #puts "---> $i) char $c to integer $tmp"
-
       set encrypt [expr $tmp + $key]
 
       if { $encrypt > 255 } {
-         set adjust [expr $encrypt - 256]
-
-         #puts "+++> Wrap condition: from $tmp to $encrypt to $adjust"
-
-         set encrypt $adjust
+         set encrypt [expr $encrypt - 256]
       }
 
       puts "~~~>    $i) shift integer $tmp to $encrypt"
 
       set value [format %c $encrypt]
-
-      #puts "---> $i) char $c is now char $value"
 
       set shift "$shift$value"
   }
