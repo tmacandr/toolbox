@@ -65,7 +65,7 @@ proc encrypt_file { fromfile tofile key } {
          set encrypt [expr $encrypt - 256]
       }
 
-      puts "~~~>    $i) shift integer $tmp to $encrypt"
+      #puts "~~~>    $i) shift integer $tmp to $encrypt"
 
       set value [format %c $encrypt]
 

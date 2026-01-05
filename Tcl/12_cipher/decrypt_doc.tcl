@@ -65,7 +65,7 @@ proc decrypt_file { fromfile tofile key } {
          set decrypt [expr $tmp - $key]
       }
 
-      puts "~~~>    $i) shift integer $decrypt to $tmp"
+      #puts "~~~>    $i) shift integer $decrypt to $tmp"
 
       set value [format %c $decrypt]
 
