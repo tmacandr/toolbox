@@ -24,6 +24,11 @@
 #      tclsh85 make_wheels.tcl wheel.bin 136
 #*************************************************************************
 
+#
+# Not in my Tcl installation
+#
+#package require tcl::chan::random
+
 
 # ***********************************************
 # PROCEDURE NAME: show_usage
@@ -68,8 +73,8 @@ proc generate_wheels { tofile seed } {
       # Invoke rand() to generate a floating point value
       # between (0.0 and 1.0), not incluing 0.0 or 1.0.
       #
-      #set value [expr ::tcl::chan::random ]
       set value [ ::tcl::mathfunc::rand ]
+      #set value [ ::tcl::chan::random ]
 
       #
       # Convert to an integer.
