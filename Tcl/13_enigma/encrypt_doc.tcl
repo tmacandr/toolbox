@@ -117,7 +117,7 @@ proc load_wheel_file { wheel_file_name } {
       exit
    }
 
-   set wheel_fd [open "$wheel_file_name" rb+]
+   set wheel_fd [open "$wheel_file_name" rb]
 
    set next_value ""
    set start 0
@@ -132,6 +132,8 @@ proc load_wheel_file { wheel_file_name } {
       set wheel_1 "$wheel_1$next_value "
    }
 
+   set wheel_1 [split $wheel_1]
+
    set start $len
    set len [expr $len + 256 ]
 
@@ -144,6 +146,8 @@ proc load_wheel_file { wheel_file_name } {
       set wheel_2 "$wheel_2$next_value "
    }
 
+   set wheel_2 [split $wheel_2]
+
    set start $len
    set len [expr $len + 256 ]
  
@@ -155,6 +159,8 @@ proc load_wheel_file { wheel_file_name } {
       }
       set wheel_3 "$wheel_3$next_value "
    }
+
+   set wheel_3 [split $wheel_3]
 
    #puts "---> Wheel 1:"
    #puts "$wheel_1"
@@ -214,7 +220,7 @@ proc encrypt_file { fromfile tofile key1 key2 key3 } {
        # e[i] = c[i] + wheel[j][Kj + i]
        #
        if { $nxt_wheel == 1 } {
-          set offset [string index $wheel_1 $key1]
+          set offset [lindex $wheel_1 $key1]
           incr $nxt_wheel
           incr $key1
           if { $key1 > 255 } {
@@ -222,14 +228,14 @@ proc encrypt_file { fromfile tofile key1 key2 key3 } {
           }
        } else {
           if { $nxt_wheel == 2 } {
-             set offset [string index $wheel_2 $key2]
+             set offset [lindex $wheel_2 $key2]
              incr $nxt_wheel
              incr $key2
              if { $key2 > 255 } {
                 set key2 0
              }
           } else {
-             set offset [string index $wheel_3 $key3]
+             set offset [lindex $wheel_3 $key3]
              set nxt_wheel 1
              incr $key3 
              if { $key3 > 255 } {
