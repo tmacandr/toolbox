@@ -32,9 +32,9 @@ proc show_usage { } {
 }
 
 
-set wheel_0 ""
 set wheel_1 ""
 set wheel_2 ""
+set wheel_3 ""
 
 
 # ***********************************************
@@ -45,9 +45,70 @@ set wheel_2 ""
 #    the global "wheel_0", "wheel_1", and "wheel_2"
 #    arrays.
 # ***********************************************
-proc load_wheel_file{ wheel_file_name } {
+proc load_wheel_file { wheel_file_name } {
 
-  puts "---> Load wheel file - not implemented"
+   puts "---> Load wheel file:"
+
+   global wheel_1
+   global wheel_2
+   global wheel_3
+
+   if { ! [file exists $wheel_file_name] } {
+      puts "***> ERROR - File $wheel_file_name not found"
+      exit
+   }
+
+   set wheel_fd [open "$wheel_file_name" rb+]
+
+   set next_value ""
+   set start 0
+   set len   256
+
+   for { set i $start } { $i < $len } { incr i } {
+      set s [gets $wheel_fd next_value]
+      if { $s <= 0 } {
+         puts "***> ERROR - Wheel 1 - EOF at $i"
+         exit
+      }
+      set wheel_1 "$wheel_1$next_value "
+   }
+
+   set start $len
+   set len [expr $len + 256 ]
+
+   for { set i $start } { $i < $len } { incr i } {
+      set s [gets $wheel_fd next_value]
+      if { $s <= 0 } {
+         puts "***> ERROR - Wheel 2 - EOF at $i"
+         exit
+      }
+      set wheel_2 "$wheel_2$next_value "
+   }
+
+   set start $len
+   set len [expr $len + 256 ]
+   for { set i $start } { $i < $len } { incr i } {
+      set s [gets $wheel_fd next_value]
+      if { $s <= 0 } {
+         puts "***> ERROR - Wheel 3 - EOF at $i"
+         exit
+      }
+      set wheel_3 "$wheel_3$next_value "
+   }
+
+   #puts "---> Wheel 1:"
+   #puts "$wheel_1"
+   #puts "----------------------------------"
+
+   #puts "---> Wheel 2:"
+   #puts "$wheel_2"
+   #puts "----------------------------------"
+
+   #puts "---> Wheel 3:"
+   #puts "$wheel_3"
+   #puts "----------------------------------"
+
+   close $wheel_fd
 }
 
 
@@ -55,51 +116,101 @@ proc load_wheel_file{ wheel_file_name } {
 # PROCEDURE NAME: decrypt_file
 #
 # DESCRIPTION:
-#    Reverses Caesar cipher of <key> shift on the
-#    specified file.
+#    Applies a reverse of the "enigma" cipher to
+#    the given encrypted file to return it to
+#    plain text.
 # ***********************************************
-proc decrypt_file { fromfile tofile key } {
+proc decrypt_file { fromfile tofile key1 key2 key3 } {
 
-  puts "---> Procedure: encrypt"
-  puts "---> From....: $fromfile"
-  puts "---> To......: $tofile"
-  puts "---> Key.....: $key"
+   puts "---> Procedure: decrypyt"
+   puts "---> From....: $fromfile"
+   puts "---> To......: $tofile"
+   puts "---> Key1....: $key1"
+   puts "---> Key2....: $key2"
+   puts "---> Key3....: $key3"
 
-  set from_fd [open "$fromfile" rb]
+   global wheel_1
+   global wheel_2
+   global wheel_3
 
-  set data [read $from_fd]
+   set from_fd [open $fromfile r]
 
-  set len [string length $data]
+   set in_bytes [read $from_fd]
 
-  puts "---> Num chars: $len"
+   set len [string length $in_bytes]
 
-  set shift ""
+   close $from_fd
 
-  for { set i 0 } { $i < $len } { incr i } {
-      set c [string index $data $i]
+   puts "---> Num bytes: $len"
+   puts "---> in_bytes: $in_bytes"
 
-      scan $c %c tmp
+   set in_data [split $in_bytes]
 
-      if { $tmp < $key } {
-         set decrypt [expr 255 + $tmp - $key + 1]
-      } else {
-         set decrypt [expr $tmp - $key]
-      }
+   set out_data ""
 
-      #puts "~~~>    $i) shift integer $decrypt to $tmp"
+   set nxt_wheel 1
+   set offset    0
 
-      set value [format %c $decrypt]
+   set len [string length $in_data]
 
-      set shift "$shift$value"
-  }
+   for { set i 0 } { $i < $len } { incr i } {
+       set encrypt [lindex $in_data $i]
 
-  set to_fd [open "$tofile" wb+]
+       puts "---> nxt num: $encrypt"
 
-  puts $to_fd "$shift"
+       #
+       # c[i] = e[i] - wheel[j][Kj + i]
+       #
+       if { $nxt_wheel == 1 } {
+          set offset [string index $wheel_1 $key1]
+          incr $nxt_wheel
+          incr $key1
+          if { $key1 > 255 } {
+             set key1 0
+          }
+       } else {
+          if { $nxt_wheel == 2 } {
+             set offset [string index $wheel_2 $key2]
+             incr $nxt_wheel
+             incr $key2
+             if { $key2 > 255 } {
+                set key2 0
+             }
+          } else {
+             set offset [string index $wheel_3 $key3]
+             set nxt_wheel 1
+             incr $key3
+             if { $key3 > 255 } {
+                set key3 0
+             }
+          }
+       }
 
-  close $to_fd
+       set plain_num [expr $encrypt - $offset]
 
-  close $from_fd
+       if { $plain_num < 0 } {
+          puts "***> ERROR - Value $plain_num is NOT valid"
+          break
+          #exit
+       }
+
+       if { $plain_num > 255 } {
+          puts "***> ERROR - Value $plain_num is not a valid char"
+          exit
+       }
+
+       set plain_char [format %c $plain_num]
+
+       puts "~~~>    $i) $encrypt to $plain_num to $plain_char"
+
+       set out_data "$out_data$plain_char"
+   }
+
+   set to_fd [open "$tofile" wb+]
+
+   puts $to_fd "$out_data"
+
+   close $to_fd
 }
 
 
@@ -111,7 +222,7 @@ proc decrypt_file { fromfile tofile key } {
 # ***********************************************
 puts "Begin - Decrypt Doc"
 
-if { $argc != 4 } {
+if { $argc != 6 } {
 
   show_usage
 
@@ -120,14 +231,26 @@ if { $argc != 4 } {
 
 puts "---> Name of program..: $argv0"
 
-set input_file   [lindex $argv 0]
-set results_file [lindex $argv 1]
-set wheel_file   [lindex $argv 3]
-set key          [lindex $argv 2]
+set input_file  [lindex $argv 0]
+set result_file [lindex $argv 1]
+set wheel_file  [lindex $argv 2]
+set key_1       [lindex $argv 3]
+set key_2       [lindex $argv 4]
+set key_3       [lindex $argv 5]
 
-load_wheel $wheel_file
+if { ! [file exists $input_file] } {
+   puts "***> ERROR - File $input_file not found"
+   exit
+}
 
-decrypt_file $input_file $results_file $key
+if { ! [file exists $wheel_file] } {
+   puts "***> ERROR - File $wheel_file not found"
+   exit
+}
+
+load_wheel_file $wheel_file
+
+decrypt_file $input_file $result_file $key_1 $key_2 $key_3
 
 puts "End - Decrypt Doc"
 
