@@ -11,9 +11,9 @@
 //    on a queue are available ... plus some others.  As mentioned, a "deque"
 //    object is a "dynamic" queue.  This means that a client can add and remove
 //    items from the queue, from any position in the queue, without having to
-//    perform memory allocation, nor memory deallocation, nor re-order operations
-//    on the queue.  All of that is hidden from the client and implemented by
-//    the internals of the "deque" template.
+//    perform memory allocation, nor memory deallocation, nor re-order
+//    operations on the queue.  All of that is hidden from the client and
+//    implemented by the internals of the "deque" template.
 //    
 //    The methods on a "deque" object are:
 //           allocator_type : 
@@ -80,24 +80,24 @@ int main
 {
             myQueueType theQueue;
             myRecType   tempRecord;
-            int         i;
+            unsigned int i;
 
    //
    // Demonstrate a FIFO queue
    //
    for (i = 0; i < 5; i++)
-     {
+   {
       tempRecord.degrees = 2 * i;
       tempRecord.minutes = 3 * i;
       tempRecord.seconds = 3.0f * i;
 
       theQueue.push_back(tempRecord);
-     }
+   }
 
-   printf("Size of queue = %d\n", theQueue.size() );
+   printf("Size of queue = %lu\n", theQueue.size() );
 
    for (i = 0; i < theQueue.size(); i++)
-      {
+   {
        tempRecord = theQueue[i];
 
        printf("%d) dd:mm:ss.ss = %2d : %2d : %f\n",
@@ -105,7 +105,7 @@ int main
               tempRecord.degrees,
               tempRecord.minutes,
               tempRecord.seconds);
-      }
+   }
 
    theQueue.clear();
 
@@ -121,7 +121,7 @@ int main
       theQueue.push_front(tempRecord);
      }
 
-   printf("Size of queue = %d\n", theQueue.size() );
+   printf("Size of queue = %lu\n", theQueue.size() );
 
    for (i = 0; i < theQueue.size(); i++)
       {

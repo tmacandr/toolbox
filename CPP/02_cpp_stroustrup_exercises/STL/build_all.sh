@@ -6,53 +6,35 @@
 #       23-Jan-26 : Point to Linux g++
 #
 # Description:
-#    Script that builds uses the SUNWspro C++ compiler to compile and
-#    link the excercises for chapter 2.
+#    Script that builds uses the SUNWspro C++ compiler each of the
+#    demos of the Standard-Template-Library (STL).
 #----------------------------------------------------------------------
 
-export SUNSPRO=/opt/cots/SUNWspro
+CC=g++
 
-#export SUN_CPP=$SUNSPRO/bin/CC
+OPTS="-ggdb -Wall"
 
-#export CPP=$SUN_CPP;
+INCL_PATH="-I."
 
-#export CC=$SUNSPRO/bin/cc;
+Files="deque_test.cpp     \
+       iostream_test.cpp  \
+       list_test.cpp      \
+       map_test.cpp       \
+       string_test.cpp"
 
-export SUN_CPP=$SUNSPRO/SC5.0/bin/CC
-
-export CPP=$SUN_CPP;
-
-export Base=$HOME/CPP_dir/hello_world
-
-export Src=$Base/source
-
-export SUN_H_PATH="-I$SUNSPRO/SC4.2/include/CC
-                   -I$SUNSPRO/SC4.2/include/cc";
-
-export H_PATH="$SUN_H_PATH
-               -I/opt/cots/local/include
-               -I/project/cots/simpact/v2.0/freeway/include
-               -I$Base/include";
-
-export OPTIONS=""
-
-export Files=`ls *.cpp`;
-
-echo "________________________";
+echo "________________________"
 
 for eachFile in $Files; do
 
-   export Temp=`echo $eachFile | sed 's/\.cpp//'`;
+   EXE=`echo $eachFile | sed 's/\.cpp/\.exe/'`
 
-   export Exe=$Temp.exe;
-
-   echo "---> Build $eachFile";
+   echo "---> Build $eachFile"
  
-   $CPP $OPTIONS $H_PATH $eachFile -o $Exe;
+   $CC $OPTS $H_PATH $eachFile -o $EXE
 
-   if ! test -x $Exe; then
+   if ! test -x $EXE; then
 
-      echo "Compile/Link failed";
+      echo "Compile/Link $eachFile failed"
 
    fi
 

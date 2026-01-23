@@ -81,7 +81,7 @@ int main
 {
             myMapType              theMap;
             myRecType              tempRecord;
-            int                    i;
+            unsigned int           i;
             myMapType::value_type  *pairPtr;
 
    //
@@ -100,10 +100,10 @@ int main
       delete pairPtr;
      }
 
-   printf("Size of queue = %d\n", theMap.size() );
+   printf("Size of queue = %lu\n", theMap.size() );
 
    for (i = 0; i < theMap.size(); i++)
-      {
+   {
        tempRecord = theMap[i];
 
        printf("%d) dd:mm:ss.ss = %2d : %2d : %f\n",
@@ -111,7 +111,7 @@ int main
               tempRecord.degrees,
               tempRecord.minutes,
               tempRecord.seconds);
-      }
+   }
 
    theMap.clear();
 
@@ -119,15 +119,15 @@ int main
    // ... another way to insert items into the map
    //
    for (i = 0; i < 5; i++)
-     {
+   {
       tempRecord.degrees = 2 * i;
       tempRecord.minutes = 3 * i;
       tempRecord.seconds = 3.0f * i;
 
       theMap[i] = tempRecord;
-     }
+   }
 
-   printf("Size of queue = %d\n", theMap.size() );
+   printf("Size of queue = %lu\n", theMap.size() );
 
    return 0;
 }
