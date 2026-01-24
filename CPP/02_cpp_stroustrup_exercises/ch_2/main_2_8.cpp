@@ -1,5 +1,6 @@
 //------------------------------------------------------------------------------
 // Date : 13-Sep-99
+//        23-Jan-26 : Update to GNU g++
 // File : exercise_8.cpp
 //
 // Description:
@@ -35,9 +36,12 @@
 #include <float.h>
 #include <limits.h>
 #include <stddef.h>
-#include <new.h>
 #include <stdarg.h>
 #include <stdlib.h>
+
+
+// Need to look this up.  Disappeared
+#define FLT_GUARD   (0.0f)
 
 
 static void printLargestAndSmallestChar ();
@@ -228,9 +232,9 @@ static void printLargestAndSmallestLong ()
          long max = LONG_MAX;
 
    printf("_________________________\n");
-   printf("Min long int = %ld (%.2x)\n", min, min);
-   printf("Max long int = %ld (%.2x)\n", max, max);
-   printf("Bad long int = %ld (%.2x)\n", badMax, badMax);
+   printf("Min long int = %ld (%.2lx)\n", min, min);
+   printf("Max long int = %ld (%.2lx)\n", max, max);
+   printf("Bad long int = %ld (%.2lx)\n", badMax, badMax);
 }
 
 
@@ -249,7 +253,7 @@ static void printLargestAndSmallestUnsigned ()
          unsigned what = -1; // how can this be negative
 
    printf("_________________________\n");
-   printf("Size of max-unsigned-int = %d bytes\n",
+   printf("Size of max-unsigned-int = %ld bytes\n",
           sizeof(UINT_MAX));
    printf("Min unsigned int = %u (%.2x)\n", min, min);
    printf("Max unsigned int = %u (%.2x)\n", max, max);
@@ -280,15 +284,21 @@ static void printLargestAndSmallestFloat ()
          float posEpsilon   = FLT_MIN;
          float absoluteZero = FLT_GUARD;
 
+   unsigned long long int *minp = (unsigned long long int *) &min;
+   unsigned long long int *maxp = (unsigned long long int *) &max;
+   unsigned long long int *nep  = (unsigned long long int *) &negEpsilon;
+   unsigned long long int *pep  = (unsigned long long int *) &posEpsilon;
+   unsigned long long int *azp  = (unsigned long long int *) &absoluteZero;
+
    printf("_________________________\n");
-   printf("Min float = %e (%.2x)\n", min, min);
-   printf("Max float = %e (%.2x)\n", max, max);
-   printf("Negative number closest to zero : %e\n",
-          negEpsilon, negEpsilon);
-   printf("Positive number closest to zero : %e\n",
-          posEpsilon, posEpsilon);
-   printf("Absolute Zero = %e (%.2x)\n",
-          absoluteZero, absoluteZero);
+   printf("Min float = %e (%llx)\n", min, *minp);
+   printf("Max float = %e (%llx)\n", max, *maxp);
+   printf("Negative number closest to zero : %e (%llx)\n",
+          negEpsilon, *nep);
+   printf("Positive number closest to zero : %e (%llx)\n",
+          posEpsilon, *pep);
+   printf("Absolute Zero = %e (%llx)\n",
+          absoluteZero, *azp);
 }
 
 
@@ -306,17 +316,23 @@ static void printLargestAndSmallestDouble ()
          double posEpsilon   = DBL_MIN;
          double absoluteZero = (double) FLT_GUARD;
 
+   unsigned long long int *minp = (unsigned long long int *) &min;
+   unsigned long long int *maxp = (unsigned long long int *) &max;
+   unsigned long long int *nep  = (unsigned long long int *) &negEpsilon;
+   unsigned long long int *pep  = (unsigned long long int *) &posEpsilon;
+   unsigned long long int *azp  = (unsigned long long int *) &absoluteZero;
+
    printf("_________________________\n");
-   printf("Size of double : %d bytes\n",
+   printf("Size of double : %ld bytes\n",
           sizeof(DBL_MAX));
-   printf("Min double = %le (%.2x)\n", min, min);
-   printf("Max double = %le (%.2x)\n", max, max);
-   printf("Negative double number closest to zero : %le\n",
-          negEpsilon, negEpsilon);
-   printf("Positive double number closest to zero : %le\n",
-          posEpsilon, posEpsilon);
-   printf("Absolute Zero = %le (%.2x)\n",
-          absoluteZero, absoluteZero);
+   printf("Min double = %le (%llx)\n", min, *minp);
+   printf("Max double = %le (%llx)\n", max, *maxp);
+   printf("Negative double number closest to zero : %le (%llx)\n",
+          negEpsilon, *nep);
+   printf("Positive double number closest to zero : %le (%llx)\n",
+          posEpsilon, *pep);
+   printf("Absolute Zero = %le (%.llx)\n",
+          absoluteZero, *azp);
 }
 
 
@@ -334,17 +350,24 @@ static void printLargestAndSmallestLongDouble ()
          long double posEpsilon   = LDBL_MIN;
          long double absoluteZero = (long double) FLT_GUARD;
 
+   unsigned long long int *minp = (unsigned long long int *) &min;
+   unsigned long long int *maxp = (unsigned long long int *) &max;
+   unsigned long long int *nep  = (unsigned long long int *) &negEpsilon;
+   unsigned long long int *pep  = (unsigned long long int *) &posEpsilon;
+   unsigned long long int *azp  = (unsigned long long int *) &absoluteZero;
+
+
    printf("_________________________\n");
-   printf("Size of long double : %d bytes\n",
+   printf("Size of long double : %ld bytes\n",
           sizeof(LDBL_MAX));
-   printf("Min long double = %le (%.2x)\n", min, min);
-   printf("Max long double = %le (%.2x)\n", max, max);
-   printf("Negative long double number closest to zero : %le\n",
-          negEpsilon, negEpsilon);
-   printf("Positive long double number closest to zero : %le\n",
-          posEpsilon, posEpsilon);
-   printf("Absolute Zero = %le (%.2x)\n",
-          absoluteZero, absoluteZero);
+   printf("Min long double = %Le (%.llx)\n", min, *minp);
+   printf("Max long double = %Le (%.llx)\n", max, *maxp);
+   printf("Negative long double number closest to zero : %Le (%llX)\n",
+          negEpsilon, *nep);
+   printf("Positive long double number closest to zero : %Le (%llX)\n",
+          posEpsilon, *pep);
+   printf("Absolute Zero = %Le (%llx)\n",
+          absoluteZero, *azp);
 }
 
 
@@ -422,8 +445,10 @@ static void otherQuestions ()
           &floatPtr);
    printf("   Address pointed to by 'floatPtr' : %p\n",
           floatPtr);
-   printf("   Contents of that address         : %f (%x)\n",
-          *floatPtr, *floatPtr);
+
+   unsigned long long int *fp = (unsigned long long int *) floatPtr;
+   printf("   Contents of that address         : %f (%llx)\n",
+          *floatPtr, *fp);
 
    printf("Double:\n");
    printf("--------\n");
@@ -436,6 +461,8 @@ static void otherQuestions ()
           &doublePtr);
    printf("   Address pointed to by 'doublePtr' : %p\n",
           doublePtr);
-   printf("   Contents of that address          : %lf (%x)\n",
-          *doublePtr, *doublePtr);
+
+   fp = (unsigned long long int *) doublePtr;
+   printf("   Contents of that address          : %lf (%llX)\n",
+          *doublePtr, *fp);
 }

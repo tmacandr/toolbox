@@ -11,17 +11,17 @@
 //
 //----------------------------------------------------------------------------
 
-#include <iostream.h>
+#include <iostream>
 
    //--------------------------------
    // Before
-   //    char ch;              -- definition
+   //    char ch;              -- declaration 
    //
-   //    int count = 1;        -- definition
+   //    int count = 1;        -- declaration
    //
-   //    char *name = "Njal";  -- definition
+   //    char *name = "Njal";  -- declaration
    //
-   //    struct complex        -- definition
+   //    struct complex        -- declaration
    //       {
    //        float re, im;
    //       };
@@ -60,7 +60,8 @@
 int main ()
 
 {
-   cout << "Exercise 2.2:\n";
+   std::cout << "Exercise 2.2:\n";
 
    return 0;
 }
+

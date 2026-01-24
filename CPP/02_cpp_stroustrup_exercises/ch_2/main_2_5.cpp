@@ -1,6 +1,7 @@
 //-------------------------------------------------------------------------
 // File : main_2_5.cpp
 // Date : 17-Apr-00 : initial defintion
+//        23-Apr-26 : Update to GNU g++
 //
 // Description:
 //    Exercise 5 from Chapter 2 of:
@@ -13,7 +14,7 @@
 //    printable characters.  Do the same, but use hexadecimal notation.
 //-------------------------------------------------------------------------
 
-#include <iostream.h>
+#include <iostream>
 
 
 typedef struct

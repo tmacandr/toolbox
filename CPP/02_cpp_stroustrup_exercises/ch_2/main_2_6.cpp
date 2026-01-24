@@ -1,6 +1,7 @@
 //-------------------------------------------------------------------------
 // File : main_2_6.cpp
 // Date : 17-Apr-00
+//        23-Jan-26 : Update to GNU g++
 //
 // Description:
 //    Exercise 6 from Chapter 2 of:
@@ -12,7 +13,7 @@
 //    your system.  Hint: see section 2.6.2. 
 //-------------------------------------------------------------------------
 
-#include <iostream.h>
+#include <iostream>
 
 
 //------------------------------------------------------------
@@ -27,25 +28,19 @@ int main
 
 {
             char               *Null_Ptr = NULL;
-            const unsigned int mask = 0x1;
             int                i;
 
    printf("__________________________\n");
 
-   printf("Mask                   = %.4x (hex)\n", mask);
-   printf("Address of 'Null_Ptr'  = %x (hex)\n", &Null_Ptr);
-   printf("Contents of 'Null_Ptr' = %.4x (hex)\n", Null_Ptr);
+   printf("Address of 'Null_Ptr'  = %p (hex)\n", &Null_Ptr);
+   printf("Contents of 'Null_Ptr' = %.8X (hex)\n", *Null_Ptr);
 
    printf("Bit pattern of 'NULL'  = ");
 
    for (i = 0; i < 32; i++)
-      {
-       printf("%d", (unsigned int) Null_Ptr & mask);
-
-       (int) Null_Ptr >> 1;
-      }
-
-   printf("\n");
+   {
+       printf("%#.8X\n", (unsigned int) *Null_Ptr);
+   }
 
    return 0;
 }

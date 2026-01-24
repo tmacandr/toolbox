@@ -1,6 +1,7 @@
 //-------------------------------------------------------------------------
 // File : main_2_7.cpp
 // Date : 24-Apr-00 : initial definition
+//        23-Jan-26 : Update to GNU g++
 //
 // Description:
 //    Exercise 7 from Chapter 2 of:
@@ -12,12 +13,15 @@
 //    argument. 
 //-------------------------------------------------------------------------
 
-#include <iostream.h>
+#include <iostream>
 #include <math.h>
 
 
 static void printExpAndMantissa
                (double someVar);
+
+static void doesThisWork
+               (double theDouble);
 
 
 //------------------------------------------------------------
@@ -34,6 +38,8 @@ int main
    printExpAndMantissa(1.1);
 
    printExpAndMantissa(33.2);
+
+   doesThisWork(3.14159);
 
    return 0;
 }
@@ -56,50 +62,49 @@ static void printExpAndMantissa
 
    dblPtr = (unsigned int *) &someVar;
 
-   printf("Value = %lf :  Double = %x   Ints = %x-%x\n",
-          someVar,
+   printf("Value = %lf :  Ints = %x-%x\n",
           someVar,
           dblPtr[1],
           dblPtr[0]);
 
    for (i = 0; i < 32; i++)
-      {
+   {
        temp = dblPtr[0] & 0x00000001;
 
        printf("%d ", temp);
 
        theMantissa = theMantissa + temp * pow(2, i); 
 
-       dblPtr[0] >> 1;
-      }
+       dblPtr[0] = dblPtr[0] >> 1;
+   }
 
    printf("\n");
 
    for (i = i; i < 52; i++)
-      {
+   {
        temp = dblPtr[1] & 0x00000001;
 
        printf("%d ", temp);
 
-       dblPtr[1] >> 1;
-      }
+       dblPtr[1] = dblPtr[1] >> 1;
+   }
 
    printf("\n");
  
-   printf("---> Mantissa = %d\n", theMantissa);
+   printf("---> Mantissa = %lf\n", theMantissa);
 
    for (i = i; i < 62; i++)
-      {
+   {
        temp = dblPtr[1] & 0x00000001;
 
        printf("%d ", temp);
 
-       dblPtr[1] >> 1;
-      }
+       dblPtr[1] = dblPtr[1] >> 1;
+   }
 
    printf("\n");
 
-   printf("---> Exponent = %d\n", theExp);
+   printf("---> Exponent = %lf\n", theExp);
 }
 
 
@@ -126,7 +131,7 @@ static void doesThisWork
 
 {
          char          charBuffer[256];
-         int           index;
+         unsigned int  index;
          //-----------------------//
          unsigned char *ptrToDouble = (unsigned char*) &theDouble;
          unsigned char doubleAsChars[sizeof(double)];
@@ -159,14 +164,16 @@ static void doesThisWork
    printf("Double-as-Chars:\n");
 
    for (index = 0; index < sizeof(double); index++)
-      {
+   {
        doubleAsChars[index] = ptrToDouble[index];
 
        printf("%.2x ", doubleAsChars[index]);
-      }
+   }
 
    printf("\n");
 
-   printf("Double         : %x\n", theDouble);
+   unsigned long long int *td = (unsigned long long int *) &theDouble;
+
+   printf("Double         : %.16llX\n", *td);
 }
 
