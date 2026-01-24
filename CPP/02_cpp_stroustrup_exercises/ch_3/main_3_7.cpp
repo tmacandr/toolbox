@@ -1,6 +1,7 @@
 //----------------------------------------------------------------------------
 // File : main_3_5.cpp
 // Date : 03-Dec-00 : initial definition
+//        23-Jan-26 : Tried some more implementation
 //
 // Description:
 //    Exercise 3.5 from:
