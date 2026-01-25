@@ -46,6 +46,17 @@ Source Code:
     If Tcl is built from source, tcl.h is located in the generic
     directory of the source tree (e.g., tcl/generic/tcl.h). 
 
+If a build fails with this error, it means you need to install the
+development package, not just the Tcl interpreter.
+
+    Ubuntu/Debian: sudo apt-get install tcl-dev
+    CentOS/RHEL: sudo dnf install tcl-devel 
+
+If the file is installed but not found by the compiler, you may need to add
+the path to your compiler flags, for example:
+
+          -I/usr/include/tcl8.6
+
 # References
 
 1. Swig https://wiki.tcl-lang.org/page/Swig
