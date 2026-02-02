@@ -1,13 +1,13 @@
 # Notes on Using Git Lab
 
-## Introduction
+## 1) Introduction
 
-First ... the repository is controlled via *GitLab* ... it's not (the same
-as) *GitHub*.
+First ... the repository is controlled via **GitLab** ... it's not (the same
+as) **GitHub**.
 
-A private database at the organization is *GitLab*
+A private database at the organization is **GitLab**
 
-## Access
+## 2) Access
 
 The URL path to the database server is:
 
@@ -15,7 +15,7 @@ The URL path to the database server is:
 https://gitlab.<your-server-alias-here>
 ```
 
-### Quick Notes
+## 3) Quick Notes
 
 The commands are shown for 'free' when I created a new 'Project'.
 
@@ -45,7 +45,7 @@ The commands are shown for 'free' when I created a new 'Project'.
    git push --set-upstream origin --tags
    ```
 
-## Settings
+## 4) Settings
 
 Some of their repositories have 'dependencies' to other repos ... kind
 of like 'externals' in Subversino.
@@ -75,7 +75,7 @@ or
 
 They chose SSH.
 
-## SSH to Read/Write to Repositories
+## 5) SSH to Read/Write to Repositories
 
 Which means that you have to create a public private key pair and
 install the 'public' key (I think that one) in the GitLab 'Settings'
@@ -150,7 +150,13 @@ It's a kind of reip-off of **OpenPGP** ... which is a rip-off of
 But I used the **SSH** protocol ... adn never followed up on the **GPG**
 protocol.  I hope this doesn't come back to bit me.
 
-## To Create a Branch
+## 6) Basic Usage
+
+Base operations are:
+1. Create a working branch
+2. Clone a branch for work/development
+
+### 6.1) To Create a Branch
 These steps
 ```
    a) Log-in to GitLab
@@ -168,7 +174,7 @@ These steps
    e) Select "Create branch" button.
 ```
 
-## To Check-out (clone) a Branch
+## 6.2) Clone (check-out) a Branch
 First ... it's not "check-out" ... it's called **clone**.
 ```
    a) Got to the base URL ... likely the 'develop' branch
@@ -244,9 +250,9 @@ First ... it's not "check-out" ... it's called **clone**.
            **git** parlance.  I'm showing my penchant for **Subversion**.
 ```
 
-To establish subm-module dependencies, see **Section 12** BELOW
+To establish subm-module dependencies, see **Section NN** BELOW
 
-# 5) Switch Submodule 'branch' Dependecy
+### 6.2.1 ) Switch Submodule 'branch' Dependecy
 
 Key words: Change Submodule branch dependecy
            submodule branch
@@ -293,21 +299,181 @@ Now, all that said, I can ONLY do this on 'private' branches.
 I have no privilege to do this on the 'develop' branches
 and ... ergo ... the 'master branches neither.
 
-# 6) Working in a Clone
+### 6.3) Working in a Clone
 
-# 7) Updating TO the Repository
+1. The following commands will NOT update the repository
+   at the server.  All this is 'prepatory' to actually doing
+   an update into the server.  But changes are kept 'locally'
+   in the working directory.  I believe in 'git' parlance this
+   is called the 'index'.  It's like a 'local' database that
+   allows 'add' and 'check-in' etc.  But none of the work goes
+   into the server's (i.e. real) database ... the actual
+   'repository'.  That comes later.
 
-# 8) Updating FROM the Repository
+   You can have new files or changes to files ... and they're
+   managed 'locally'.  But until you do a 'push' (see below),
+   none of the 'local' history is moved into the actual
+   project 'repository'.
 
-# 9) Merge
+2. Before getting started, the 'exact' definition of each of the
+   following commands can be obtained via the 'help' option:
+   ```
+      git help
+   ```
+   This lists all the commands available (as opposed to 'man git').
 
-# 10) Difference
+   To get more details on a specific command, then do as follows:
+   ```
+      git help <command>
+   ```
+   For example:
+   ```
+      git help clone
+   ```
 
-# 11) Delete Branch
+3. **Add** - To 'add' a new new file, use:
+   ```
+      git add <new-file(s)>
+   ```
+   Your're not prompted to give a comment.  See _commit_ next.
 
-# 12) Restore (Older) Versions
+   This 'establishes' the new file into the 'local' (ONLY!) databse
+   being maintained by 'git'.
 
-# 13) How to Create Submodule Dependency
+4. **commit** (Subversion _check-in_)
+   First ... it's not 'check-in' ... the 'git' parlance is to 'commit'.
 
+   To 'commit' a file:
+   ```
+      git commit <file(s)>
+   ```
+   You're now LOCALLY updating the 'history' of any changes to the
+   file.  If this is the first 'commit' then this is version 1.  After
+   that, any changes are tracked by doing additional 'commit' commands.
 
-              
+   During the 'commit', yuou will be brought to the editor to add a comment
+   to describe what's going on.  Note/Atten:  the first line will act
+   as the 'title' of the 'commit'.  When work items are finally moved to
+   the real database (repository) this 'headline' will be shown in 'bold'
+   on the web-site.  So be specific.
+
+   After the first line then add more specifics and details as to what's
+   going on.
+
+   Which 'editory' to use can be specified in the git **config** file.  The
+   mechanics of updating and maintaining the 'config' file is a science
+   to itself ... ug.
+
+5. **check-out**
+   The 'check-out' mechanics in 'git' is in no way comparable to
+   'check-out' in **Subversion**.  One does a **clone** adn then one does
+   one or more **commit** operations.
+
+   The 'check-out' mechanism in 'git' has something to do with the
+   **merge** process from one branch to another (command-line).
+
+6. **delete**
+   In general, the command to delete is:
+   ```
+      git rm <file(s)>
+   ```
+   But to delete a directory ... and perhaps all its contents and
+   sub-directories, use:
+   ```
+     git rm -R <file(s) or dir(s)>
+   ```
+   **ATTEN**:
+   ```
+      After the items have been deleted ... they're 'gone' ... but
+      they're not actually removed from the LOCAL repository until
+      you do a 'commit'.
+   ```
+
+7. General Info
+   There are various commands to get the staqtus of a LOCAL repository:
+   ```
+      (i)   git status
+      (ii)  git log
+      (iii) git diff <item1> <item2>
+      (iv)  git difftool <stuff1> <stuff2>
+   ```
+   **ATTEN**:
+   ```
+      You can set the 'difftool' to something like BeyondCompare via
+      the 'config' file.
+
+      I did this to 'meld' ... but then they removed 'meld' from the
+      node and told me its a useless tool.  What?
+   ``` 
+8. **Summary**
+   So ... to do CRUD the commands are:
+   ```
+      (i)   Create - git add <file(s)>
+      (ii)  Read   - git status ... or git log
+      (iii) Update - git commit <file(s)>
+      (iv)  Delete - git rm <file(s)>
+   ```
+### 6.4) Updating TO the Repository
+Once you're done working and making changes the process to move the items
+into the (real) database (repository) is called **push**.
+
+So there's some 'git semantics going on here.  Local work is tracked
+using **commit** ... sort of ... but not fully analogous to 'check-in'
+in **Subversion**.  But he final, for-real 'update' into the repository
+in the server's database/repository ... but 'git' separates this into
+a two-step process ... one or more 'commit operations ... followed by
+a final **push**.  Nothing gets moved into the server's repository until
+a **push** is done.
+
+To **push** changes, issue the following:
+```
+   git push
+```
+
+### 6.5) Updating FROM the Repository
+```
+          ===============
+          Don't do the following ... use the GUI 'merge' mechanics
+          ===============
+```
+I think this is really a **MERGE** operation ...
+
+To get any change that have been made to the main repository to your
+LOCAL clone, do the following:
+```
+   cd <work-dir>    # go to the clone of the working branch
+   git branch       # verify it's a working branch
+   git merge origin/develop
+        # This starts a 'commit'.  You're taken to the
+        # commit editor ... and the title is already
+        # set.  When you 'save'/'quit' the 'merege' is then
+        # done ... wham!
+
+   git status  # says the 'submodule' is modified
+   
+         # what does that mean?
+```
+To verify what happened do a _meld_ between the 'develop' directory
+and your working directory.  Verify the 'merge' worked, with
+no conflicts, that only the items you changed/want are now showing
+as diff'd.
+```
+   git push
+```
+About 'conflicts':
+```
+   If a fiel you ar woking on has been changed in the repository, and
+   you 'pull' from the repository, then 'git' will attempt to 'merge'
+   the differences from each version of the (same) file.  If this fails,
+   then 'git' marks the file as a 'conflict'.
+
+### 6.6) Merge
+
+### 6.7) Difference
+
+### 6.8) Delete Branch
+
+### 6.9) Restore (Older) Versions
+
+### 6.10) How to Create Submodule Dependency
+
