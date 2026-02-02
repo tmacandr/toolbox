@@ -413,7 +413,7 @@ and ... ergo ... the 'master branches neither.
       (iii) Update - git commit <file(s)>
       (iv)  Delete - git rm <file(s)>
    ```
-### 6.4) Updating TO the Repository
+### 6.4) **push** Updating TO the Repository
 Once you're done working and making changes the process to move the items
 into the (real) database (repository) is called **push**.
 
@@ -429,12 +429,13 @@ To **push** changes, issue the following:
 ```
    git push
 ```
+More in Section 6.6
 
 ### 6.5) Updating FROM the Repository
 ```
-          ===============
-          Don't do the following ... use the GUI 'merge' mechanics
-          ===============
+          ============================================
+    Don't do the following ... use the GUI 'merge' mechanics
+          ============================================
 ```
 I think this is really a **MERGE** operation ...
 
@@ -476,4 +477,46 @@ About 'conflicts':
 ### 6.9) Restore (Older) Versions
 
 ### 6.10) How to Create Submodule Dependency
+
+Oh!  Where are you **Subversion**!!
+**ATTEN**
+```
+   ---------------------------------------------------
+   This did NOT work
+
+   I still got the 'master' trunk and not the 'develop' branch.
+
+   OR ... I dunno ... maybe it did work.  The .gitmodules file says
+   develop.
+   ---------------------------------------------------
+```
+**BE CAREFUL HERE**!  If you have anyting else that is not part of the
+repo, theis **add** will GRAB every friggin' thing in the clone and add
+it.  Then the **commit** below will blast everything into the clone
+history.  Then, the **push** will permanently latch **EVERYTHING** into
+the repo.
+
+Do this a fresh clone ... **not** something where other work is being
+done.
+```
+   git add .
+```
+Do a 'status' here just to make sure you're not blowing in the kitchen
+sink.
+```
+   git status ./
+```
+Then:
+```
+   git commit -m"Describe what's going on here."
+
+   git push
+```
+Not sure the following are needed in the just created submodule.  But
+they have to be done for new _clone_ areas, just as is done for any
+clone that has submodule dependencies:
+```
+   git submodule init
+   git submodule update
+```
 
