@@ -467,6 +467,7 @@ About 'conflicts':
    you 'pull' from the repository, then 'git' will attempt to 'merge'
    the differences from each version of the (same) file.  If this fails,
    then 'git' marks the file as a 'conflict'.
+```
 
 ### 6.6) Merge
 
