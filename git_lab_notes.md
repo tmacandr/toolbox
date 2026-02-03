@@ -471,6 +471,126 @@ About 'conflicts':
 
 ### 6.6) Merge
 
+#### 6.6.1) Merge from owner branch to owner branch - LESSON LEARNED
+
+I don't think there's a command-line way to merge from one
+branch to another ... in spite of all the verbiage I have here.
+
+The mechanism seems to be restricted to the GitLab GUI.
+
+Do the following:
+```
+   1) Go to the root repository
+
+   2) Select "Code --> Branches" tab (on the right).
+
+   3) Select the .
+                 .
+                 .
+      thing on the far right of the "FROM" branch you want
+      to update from.
+
+      Then select the "Compare" option.
+
+   4) Go to the "Target" side of the page and select the
+      "TO" branch to be updated.  Don't select "MASTER" or
+      "DEVELOP", etc ... these require full-up peer review.
+
+   5) Select the "Create merge request" button ... sort of to
+      the left on the page.
+
+   6) Create the merge request:
+         (a) Assign to "self"
+         (b) Do NOT specify any REVIEWERs
+         (c) Make sure the number of required approvals is ZERO.
+
+   7) When the MR is created, just select "MERGE".
+
+       voila!! Done
+```
+
+#### 6.6.2) Merge - No Conflicts (the easy way)
+
+If there are no CONFLICGTS between the 'from' (i.e. working)
+branch to the 'main' branch, then just click on the 'merge'
+but in GitLab when the 'merge request' has been approved.
+
+SEE ALSO (Section 6.6.4) notes below ...
+
+#### 6.6.2) Merge - Conflicts (the hard way)
+
+How to merge from a working branch to the 'main'
+(or 'develop') branch where the 'main' branch has moved/changed
+so there are now CONFLICTs between the two branches.
+
+... this what I end up doing:
+```
+   1) If there are too many changes (i.e. CONFLICTs) from the 'trunk'
+      then do the following:
+
+      (a) Make another branch off 'develop'
+
+      (b) clone it
+
+          git clone <git-hash-to-repo> -b <name-of-new-branch> ./work_dir
+
+      (c) Do 'meld' merge from the first 'work' area to this new
+          'work' area.
+
+      (d) Go to the 'develop' clone.
+
+          ... do a 'git pull' to get the latest.
+
+      (e) Then, do a 'meld' compare from the 'develop' clone to this
+          'new' clone ...
+
+          Verify only the 'new' work is different ... OR ... resolve
+          'conflicts' in ONLY the items that are being worked.
+
+      (f) Commit those changes.
+
+      (g) Push those changes ... 'git push'
+
+      (h) Redo all testing
+
+      (i) Go to GitLab and perform a "MERGE REQUEST"
+
+          ... verify in the 'merge request' that ONLY the files
+          worked/changed are part of the request.
+
+          ---> Go to the "Branches" button on the far left panel.
+
+          ---> The list of all branches is shown
+
+          ---> Click on the "New" button on the far right of the
+               'branch' to be merged (to 'develop').
+
+       (j) DELETE the 'old' work branch (<--- why?)
+
+       (k) If the 'Merge Request' is accepted, go to GitLab
+
+              (i)  Select teh "Mark as Ready" button
+
+              (ii) Select the big 'green' MERGE button.
+
+           See below ...
+
+           There is not much to this ... the tool does the merge.
+
+           I think select the "Close Merge Request" ... or something
+           like that.
+
+   2) ATTEN: see notes below too ... these were copied from the pop-up
+             dialog when the "Merge Request" for an Issue is approved.
+             There was a little hyper-link that basically said "this is
+             how you do a merge using the command-line."   
+
+```
+
+#### 6.6.3) 'help Info from GitLab
+
+#### 6.6.4) Merge - From Working Branch to 'origin/develop'
+
 ### 6.7) Difference
 
 ### 6.8) Delete Branch
