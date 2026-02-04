@@ -268,7 +268,8 @@ I needed to swich the submodule dependency so that the
 parent 'repo' would use (i.e. 'pull') from the 'develop'
 branch instead of the 'master branch.
 
-I did the follwoing:
+I did the following:
+
 ```
    (a) Create a private branch of the parent
 
@@ -289,6 +290,7 @@ I did the follwoing:
           git commit <submodule-dir>
           git push
 ```
+
 After that I deleted the entire 'clone' directory and did
 a fresh 'clone' ... submodule init ... update ... etc.
 
@@ -588,8 +590,108 @@ so there are now CONFLICTs between the two branches.
 ```
 
 #### 6.6.3) 'help Info from GitLab
+To merge changes from one branch to another
+```
+   (a) Create a working directory for the 'to' branch:
+
+       mkdir To_Branch
+
+       cd  To_Branch
+
+   (b) Clone
+
+       git clone <SSH-link> ./
+
+   (c) Merge
+
+       git merge <from-branch>
+```
+Here's an example:
+```
+   mkdir Issue_42
+
+   cd Issue_42
+
+   git clone <ssh-path-to-branch> ./
+
+   git branch     # verify branch
+
+   git merge origin/develop
+
+   --------------------------------
+    Editor
+
+    Enter comments
+
+    <save> <quit>
+   --------------------------------
+
+   Result:
+
+      "Merge made by the 'ort' strategy."
+
+   I have no idea what that means.
+```
+How to UNDO an un-concluded 'merge':
+```
+   (i)  git reset
+   (ii) git restore <file(s)>
+```
 
 #### 6.6.4) Merge - From Working Branch to 'origin/develop'
+
+On the GitLab page for the "Merge Request", selectd the
+"Mark as Ready" button.
+
+Selct the green "Merge" button.
+
+Oh ... I guess that's it.
+
+... not sure what all the 'noise' below is about ...
+
+**ATTEN** these steps were copied from the pop-up dialog when the
+"Merge Request" for Issue 43 was approved.  There was a little
+hyper-link that basically said "this is how you do a merge using
+the command-line".
+
+```
+   Step 0:
+   =======
+   On the GitLab page or the "Merge Request", select the
+   "Mark as Ready" button.
+
+   Step 1:
+   =======
+   a) git fetch origin
+
+   b) git checkout -b "Issue_43_Fix" "origin/Issue_43_Fix"
+
+   Step 2:
+   =======
+   a) git fetch origin
+
+   b) git checkout "develop"
+
+   c) git merge --no-ff "Issue_43_Fix"
+
+   Step 3
+   (a) git push origin "develop"
+```
+See also:
+```
+   https://<server-IP-addr>/gitlab/help/user/project/merge_requests/
+      reviewing_and_managing_merge_requests.md#
+         checkout-merge-requests-locally-through-the-head-ref
+```
+
+#### 6.6.5) Merge - From One REPO to a different REPO
+All the (merge) items above describe how to 'merge' from/to
+branches on the SAME repository.
+
+This is how to merge from REPO **A** to REPO **B** ... two different
+repositories.
+
+See my script 'merge_git_dirs.sh'
 
 ### 6.7) Difference
 
