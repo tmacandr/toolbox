@@ -692,8 +692,140 @@ This is how to merge from REPO **A** to REPO **B** ... two different
 repositories.
 
 See my script 'merge_git_dirs.sh'
+```
+   1) Setup a new directory in clone of TO repository
+
+      Do 'commit' of at least one item into the new
+      directory.
+
+   2) Setup/edit script 'merge_git_dirs.sh'
+
+   3) At this point, verify that BOTH the TO and the FROM
+      directories have no un-commits and that a 'push'
+      from the clone areas to the repo is DONE.
+
+   4) Run scripts
+
+   5) 'commit' items from TO directory into branch of TO repo
+
+      Push to branch of TO repo
+
+      ATTEN/WARNING:  If the 'moved' items are not in the
+                      location you want ... still do the
+                      'push'.  Then do 'git mv'.
+
+                      See (7) below.
+
+   6) Do 'git rm' from FROM directory.  Do 'commit'.
+
+      Do 'push' to (branch of) FROM repo.
+
+      Verify items are deleted.
+
+   7) WARNING/PROBLEMS/ISSUESs:
+
+      (a) If the 'merge' (i.e. 'git am') fails and you want to try
+          to recover and try again, you FIRST have to go into the
+          TO directory's '.git' directory and delete (rm -Rf) the
+          directory named 'rebase-apply'.  Otherwise, any other
+          attempts to run the 'git am' will fail ... saying something
+          stupid like "a rebase is already started".
+
+      (b) If one or more files in FROM collide with TO then
+          the 'git am' bombs out.
+
+          If possible, one thing to do is edit the 'patch.txt'
+          file that was generated and remove/delete the file(s)
+          that collide.  For example, if a "README.md" collides
+          between the FROM and the TO.  Delete the lead reference
+          at the start of the 'patch.txt'.  Then look for the
+          'start' of the merge/diff and delete till the next
+          named merge file.
+
+          This can get ugly if there's more than one 'merege'
+          operation on each file that collides.
+
+          The, rerun the 'git am' command:
+
+          git am --committer-date-is-author-date < $FROM_REPO/patch.txt
+
+          I have no idea what that "commiter-date-blah-blah"
+          means.
+
+      (c) If trying to merge to a 'new subdirectory' per step (1)
+          the FROM files will go to the root of the TO
+          directory.
+
+          DO NOT ATTEMPT to 'git mv' these to the sub-directory.
+          You have to 'push' the changes to the REPO.  Then
+          you can do a 'git mv'.  Otherwise, you will lose all
+          the 'history' that is the whole purpose of this
+          rigmarole process.
+
+          ACTUALLY - I dont' know if this matters.  When I do
+                     a 'git mv' AFTER 'commit' and 'push' I
+                     still LOSE the history.  ARGH!!!
+
+                     ---> BUT NOT REALLY!?!?!?
+
+                    What you have to do is:
+
+                       git log --follow <file>
+
+                    and this shows the full history of the
+                    file ... even going back to the starting
+                    repo.
+
+                    Ug!  Who came up with this garbage?
+```
 
 ### 6.7) Difference
+Setting the 'difftool' option.
+
+On the Linux node the IT (or maybe IA) won't allow (Linux) "Beyond Compare"
+to be installed.
+
+But they did install "meld" ... via IT request.
+```
+   /bin/meld
+```
+To set 'git' to use 'meld' instead of its default 'command-line'
+diff tool, do the following IN EACH clone:
+```
+   cd <clone-dir>
+
+   cd .git
+
+   edit (vim) config
+
+   Add the following lines:
+
+      [diff]
+              tool = meld
+      [difftool]
+              prompt = false
+      [difftool "meld"]
+              cmd = meld "$LOCAL" "$REMOTE"
+```
+WARNING/ATTENTION:
+```
+   Each 'in-dent' must be a <tab> ... not spaces (<-- I think)
+
+   Otherwise, 'git' will silently fail to parse the
+   config file for these options.
+
+   If you are using 'vim' and have <tabs>-to-<spaces> activated,
+   then even hitting <tab> won't work ... and copy/paste other
+   tabs won't work.
+
+   Do use a text editor.
+
+   Actually, one is not supposed to 'edit' the 'config' file
+   manually.  Instead, one is supposed to use the 'git' 'config'
+   command to add/change the settings.
+```
+Even so, the options offered by the default 'git' tool is myriad.
+So maybe there are features in 'git' that are not offered by 'meld'.
 
 ### 6.8) Delete Branch
 
