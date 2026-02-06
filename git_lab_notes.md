@@ -829,9 +829,87 @@ So maybe there are features in 'git' that are not offered by 'meld'.
 
 ### 6.8) Delete Branch
 
+Use the GitLab GUI to delete a (private) branch.
+```
+   (a) Got to GitLab page
+   
+       https://<svr-IP-addr>/<path>/<proj-name>/<name-of-REPO>
+       
+   (b) Select the REPOSITORY button on the far left of the page ... about
+       1/4 of the way down.
+       
+   (c) Select teh "Branches" button that gets rendered (underneath the
+       "Repository" button.
+       
+   (d) Carefully identify the branch you want to delete ...
+   
+       Verify there is a RED "Trash Can" symbol on the far right
+       of the entry/line-item.
+       
+       Select the "Trash Can" button.
+       
+       Verify "Are You Sure" dialog ... can't be undone ... etc.
+       
+       Select OK
+       
+       Verify branch is gone/deleted from teh list of branches.
+```
+
 ### 6.9) Restore (Older) Versions
+The following:
+```
+   git log <file>
+   
+   Selete the SHA marker of the 'commit'
+   
+   git restore --source=<SHA-value> <file>
+```
+For example:
+```
+git restore --source=ca0397481723476128476417623ae37cd72 ./hello_world.c
+```
 
 ### 6.10) How to Create Submodule Dependency
+These are the steps to create a submodule dependency for a repo.
+
+These are the specific steps done to add the 'ud-mcast' repo
+as a submodule to the <repo-name> repository.
+
+```
+   cd IB_work
+   
+   # ATTEN:
+   #    The directory 'ud-mcast' will be created by 'git'.  Do NOT create
+   #    the sub-directory
+   #
+   #    Use SSH protocol git@gitlab<ugly-SHA-value-here>
+   #    But you can use HTTP URL too, but have to provide user/password
+   #
+   #    Copy <ugly-SHA-value> from the GUI
+   #
+   git submodule add git@<ugly-SHA-value> ./src/multicast/ud-mcast <-- NO!
+                                                                 <-- See below
+   
+   #
+   # ATTEN:
+   #    For a specific BRANCH use hte -b option
+   #
+   # ATTEN:
+   #    The -b option comes BEFORE the repository name here
+   #    vs teh 'clone' command where the -b option comes AFTER
+   #    the repo name.
+   #
+   #    Yup ... 'git' consistency
+   #
+   #    >> AND THIS FAILED TOO !!!    <<<
+
+   -----------------------------------------------------------
+   git submodule add -b develop git@<ugly-SHA-value>
+   -----------------------------------------------------------
+   
+   Did NOT name sub-directory.  I had to let the friggin tool
+   force it, in spite of their friggin' [<path>] option.
+```
 
 Oh!  Where are you **Subversion**!!
 **ATTEN**
