@@ -21,6 +21,15 @@ in 50 years.
 
 ## Vivado Start
 
+Start 'gnome-terminal'
+
+Run following commands
+```
+   copy script contents here
+```
+
+![vivado_start_window](./vivado_pg_00.jpg "Vivado start dialog")
+
 ## Setup - Open Hardware Manager
 
 ## Select Target Hardware
