@@ -111,7 +111,11 @@ Select signal(s) to probe ... called _trigger_ signals.
 When the trigger condition occurs the ILA will measure all the signals
 defined in the probe file and display them on the GUI.
 
-[select_probes](./Images/vivado_pg_04.jpg "load probes")
+![select_probes](./Images/vivado_pg_04.jpg "load probes")
+
+Setup trigger events:
+
+![select_trigger](.Images/vivado_pg_05.jpg "trigger events")
 
 ## 7) Shutdown
 
