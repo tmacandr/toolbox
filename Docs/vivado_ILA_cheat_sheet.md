@@ -115,7 +115,7 @@ defined in the probe file and display them on the GUI.
 
 Setup trigger events:
 
-![select_trigger](.Images/vivado_pg_05.jpg "trigger events")
+![select_trigger](./Images/vivado_pg_05.jpg "trigger events")
 
 ## 7) Shutdown
 
