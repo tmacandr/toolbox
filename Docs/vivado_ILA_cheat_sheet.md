@@ -117,6 +117,20 @@ Setup trigger events:
 
 ![select_trigger](./Images/vivado_pg_05.jpg "trigger events")
 
+More
+
+![select_signals](./Images/vivado_pg_06.jpg "select signals")
+
+More
+
+![change_settings](./Images/vivado_pg_07.jpg "chagne settings")
+
+More
+
+![trigger_setup](./Images/vivado_pg_08.jpg "trigger setup")
+
+More
+
 ## 7) Shutdown
 
 Show 'gracefull' exit here.
