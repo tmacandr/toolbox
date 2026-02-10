@@ -142,7 +142,7 @@ or just do "exit".
 
 NOTE - Running Vivado may not render correctly on full 32-bit graphics
        environment.
-````
+```
        Some "colors" are rendered as "see through".
 
        I forget how, but there may be a start option on the
