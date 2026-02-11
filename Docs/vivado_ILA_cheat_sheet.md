@@ -131,9 +131,15 @@ More
 
 More
 
+![trigger_buttons](./Images/vivado_pg_09.jpg "trigger setup")
+
+More
+
+![trigger_event](./Images/vivado_pg_10.jpg "trigger setup")
+
 ## 7) Shutdown
 
-Show 'gracefull' exit here.
+Show 'graceful' exit here.
 
 Not sure if have to disconnect from hardware (via JTAG connection)
 or just do "exit".
