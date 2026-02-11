@@ -65,23 +65,25 @@ Run following commands
 ```
    copy script contents here
 ```
+The **Vivado** tool starts and the base start-up window is shown.
 
 ![vivado_start_window](./Images/vivado_pg_00.jpg "Vivado start dialog")
 
+If starting an ILA session for the first time, continue to Section **3**.
+
+If hardware selection has been done previously, skip to Section **5**.
+
 ## 3) Setup - Open Hardware Manager
+ 
+Follow steps shown here to open the **hardware manager**.
 
 ![hw_manager](./Images/vivado_pg_01.jpg "HW Manager")
 
-If starting an ILA session for the first time, continue to Section **3**.
-
-If hardware selection has been done previously, skip Section 3 and
-proceed to Section **4**.
-
 ## 4) Select Target Hardware
 
-Diagram shows steps to open/activate a **hardware target**.
+The next diagram shows steps to open/activate a **hardware target**.
 
-Follow the steps of the Vivado **wizard**.
+Follow the steps of the _open new hardware target_ **wizard**.
 
 ![target_hardware](./Images/vivado_pg_02.jpg "hw target wizard")
 
@@ -91,31 +93,50 @@ The **port** always seems to be **3121**.
 
 Need to know what the **serial number** to the board.
 
+If the board is already connected to the host workstation via a
+serial/JTAG line, then the serial number may be available by using
+the following Linux tools:
+```
+   commands of that tty tool here
+```
+
 Select the target based on the **serial number**.
 
-## 5) Load Probe (ILA File - <probe>.ltx)
+![select_tgt_board](./Images/vivado_pg_03.jpg "select board")
+
+## 5) Load Probe (ILA) File - <probe>.ltx
+
+If the target board has been loaded during a previous session, then
+select:
+```
+   Open Recent
+       |
+       |---> Target
+       
+   Select the previous board configuration from the previous session
+```
+At this point, the **probe** window/dialog is shown.
+
+![select_probes](./Images/vivado_pg_04.jpg "load probes")
 
 A **probe file** is a list of signal points in the ILA circuitry, which
 allows signals in the IP to be observed.  An EE would probably laugh,
 but probe signals for a software developer are analogous to _break points_
 in source code.
 
-![load_probe](./Images/vivado_pg_03.jpg "load ILA probe file")
+Probe files have the file extension **.ltx**.
 
-Probe files have the file extension *.ltx*.
+## 6) Select Trigger Signals
 
-## 6) Trigger
+To specify the signal(s) to probe ... called _trigger_ signals, press
+the **+** sign at the **Trigger Setup** sub-window.
 
-Select signal(s) to probe ... called _trigger_ signals.
+![select_trigger](./Images/vivado_pg_05.jpg "trigger events")
 
 When the trigger condition occurs the ILA will measure all the signals
 defined in the probe file and display them on the GUI.
 
-![select_probes](./Images/vivado_pg_04.jpg "load probes")
-
 Setup trigger events:
-
-![select_trigger](./Images/vivado_pg_05.jpg "trigger events")
 
 More
 
