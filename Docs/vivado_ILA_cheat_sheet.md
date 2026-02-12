@@ -199,12 +199,15 @@ Tcl script to load/install FPGA-ware.
 
 Use the Xilinx tool `xsct` and specify the following Tcl script.
 
-ATTEN - This is for load/install to a **Virtex UltraScale+ VU37P** on a
-**VCU-128** Evaluation board.  The `xsct` tool has been deprecated by
-Xilinx (actually AMD) for later products.  The **VCU-128** is no longer
-available from Xilinx.
+ATTEN - This is for load/install to a **Virtex UltraScale+ VU37P** on
+a **VCU-128** Evaluation board.  The `xsct` will download the FPGA product(s)
+via the **JTAG** connection from the host workstation to the target
+board.
 
-Check this, but I think the syntax is:
+The `xsct` tool has been deprecated by Xilinx (actually AMD) for later
+products.  The **VCU-128** is no longer available from Xilinx.
+
+Check this, but I think the syntax is (need to check this):
 ```
    xsct load_board.tcl
 ```
