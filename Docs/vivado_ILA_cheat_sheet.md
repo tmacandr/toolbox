@@ -63,7 +63,17 @@ Start 'gnome-terminal'
 
 Run following commands
 ```
-   copy script contents here
+   #!/bin/bash
+   module use --append <path-to-Xilinx-installation>
+   
+   VDIR=<path-to-Xilinx-installation>
+   VBIN=$VDIR/bin
+   PATH=$PATH:$VBIN
+   VEXE=$VBIN/vivado
+   #possibly set TMPDIR if /tmp not available
+   #export TMPDIR=$HOME/<work-area>
+   source $VDIR/settings64.sh
+   $VXE &
 ```
 The **Vivado** tool starts and the base start-up window is shown.
 
@@ -97,7 +107,15 @@ If the board is already connected to the host workstation via a
 serial/JTAG line, then the serial number may be available by using
 the following Linux tools:
 ```
-   commands of that tty tool here
+   #!/bin/bash
+   DEVS=`ls -l /dev/ttyUSB* | sort -tB -k2 -g`
+   for e in $DEVS; do
+      udevadm info --query=property --name=$DEVS
+   done
+```
+Note:
+```
+   Use 'jq' tool to pares JSON file of information
 ```
 
 Select the target based on the **serial number**.
@@ -175,5 +193,62 @@ NOTE - Running Vivado may not render correctly on full 32-bit graphics
        I forget how, but there may be a start option on the
        "Windows to Linux" 'mstsc' tool to select a 24-bit color
        pallette.  Vivado will render correctly then.
+```
+
+Tcl script to load/install FPGA-ware.
+
+Use the Xilinx tool `xsct` and specify the following Tcl script.
+
+ATTEN - This is for load/install to a **Virtex UltraScale+ VU37P** on a
+**VCU-128** Evaluation board.  The `xsct` tool has been deprecated by
+Xilinx (actually AMD) for later products.  The **VCU-128** is no longer
+available from Xilinx.
+
+Check this, but I think the syntax is:
+```
+   xsct load_board.tcl
+```
+where `xsct` is in **$PATH**.
+
+The following is the `load_board.tcl`:
+
+```
+   set XSA_FILE      [lindex $argv 0]
+   set BIT_FILE      [lindex $argv 1]
+   set ELF_FILE      [lindex $argv 2]
+   set SERIAL_NUM    [lindex $argv 3]
+
+   puts "--->    XSA File...: $XSA_FILE"
+   puts "--->    BIT File...: $BIT_FILE"
+   puts "--->    ELF File...: $ELF_FILE"
+   puts "--->    Tgt ID.....: $SERIAL_NUM"
+   
+   connect -url tcp:127.0.0.1:3121
+   
+   puts "---> targets to load FPGA bit file"
+   
+   targets -set -filter {target_ctx =~ "*${SERIAL_NUM}*" && name =~ "xcvu37p"}
+   
+   puts "---> load bit file"
+   
+   loadhw -hw $XSA_FILE -regs
+   
+   puts "---> loadhw"
+   
+   loadhw -hw $XSA_FILE -regs
+   
+   puts "---> reset"
+   
+   rst -system
+   
+   puts "---> download elf"
+   
+   dow $ELF_FILE
+   
+   puts "---> con"
+   
+   con
+   
+   puts "---> done"
 ```
 
