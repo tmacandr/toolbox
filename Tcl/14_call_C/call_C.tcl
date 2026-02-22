@@ -29,6 +29,9 @@ proc some_procedure { first_arg second_arg } {
 # ***********************************************
 puts "Begin - hello Tcl"
 
+load lib/libc_func[info sharedlibextension]
+
+get_integer
 
 for { set i 0 } { $i < 10 } { incr i } {
 

@@ -7,23 +7,29 @@
 
 CC  = gcc
 
+OPTS = -Wall -DUSE_TCL_STUBS -fPIC
+
 SRC = c_functions.c
 
 OBJ = $(SRC:.c=.o)
 
-LIB = libc_func.a
+INCL = -I/usr/include/tcl8.6
 
-OPTS = -Wall
+LIB_PATH = -L/usr/lib/x86_64-linux-gnu
 
-$(LIB):$(OBJ)
+LIBS = -ltclstub8.6
+
+TO_LIB = libc_func.so
+
+$(TO_LIB):$(OBJ)
 	@echo "________________________________"
 	@echo "Build $@"
-	@ar -r $(LIB) $(OBJ)
+	@gcc -shared -o $(TO_LIB) $(OBJ) $(LIB_PATH) $(LIBS)
 
 c_functions.o:c_functions.c
 	@echo "________________________________"
 	@echo "Compile $?"
-	$(CC) $(OPTS) -c $?
+	$(CC) $(OPTS) $(INCL) -c $?
 
 clean:
 	@echo "________________________________"
