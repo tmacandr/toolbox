@@ -384,6 +384,28 @@ But that said, the idea (goal) of passing complex objects, such as
 a drawing pallette, to C functions to do complex processing doesn't
 seem to be possible.
 
+Couple more things:
+
+   1. I didn't discuss/cover the mechanics associated with the
+      `Tcl_CmdDeleteProc()` callback.  When the function
+      ```
+         Tcl_CmdDelete()
+      ```
+      is called the corresponding callback(s) are invoked to
+      deallocate resources.
+
+      But I'm not sure how or when the `Tcl_CmdDelete()` is done.
+      Maybe there's supposed to be a 'clean-up' C-function analogous
+      to the `C_func_Init()`.  But it's called somewhere in the Tcl
+      script, whereas the `C_func_Init()` is invoked (for free) when
+      `load <lib>[info sharedlibextension]` is invoked.
+
+   2. I'm not sure about how memory allocated in a C function
+      (e.g. a char * buffer) is to be deallocated once the
+      `Tcl_SetObjResult()` is called and the C function returns.
+
+      Seems it could be an easy way to cause memory leaks.
+
 # References
 
 1. Swig https://wiki.tcl-lang.org/page/Swig
