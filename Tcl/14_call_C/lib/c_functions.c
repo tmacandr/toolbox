@@ -5,6 +5,7 @@
  *    Example of functions that are called from Tcl scipt.
  *****************************************************************************/
 #include <stdio.h>
+#include <string.h>
 #include "c_functions.h"
 
 /************************************************
@@ -43,7 +44,7 @@ int C_func_Init(Tcl_Interp *interp)
 
    /*
     * Create the new Tcl command "get_integer" and link it to
-    * the C function MyAddCmd
+    * the C function get_integer()
     */
    Tcl_CreateCommand
           (interp,
@@ -84,7 +85,24 @@ int get_integer(ClientData clientData,
 {
    int answer = 1234;
 
-   printf("---> get_integer: %d\n", answer);
+   printf("---> get_integer\n"
+          "--->    argc...: %d\n",
+          argc);
+
+   for (int i = 0; i < argc; i++)
+   {
+       printf("--->    argv[%d]...: %s\n",
+              i,
+              argv[i]);
+   }
+
+   printf("---> answer: %d\n", answer);
+
+   Tcl_Obj *result_obj;
+
+   result_obj = Tcl_NewIntObj(answer);
+
+   Tcl_SetObjResult(interp, result_obj);
 
    return TCL_OK;
 }
@@ -103,7 +121,24 @@ int get_float(ClientData clientData,
 {
    float answer = 3.14159f;
 
+   printf("---> get_float\n"
+          "--->    argc...: %d\n",
+          argc);
+
+   for (int i = 0; i < argc; i++)
+   {
+       printf("--->    argv[%d]...: %s\n",
+              i,
+              argv[i]);
+   }
+
    printf("---> get_float: %f\n", answer);
+
+   Tcl_Obj *result_obj;
+
+   result_obj = Tcl_NewDoubleObj((double) answer);
+
+   Tcl_SetObjResult(interp, result_obj);
 
    return TCL_OK;
 }
@@ -123,7 +158,24 @@ int get_string(ClientData clientData,
 {
    char *answer = "The quick brown fox";
 
+   printf("---> get_string\n"
+          "--->    argc...: %d\n",
+          argc);
+
+   for (int i = 0; i < argc; i++)
+   {
+       printf("--->    argv[%d]...: %s\n",
+              i,
+              argv[i]);
+   }
+
    printf("---> get_string: %s\n", answer);
+
+   Tcl_Obj *result_obj;
+
+   result_obj = Tcl_NewStringObj(answer, strlen(answer));
+
+   Tcl_SetObjResult(interp, result_obj);
 
    return TCL_OK;
 }

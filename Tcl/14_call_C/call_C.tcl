@@ -31,7 +31,17 @@ puts "Begin - hello Tcl"
 
 load lib/libc_func[info sharedlibextension]
 
-get_integer
+set answer [get_integer 123 456 789]
+
+puts "Integer answer: $answer"
+
+set answer [get_float 3.14 2.718 10.0]
+
+puts "Float answer: $answer"
+
+set answer [get_string 1 3.1 "blah"]
+
+puts "String answer: $answer"
 
 for { set i 0 } { $i < 10 } { incr i } {
 

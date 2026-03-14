@@ -331,6 +331,59 @@ Tried the following:
 
    WORKED!!!
 
+# Discussion
+
+Expanded the three C functions to return 'results'.  And things got
+messy.
+
+   1. Input arguments
+
+      Arguments, it appears, can only be scalar values (char, int,
+      float, etc) but no matter the type, the value is converted
+      to (ASCII) string.
+
+      Then, the agruments are passed to the C function as the
+      typical:
+      ```
+         int argc, char **argv
+      ```
+
+      So the C function has to convert the given argument from
+      string (back) to the original scalar type.
+
+      So complex structures can't be passed.  Or, at least I'm not
+      seeing a mechanism to do so.
+
+   2. Return value
+
+      The protocol seems to be:
+      ```
+         Tcl_Obj *result_obj;
+
+         result_obj = Tcl_New<TYPE>Obj(<result>, [other args]);
+
+         Tcl_SetObjResult(interp, result_obj);
+      ```
+
+      Then the protcol in the Tcl code is:
+      ```
+         set answer [<C_function_name <arg1> ... <argN>]
+      ```
+
+      The <Type> can be Int, Double (there's no 'float'), String, etc.
+
+   3. Output arguments.
+
+      And there are no 'out' arguments.
+
+At this point, I'll close this effort out.  It shows the basic
+mechanics of how to pass arguments from a Tcl script to a C function
+and then receive the results.
+
+But that said, the idea (goal) of passing complex objects, such as
+a drawing pallette, to C functions to do complex processing doesn't
+seem to be possible.
+
 # References
 
 1. Swig https://wiki.tcl-lang.org/page/Swig
