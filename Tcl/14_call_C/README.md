@@ -406,6 +406,22 @@ Couple more things:
 
       Seems it could be an easy way to cause memory leaks.
 
+Oh ... maybe possible to do graphics operations.  Do the following
+Google query:
+   ```
+   Tcl is there a way to pass a Tcl graphic objects such as
+   a canvas to a C function?
+   ```
+The problem is that there's still no X11 Window System on Linux.  The
+answer talks about using Windows graphics operations by obtaining the
+`HWND` graphics handle, or using the object in `OpenGL` operations.
+But that's the point.  If I'm on Windows node I can use Visual Studio
+to build the GUI and perform graphics ... and if I had `OpenGL` I
+probably wouldn't need Tcl.  But that's what I'm trying to avoid, the
+whole massive, black-hole of using `OpenGL`.  I'm sure it's powerful
+windowing/graphics system (yes, even 3D), but I don't have 10 years
+to learn the basics.
+ 
 # References
 
 1. Swig https://wiki.tcl-lang.org/page/Swig
