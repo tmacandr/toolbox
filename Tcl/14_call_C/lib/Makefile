@@ -35,4 +35,4 @@ clean:
 	@echo "________________________________"
 	@echo "clean"
 	rm -f $(OBJ)
-	rm -f $(LIB)
+	rm -f $(TO_LIB)
