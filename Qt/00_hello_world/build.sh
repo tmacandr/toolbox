@@ -1,50 +1,32 @@
 #=============================================================================
-# FILE: Makefile
+# FILE: build.sh
 #
 # DESCRIPTION:
-#    Base 'make' file to build the Qt "hello world" app.
+#    Steps to use 'qmake' tool to build 'hello_world' Qt app.
 #
-#    Not sure I should start here.  Apparently Qt has a 'make' tool as
-#    part of the overall Qt toolkit.  But I guess I'm already leaning
-#    toward what I know rather than take the time to sit down and read
-#    the Qt manuals.
+#    I made the mistake of not reading the "Qt Assistant" documentation.
 #
-#    First things first, Qt is C++ and C++ ONLY!
+#    A Qt build requires the use of the 'qmake' tool.  And already I don't
+#    like that.  It means the build mechanics are so friggin' complicated
+#    that trying to do it 'manually' is an impossibility.
 #
-#    Next - must specify "Position Indepedent Code" (PIC) build because
-#           Qt was built using a "-reduce-relocations" option ... whatever
-#           that is.
+#    So this script captures the base steps.
+#
+#    NOTES:
+#       1) Qt is C++ and C++ ONLY!
+#
+#       2) I don't have to worry about specifying
+#          "Position Indepedent Code" (PIC) build because
+#          Qt was built using a "-reduce-relocations"
+#          option ... whatever that is.
+#
+#          But since the 'qmake' tool figures everything out,
+#          I don't have to worry about it.
 #=============================================================================
 
-CC = gcc -Wall -fPIC
+qmake -o Makefile hello.pro
 
-SRC = hello_world.cpp
+make clean
 
-OBJ = $(SRC:.cpp=.o)
-
-EXE = $(SRC:.cpp=.exe)
-
-INCL = -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets \
-       -I/usr/include/x86_64-linux-gnu/qt5
-
-LPATH = -L/usr/lib/x86_64-linux-gnu
-
-LLIBS = -lQt5Widgets
-
-$(EXE):$(OBJ)
-	@echo "________________________________"
-	@echo "Build $@"
-	@$(CC) $(OBJ) $(LPATH) $(LLIBS) -o $(EXE)
-
-$(OBJ):$(SRC)
-	@echo "________________________________"
-	@echo "Compile $?"
-	qmake hello.pro
-	@$(CC) $(INCL) -c $?
-
-clean:
-	@echo "________________________________"
-	@echo "Clean ..."
-	@rm -f $(OBJ)
-	@rm -f $(EXE)
+make
 
