@@ -22,7 +22,9 @@ void ButtonDemo::on_count_button_clicked()
 
     std::cout << "Count = " << count << "\n";
 
-    //count_line.set(std::string(count));
+    std::string value = std::to_string(count);
+
+    ui->count_line->setText(value.c_str());
 }
 
 void ButtonDemo::on_reset_button_clicked()
@@ -31,5 +33,12 @@ void ButtonDemo::on_reset_button_clicked()
 
     std::cout << "Reset Count = " << count << "\n";
 
-    //count_line.set(std::string(count));
+    std::string value = std::to_string(count);
+
+    ui->count_line->setText(value.c_str());
+}
+
+void ButtonDemo::on_exit_button_clicked()
+{
+    std::exit(0);
 }
