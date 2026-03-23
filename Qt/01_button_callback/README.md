@@ -324,3 +324,14 @@ And the answer came back **Java**.
 I'll do the next couple of demo problems (Menu GUI, then graphics demo).
 But unless there's some miracle event I think I'm done with **Qt**.
 
+One more note before I close this demo out ... It took me **six** dang
+hours to get this simple demo to work.  Either I'm too old or this **Qt**
+stuff is to shakey.  I think the word I'm looking for is **tribal**.
+Sometimes these Linux _communities_ get so high on themselves, and
+no one to tell them their wrong, that they become insular, with
+_group-think_.  Outsiders ... sucks to be you.  And after the NVIDIA
+take over, that probably sealed it.  Unchecked authority to do what
+ever they wanted.
+
+I wonder why NVIDIA eventually sold **Qt** away?
+
