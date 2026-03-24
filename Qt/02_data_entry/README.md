@@ -84,3 +84,39 @@ Did the following:
    main.cpp
    ```
 
+8. I still had to fix the header files.  They didn't have the right
+   include to 'ui_data_entry.h' and the name of the object was still
+   the generice name, not the 'data_entry' name.
+
+   Once I made the 'fixes', the compile/link worked.
+
+9. Run
+
+   Worked.
+
+10. Implemented the 'exit' button 'slot'.
+
+    When I reloaded into the tool and tried to 'go to' the 'slot', where
+    it would be created/added to the 'data_entry.cpp', it bombed saying
+    the name of the object was wrong, or some such.
+
+    And so it was.  I still had the main object in the .ui file called
+    "MainWindow".  I renamed it to "data_entry" and this broke things
+    lose.  Was able to implement the exit 'slot' function.
+
+11. Build/run
+
+    Looks OK now.
+
+# Conclusion
+
+Still don't like this 'in the tool' ... then 'out of the tool' ... then
+back 'in' ... then 'out' ... etc.
+
+I'll implement the 'Save' and the 'Reset'.
+
+BTW ... I still don't know what the 'menu' bar is doing there.  The
+tool prompts to "type here" ... and then what appears to be a kind
+of cascade/root menu button is created.  But otherwise, I can't
+figure out what they're heading for.
+
