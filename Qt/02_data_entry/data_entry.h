@@ -16,6 +16,9 @@ public:
     data_entry(QWidget *parent = nullptr);
     ~data_entry();
 
+private slots:
+    void on_exit_button_clicked();
+
 private:
     Ui::data_entry *ui;
 };

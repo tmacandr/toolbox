@@ -13,3 +13,8 @@ data_entry::~data_entry()
     delete ui;
 }
 
+
+void data_entry::on_exit_button_clicked()
+{
+    std::exit(0);
+}
