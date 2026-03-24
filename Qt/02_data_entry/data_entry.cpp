@@ -1,14 +1,14 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "data_entry.h"
+#include "ui_data_entry.h"
 
-MainWindow::MainWindow(QWidget *parent)
+data_entry::data_entry(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , ui(new Ui::data_entry)
 {
     ui->setupUi(this);
 }
 
-MainWindow::~MainWindow()
+data_entry::~data_entry()
 {
     delete ui;
 }

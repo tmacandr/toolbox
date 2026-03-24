@@ -71,3 +71,16 @@ Did the following:
 
    Wait ... I lose the .ui?
 
+7. Try again:
+
+   ```
+   Files to be added in
+   /home/tmacandr/Programming/toolbox/Qt/02_data_entry/data_entry:
+
+   data_entry.cpp
+   data_entry.h
+   data_entry.pro
+   data_entry.ui
+   main.cpp
+   ```
+

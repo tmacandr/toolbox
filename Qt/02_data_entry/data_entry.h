@@ -1,21 +1,22 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef DATA_ENTRY_H
+#define DATA_ENTRY_H
 
 #include <QMainWindow>
+#include "ui_data_entry.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui { class data_entry; }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
+class data_entry : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    data_entry(QWidget *parent = nullptr);
+    ~data_entry();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::data_entry *ui;
 };
-#endif // MAINWINDOW_H
+#endif // DATA_ENTRY_H
