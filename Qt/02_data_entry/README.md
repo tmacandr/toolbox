@@ -51,3 +51,23 @@ Did the following:
    Buttons
    Labels with text-fields
 
+4. Did 'Save All' and the 'Build All' ... and as with the 02 demo, it
+   didn't work.
+
+5. So I exit out of **Qt Creator**.
+
+6. Add my own **build.sh**
+
+   Get the error:
+   ```
+   data_entry.cpp:1:10: fatal error: mainwindow.h:
+       No such file or directory 1 | #include "mainwindow.h"
+   ```
+
+   So, when I renamed the .ui file and the tool said "rename all files"
+   to match ... they don't update the internal references.
+
+   Screw it!  Too tedious.  Delete and start over.
+
+   Wait ... I lose the .ui?
+
