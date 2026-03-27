@@ -19,6 +19,10 @@ public:
 private slots:
     void on_exit_button_clicked();
 
+    void on_cancel_button_clicked();
+
+    void on_save_button_clicked();
+
 private:
     Ui::data_entry *ui;
 };
