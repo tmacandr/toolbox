@@ -10,7 +10,7 @@
 *    closed.
 *
 * COPYRIGHT:
-*    Copyright (c) 2004, Sally Recuas (SallyRecuas@gmail.com)
+*    Copyright (c) 2004, Tim MacAndrew
 *
 *    Permission to use, copy, modify, and/or distribute this software for any
 *    purpose with or without fee is hereby granted, provided that the above

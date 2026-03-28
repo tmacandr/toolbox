@@ -8,7 +8,7 @@
 *                     V = IR
 *
 * COPYRIGHT:
-*    Copyright (c) 2004, Sally Recuas (Sally_Recuas@yahoo.com)
+*    Copyright (c) 2004, Tim MacAndrew, all rights reserved
 *
 *    Permission to use, copy, modify, and/or distribute this software for any
 *    purpose with or without fee is hereby granted, provided that the above
