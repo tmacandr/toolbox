@@ -1,5 +1,12 @@
 # Qt Button Demo Project
 
+Note:
+```
+   To start the tool, at console:
+
+   qtcreator &
+```
+
 I figured the next goal would be to create a 'button' demo program
 so I could figure out what their button **callback** mechanism was
 like.
