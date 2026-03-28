@@ -34,7 +34,21 @@ int main (int argc, char **argv)
 
 {
    printf("hello world\n");
-
+   printf("   Sizes of scalars:\n");
+   printf("      char.....................: %lu\n", sizeof(char));
+   printf("      uchar....................: %lu\n", sizeof(unsigned char));
+   printf("      short....................: %lu\n", sizeof(short int));
+   printf("      unsigned short...........: %lu\n", sizeof(unsigned short int));
+   printf("      int......................: %lu\n", sizeof(int));
+   printf("      unsigned int.............: %lu\n", sizeof(unsigned int));
+   printf("      long int.................: %lu\n", sizeof(long int));
+   printf("      unsigned long int........: %lu\n", sizeof(unsigned long int));
+   printf("      long long int............: %lu\n", sizeof(long long int));
+   printf("      unsigned long long int...: %lu\n",
+          sizeof(unsigned long long int));
+   printf("      float....................: %lu\n", sizeof(float));
+   printf("      double...................: %lu\n", sizeof(double));
+ 
    return 0;
 }
 
