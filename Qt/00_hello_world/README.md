@@ -189,6 +189,17 @@ screen.
 
 Select the **Qt 5 Assistant** and/or the **Qt 5 Designer** icons.
 
+Or !!
+
+In _console_ window, simply type:
+```
+   qtcreator &
+```
+Don't forget the `&` so it doesn't lock the console window.
+
+NOTE - It takes a couple of seconds for the IDE to render.  It's a big
+puppy.
+
 ## Compile
 
    Include directories:
