@@ -14,7 +14,7 @@
    <string>menu_bar_demo</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="count_text_field">
     <property name="geometry">
      <rect>
       <x>170</x>
