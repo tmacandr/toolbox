@@ -4,7 +4,14 @@
 # DESCRIPTION:
 #    Steps to use 'qmake' tool to build 'menu-bar' demo Qt app.
 #
+#    ATTENTION:
+#       Below are some parameters during a 'build' operation.  However,
+#       the 'lesson learned' is do NOT try to figure out object attributes
+#       or behavior by reading "code".  You'll go blind!  Instead, one
+#       MUST use the documentation in the "Qt Assistant" tool.
+#
 #    Build Configuration:
+#    --------------------
 #       /usr/lib/qt5/bin/uic <project>.ui -o <project>.h
 #
 #       g++ -c -pipe -O2 -std=gnu++11
