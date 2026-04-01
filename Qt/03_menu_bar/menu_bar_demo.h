@@ -64,5 +64,15 @@ private:
     Ui::menu_bar_demo *ui;
 
     unsigned int count = 0;
+
+    int x = 0;
+    int y = 0;
+
+    std::string message;
+
+    QColor pen_color = Qt::black;
 };
 #endif // MENU_BAR_DEMO_H
+
+/* EOF */
+

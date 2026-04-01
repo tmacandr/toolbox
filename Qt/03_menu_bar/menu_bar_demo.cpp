@@ -117,59 +117,154 @@ void menu_bar_demo::exit_action_slot()
 // Ctrl
 void menu_bar_demo::zoom_in_action_slot()
 {
+    x = ui->centralwidget->width() / 2;
+    y = ui->centralwidget->height() / 2;
+
+    message = "Zoom in";
+
+    std::cout << message << "\n";
+
+    pen_color = Qt::blue;
+
     update();
 }
 
 void menu_bar_demo::zoom_out_action_slot()
 {
-    std::cout << "NNN not implemented\n";
+    x = ui->centralwidget->width() / 4;
+    y = ui->centralwidget->height() / 4;
+
+    message = "Zoom out";
+
+    std::cout << message << "\n";
+
+    pen_color = Qt::darkCyan;
+
+    update();
 }
 
 void menu_bar_demo::move_north_action_slot()
 {
-    std::cout << "Move NORTH not implemented\n";
+    x = ui->centralwidget->width() / 3;
+    y = ui->centralwidget->height() / 3;
+
+    message = "Move North";
+
+    pen_color = Qt::darkBlue;
+
+    std::cout << message << "\n";
+
+    update();
 }
 
 void menu_bar_demo::move_south_action_slot()
 {
-    std::cout << "Move SOUTH not implemented\n";
+    x = ui->centralwidget->width() / 6;
+    y = ui->centralwidget->height() / 6;
+
+    message = "Move South";
+
+    pen_color = Qt::darkYellow;
+
+    std::cout << message << "\n";
+
+    update();
 }
 
 void menu_bar_demo::move_east_action_slot()
 {
-    std::cout << "Move EAST not implemented\n";
+    x = ui->centralwidget->width() / 9;
+    y = ui->centralwidget->height() / 9;
+
+    message = "Move East";
+
+    std::cout << message << "\n";
+
+    update();
 }
 
 void menu_bar_demo::move_west_action_slot()
 {
-    std::cout << "Move WEST not implemented\n";
+    x = ui->centralwidget->width() / 5;
+    y = ui->centralwidget->height() / 5;
+
+    message = "Move West";
+
+    pen_color = Qt::cyan;
+
+    std::cout << message << "\n";
+
+    update();
 }
 
 // Themes
 void menu_bar_demo::libRef_action_slot()
 {
-    std::cout << "LIBREF not implemented\n";
+    x = (int) (0.65 * ui->centralwidget->width());
+    y = ui->centralwidget->height() / 5;
+
+    message = "LibRef";
+
+    pen_color = Qt::darkMagenta;
+
+    std::cout << message << "\n";
+
+    update();
 }
 
 void menu_bar_demo::population_action_slot()
 {
-    std::cout << "Poplulation not implemented\n";
+    x = (int) (0.70 * ui->centralwidget->width());
+    y = ui->centralwidget->height() / 2;
+
+    message = "Population";
+
+    pen_color = Qt::yellow;
+
+    std::cout << message << "\n";
+
+    update();
 }
 
 void menu_bar_demo::drainage_action_slot()
 {
-    std::cout << "Drainage not implemented\n";
+    x = (int) (0.75 * ui->centralwidget->width());
+    y = (int) (0.75 * ui->centralwidget->height());
+
+    pen_color = Qt::magenta;
+
+    message = "Drainage";
+
+    std::cout << message << "\n";
+
+    update();
 }
 
 void menu_bar_demo::polit_ocean_action_slot()
 {
-    std::cout << "Polit-Ocean not implemented\n";
+    x = (int) (0.6 * ui->centralwidget->width());
+    y = (int) (0.6 * ui->centralwidget->height());
+
+    pen_color = Qt::red;
+
+    message = "Polit Ocean";
+
+    std::cout << message << "\n";
+
+    update();
 }
 
 // Help
 void menu_bar_demo::help_action_slot()
 {
-    std::cout << "help not implemented\n";
+    x = (int) (0.8 * ui->centralwidget->width());
+    y = (int) (0.8 * ui->centralwidget->height());
+
+    message = "Help";
+
+    std::cout << message << "\n";
+
+    update();
 }
 
 
@@ -177,13 +272,19 @@ void menu_bar_demo::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this); // QPainter automatically init for the paintEvent
 
-    int width = ui->centralwidget->width();
-    int height = ui->centralwidget->height();
+    QRegion region = event->region();
 
-    // ... set pen, font, etc
-    painter.setPen(Qt::blue);
+    if ( region.isEmpty() )
+    {
+        painter.setPen(Qt::green);
+    }
+    else
+    {
+        painter.setPen(pen_color);
+    }
 
-    painter.drawText(width/2, height/2, "Zoom In");
+    painter.drawText(x, y, message.c_str());
 }
+
 /* EOF */
 
