@@ -38,7 +38,7 @@
     </property>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
+  <widget class="QMenuBar" name="demo_menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -47,7 +47,7 @@
      <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFile">
+   <widget class="QMenu" name="menuFileCascadeButton">
     <property name="title">
      <string>File</string>
     </property>
@@ -55,7 +55,7 @@
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
-   <widget class="QMenu" name="menuCtrl">
+   <widget class="QMenu" name="menuCtrlCascadeButton">
     <property name="title">
      <string>Ctrl</string>
     </property>
@@ -66,7 +66,7 @@
     <addaction name="actionMove_East"/>
     <addaction name="actionMove_West"/>
    </widget>
-   <widget class="QMenu" name="menuThemes">
+   <widget class="QMenu" name="menuThemesCascadeButton">
     <property name="title">
      <string>Themes</string>
     </property>
@@ -75,15 +75,15 @@
     <addaction name="actionDrainage"/>
     <addaction name="actionPolit_Ocean"/>
    </widget>
-   <widget class="QMenu" name="menuHelp">
+   <widget class="QMenu" name="menuHelpButton">
     <property name="title">
      <string>Help</string>
     </property>
    </widget>
-   <addaction name="menuFile"/>
-   <addaction name="menuCtrl"/>
-   <addaction name="menuThemes"/>
-   <addaction name="menuHelp"/>
+   <addaction name="menuFileCascadeButton"/>
+   <addaction name="menuCtrlCascadeButton"/>
+   <addaction name="menuThemesCascadeButton"/>
+   <addaction name="menuHelpButton"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionCount">
