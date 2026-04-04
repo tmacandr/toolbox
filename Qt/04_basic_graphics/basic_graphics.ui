@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>basic_graphics_MainWindow</class>
+ <widget class="QMainWindow" name="basic_graphics_MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>basic_graphics_MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionExitButton"/>
+   </widget>
+   <widget class="QMenu" name="menuDraw">
+    <property name="title">
+     <string>Draw</string>
+    </property>
+    <addaction name="actionGridButton"/>
+    <addaction name="actionLineButton"/>
+    <addaction name="actionCircleButton"/>
+    <addaction name="actionOvalButton"/>
+    <addaction name="actionSine_WaveButton"/>
+    <addaction name="actionCosine_WaveButton"/>
+    <addaction name="actionTangentButton"/>
+    <addaction name="actionCotangentButton"/>
+    <addaction name="actionSecantButton"/>
+    <addaction name="actionCosecantButton"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuDraw"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionExitButton">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionGridButton">
+   <property name="text">
+    <string>Grid</string>
+   </property>
+  </action>
+  <action name="actionLineButton">
+   <property name="text">
+    <string>Line</string>
+   </property>
+  </action>
+  <action name="actionCircleButton">
+   <property name="text">
+    <string>Circle</string>
+   </property>
+  </action>
+  <action name="actionOvalButton">
+   <property name="text">
+    <string>Oval</string>
+   </property>
+  </action>
+  <action name="actionSine_WaveButton">
+   <property name="text">
+    <string>Sine Wave</string>
+   </property>
+  </action>
+  <action name="actionCosine_WaveButton">
+   <property name="text">
+    <string>Cosine Wave</string>
+   </property>
+  </action>
+  <action name="actionTangentButton">
+   <property name="text">
+    <string>Tangent</string>
+   </property>
+  </action>
+  <action name="actionCotangentButton">
+   <property name="text">
+    <string>Cotangent</string>
+   </property>
+  </action>
+  <action name="actionSecantButton">
+   <property name="text">
+    <string>Secant</string>
+   </property>
+  </action>
+  <action name="actionCosecantButton">
+   <property name="text">
+    <string>Cosecant</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
