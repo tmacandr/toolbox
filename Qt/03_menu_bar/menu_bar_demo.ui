@@ -75,15 +75,9 @@
     <addaction name="actionDrainage"/>
     <addaction name="actionPolit_Ocean"/>
    </widget>
-   <widget class="QMenu" name="menuHelpButton">
-    <property name="title">
-     <string>Help</string>
-    </property>
-   </widget>
    <addaction name="menuFileCascadeButton"/>
    <addaction name="menuCtrlCascadeButton"/>
    <addaction name="menuThemesCascadeButton"/>
-   <addaction name="menuHelpButton"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionCount">

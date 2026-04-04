@@ -115,7 +115,7 @@ menu_bar_demo::menu_bar_demo(QWidget *parent)
     //    But I opted for the following: 
 
     ui->demo_menubar->addAction
-            ("Not Help",
+            ("Help",
              this,
              &menu_bar_demo::help_action_slot);
 }
@@ -284,8 +284,20 @@ void menu_bar_demo::polit_ocean_action_slot()
 // Help
 void menu_bar_demo::help_action_slot()
 {
-    x = (int) (0.8 * ui->centralwidget->width());
-    y = (int) (0.8 * ui->centralwidget->height());
+    if (pen_color == Qt::darkRed)
+    {
+       x = (int) (0.8 * ui->centralwidget->width());
+       y = (int) (0.8 * ui->centralwidget->height());
+
+       pen_color = Qt::darkCyan;
+    }
+    else
+    {
+       x = (int) (0.4 * ui->centralwidget->width());
+       y = ui->centralwidget->height() / 2;
+
+       pen_color = Qt::darkRed;
+    }
 
     message = "Help";
 
