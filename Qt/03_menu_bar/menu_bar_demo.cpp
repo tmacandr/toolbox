@@ -87,10 +87,37 @@ menu_bar_demo::menu_bar_demo(QWidget *parent)
             &menu_bar_demo::polit_ocean_action_slot);
 
     // Help
-    connect(ui->menuHelp,
-            &QMenu::triggered,
-            this,
-            &menu_bar_demo::help_action_slot);
+    //    Apparently, there's no way to create connect a 'slot'
+    //    function to a 'menubar' button using the 'Qt Creator'
+    //    But it can be done 'programmatically' ... shown below.
+    //
+    //    So, the following did NOT work:
+    //       Created a "Help" menubar button with no pulldown buttons.
+    //       Tried to use the following to create a handler:
+    //
+    //          connect(ui->menuHelpButton,
+    //                  &QMenu::triggered,
+    //                  this,
+    //                  &menu_bar_demo::help_action_slot);
+    //
+    //       But when selecting the "Help" button (only), nothing
+    //       happened.
+    //
+    //    The following worked:
+    //
+    //       QAction *helpAction = ui->demo_menubar->addAction("What?");
+    //
+    //       connect(helpAction,
+    //               &QAction::triggered,
+    //               this,
+    //               &menu_bar_demo::help_action_slot);
+    //
+    //    But I opted for the following: 
+
+    ui->demo_menubar->addAction
+            ("Not Help",
+             this,
+             &menu_bar_demo::help_action_slot);
 }
 
 menu_bar_demo::~menu_bar_demo()
