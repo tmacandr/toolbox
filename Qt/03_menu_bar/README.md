@@ -56,7 +56,9 @@ This has to be done for each button in the menu-bar.
 Very clunky.  Why did they allow 'slot' connections via the IDE for
 base button widgets, but not 'action' widgets?
 
-# About 'slot' functions and 'paint' ... and Menu-bar root button
+# About 'slot' functions and 'paint' ... and NOT Menu-bar root button
+
+**SEE BELOW FOR INFO ON 'slot' FUNCTIONS for root MENUBAR buttons**.
 
 1. Defined "action" slot (functions) for
    Ctrl cascade button (Zoom in ... Move west)
@@ -115,4 +117,22 @@ base button widgets, but not 'action' widgets?
            behind hubris when they (i.e. the "experts")
            won't admit they don't know the answer.
     ```
+
+# Slot Function For Menu-bar Root Button
+
+There apparently is no way to define a 'slot' function on a 'menubar'
+item that was created vis the 'Qt Creator' tool.
+    
+Apparently it has to be done 'progammatically'.  Menubar items that have
+'pulldown' buttons (or cascade themselves) can be created in the
+'Qt Creator' and then 'action' slot functions can be connect'd via the
+name of the menubar button in the <project>.cpp file.
+    
+But not so for a root level menubar item.  A root-level menubar item can
+be defined using the 'Qt Creator', but there's ABSOLUTELY, COMPLETELY
+NO WAY to define a slot for it.  Well, at least that I could find.
+    
+The ONLY solution I found was to create the root-level menubar item and
+then attach a slot a 'slot' function as the 'action' on the (top level)
+menubar item.
 
