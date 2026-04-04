@@ -18,6 +18,7 @@ QT_END_NAMESPACE
 
 class menu_bar_demo : public QMainWindow
 {
+    // Macro that declares its own signals and slots
     Q_OBJECT
 
 public:
