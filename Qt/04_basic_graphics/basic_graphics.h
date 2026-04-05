@@ -21,6 +21,24 @@ public slots:
 
    void draw_grid_action_slot();
 
+   void draw_line_action_slot();
+
+   void draw_circle_action_slot();
+
+   void draw_oval_action_slot();
+
+   void draw_sine__action_slot();
+
+   void draw_cosine_action_slot();
+
+   void draw_tangent_action_slot();
+
+   void draw_cotangent_action_slot();
+
+   void draw_secant_action_slot();
+
+   void draw_cosecant_action_slot();
+
 protected:
 
    void paintEvent(QPaintEvent *event);
@@ -31,9 +49,17 @@ private:
     int x = 0;
     int y = 0;
 
-    QColor pen_color = Qt::black;
+    bool draw_grid      = false;
+    bool draw_line      = false;
+    bool draw_circle    = false;
+    bool draw_oval      = false;
+    bool draw_sine      = false;
+    bool draw_cosine    = false;
+    bool draw_tangent   = false;
+    bool draw_cotangent = false;
+    bool draw_secant    = false;
+    bool draw_cosecant  = false;
 
-    bool draw_grid = false;
 };
 #endif // BASIC_GRAPHICS_MAINWINDOW_H
 

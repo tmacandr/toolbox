@@ -34,6 +34,51 @@ basic_graphics_MainWindow::basic_graphics_MainWindow(QWidget *parent)
             &QAction::triggered,
             this,
             &basic_graphics_MainWindow::draw_grid_action_slot);
+
+    connect(ui->actionLineButton,
+            &QAction::triggered,
+            this,
+            &basic_graphics_MainWindow::draw_line_action_slot);
+
+    connect(ui->actionCircleButton,
+            &QAction::triggered,
+            this,
+            &basic_graphics_MainWindow::draw_circle_action_slot);
+
+    connect(ui->actionOvalButton,
+            &QAction::triggered,
+            this,
+            &basic_graphics_MainWindow::draw_oval_action_slot);
+
+    connect(ui->actionSine_WaveButton,
+            &QAction::triggered,
+            this,
+            &basic_graphics_MainWindow::draw_sine__action_slot);
+
+    connect(ui->actionCosine_WaveButton,
+            &QAction::triggered,
+            this,
+            &basic_graphics_MainWindow::draw_cosine_action_slot);
+
+    connect(ui->actionTangentButton,
+            &QAction::triggered,
+            this,
+            &basic_graphics_MainWindow::draw_tangent_action_slot);
+
+    connect(ui->actionCotangentButton,
+            &QAction::triggered,
+            this,
+            &basic_graphics_MainWindow::draw_cotangent_action_slot);
+
+    connect(ui->actionSecantButton,
+            &QAction::triggered,
+            this,
+            &basic_graphics_MainWindow::draw_secant_action_slot);
+
+    connect(ui->actionCosecantButton,
+            &QAction::triggered,
+            this,
+            &basic_graphics_MainWindow::draw_cosecant_action_slot);
 }
 
 basic_graphics_MainWindow::~basic_graphics_MainWindow()
@@ -58,6 +103,96 @@ void basic_graphics_MainWindow::draw_grid_action_slot()
    update();
 }
 
+void basic_graphics_MainWindow::draw_line_action_slot()
+{
+    if (draw_line)
+       draw_line = false;
+    else
+       draw_line = true;
+
+    update();
+}
+
+void basic_graphics_MainWindow::draw_circle_action_slot()
+{
+    if (draw_circle)
+       draw_circle = false;
+    else
+       draw_circle = true;
+
+    update();
+}
+
+void basic_graphics_MainWindow::draw_oval_action_slot()
+{
+    if (draw_oval)
+       draw_oval = false;
+    else
+       draw_oval = true;
+
+    update();
+}
+
+void basic_graphics_MainWindow::draw_sine__action_slot()
+{
+    if (draw_sine)
+       draw_sine = false;
+    else
+       draw_sine = true;
+
+    update();
+}
+
+void basic_graphics_MainWindow::draw_cosine_action_slot()
+{
+    if (draw_cosine)
+       draw_cosine = false;
+    else
+       draw_cosine = true;
+
+    update();
+}
+
+void basic_graphics_MainWindow::draw_tangent_action_slot()
+{
+    if (draw_tangent)
+       draw_tangent = false;
+    else
+       draw_tangent = true;
+
+    update();
+}
+
+void basic_graphics_MainWindow::draw_cotangent_action_slot()
+{
+    if ( draw_cotangent)
+       draw_cotangent = false;
+    else
+       draw_cotangent = true;
+
+    update();
+}
+
+void basic_graphics_MainWindow::draw_secant_action_slot()
+{
+    if ( draw_secant )
+       draw_secant = false;
+    else
+       draw_secant = true;
+
+    update();
+}
+
+void basic_graphics_MainWindow::draw_cosecant_action_slot()
+{
+    if ( draw_cosecant )
+       draw_cosecant = false;
+    else
+       draw_cosecant = true;
+
+    update();
+}
+
 void basic_graphics_MainWindow::paintEvent(QPaintEvent *event)
 {
     if (!event)
@@ -66,9 +201,11 @@ void basic_graphics_MainWindow::paintEvent(QPaintEvent *event)
         return;
     }
 
+    QPainter painter(this);
+
     if (draw_grid)
     {
-        QPainter painter(this);
+        painter.setPen(Qt::blue);
 
         x = ui->centralwidget->width() / 2;
         y = ui->centralwidget->height();
@@ -83,6 +220,40 @@ void basic_graphics_MainWindow::paintEvent(QPaintEvent *event)
         const QLine y_axis(0, y, x, y);
 
         painter.drawLine(y_axis);
+    }
+
+    if (draw_line)
+    {
+        painter.setPen(Qt::red);
+
+        x = ui->centralwidget->width();
+        y = ui->centralwidget->height();
+
+        QPoint first(0, y);
+        QPoint last(x, 0);
+
+        painter.drawLine(first, last);
+
+        update();
+    }
+
+    if (draw_circle)
+    {
+        // There's no 'drawCircle()'.  Use 'drawEllipse()' whose
+        // rectangle is a square.
+        painter.setPen(Qt::green);
+
+        x = ui->centralwidget->width() / 2;
+        y = ui->centralwidget->height() / 2;
+
+        int width = x / 4;
+
+        QPoint upper_left(x - width, y - width);
+        QPoint lower_right(x + width, y + width);
+
+        QRectF rectangle(upper_left, lower_right); // a square
+
+        painter.drawEllipse(rectangle);
     }
 }
 
