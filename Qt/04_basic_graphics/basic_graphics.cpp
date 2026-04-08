@@ -34,7 +34,7 @@ basic_graphics_MainWindow::basic_graphics_MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    QWidget *central = new QWidget(this);
+    QWidget *central = ui->centralwidget;
 
     setCentralWidget(central);
 
@@ -124,8 +124,6 @@ void basic_graphics_MainWindow::draw_grid_action_slot()
       draw_grid = false;
    else
       draw_grid = true;
-
-   std::cout << "Grid: " << draw_grid << "\n";
 
    update();
 }
@@ -222,8 +220,6 @@ void basic_graphics_MainWindow::draw_cosecant_action_slot()
 
 void basic_graphics_MainWindow::paintEvent(QPaintEvent *event)
 {
-    std::cout << "---> Begin paint\n";
-
     if (!event)
     {
         std::cout << "ERROR - paint event is NULL\n";
