@@ -4,7 +4,11 @@
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class basic_graphics_MainWindow; }
+namespace Ui
+{
+
+   class basic_graphics_MainWindow;
+}
 QT_END_NAMESPACE
 
 class basic_graphics_MainWindow : public QMainWindow
@@ -13,6 +17,7 @@ class basic_graphics_MainWindow : public QMainWindow
 
 public:
     basic_graphics_MainWindow(QWidget *parent = nullptr);
+
     ~basic_graphics_MainWindow();
 
 public slots:

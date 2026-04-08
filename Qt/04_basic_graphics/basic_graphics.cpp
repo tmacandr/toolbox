@@ -9,8 +9,15 @@
 #include <QPainter>
 #include <QPaintEvent>
 
+#include <QSplitter>
+#include <QWidget>
+#include <QHBoxLayout>
+
+#include "graphics_palette.h"
+#include "text_palette.h"
 #include "basic_graphics.h"
 #include "ui_basic_graphics.h"
+
 
 //========================================================
 // METHOD: basic_graphics_MainWindow 
@@ -20,10 +27,30 @@
 //    of the application.
 //========================================================
 basic_graphics_MainWindow::basic_graphics_MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::basic_graphics_MainWindow)
+
+    : QMainWindow(parent),
+
+    ui(new Ui::basic_graphics_MainWindow)
 {
     ui->setupUi(this);
+
+    QWidget *central = new QWidget(this);
+
+    setCentralWidget(central);
+
+    GraphicsPalette *graphics_palette = new GraphicsPalette(this);
+    TextPalette     *text_palette     = new TextPalette(this);
+
+    QSplitter *splitter = new QSplitter(Qt::Horizontal, this);
+
+    splitter->addWidget(graphics_palette);
+    splitter->addWidget(text_palette);
+
+    splitter->setSizes({300, 200});
+
+    QHBoxLayout *layout = new QHBoxLayout(central);
+
+    layout->addWidget(splitter);
 
     connect(ui->actionExitButton,
             &QAction::triggered,
@@ -195,6 +222,8 @@ void basic_graphics_MainWindow::draw_cosecant_action_slot()
 
 void basic_graphics_MainWindow::paintEvent(QPaintEvent *event)
 {
+    std::cout << "---> Begin paint\n";
+
     if (!event)
     {
         std::cout << "ERROR - paint event is NULL\n";
