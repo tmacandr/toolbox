@@ -46,7 +46,7 @@ basic_graphics_MainWindow::basic_graphics_MainWindow(QWidget *parent)
     splitter->addWidget(graphics_palette);
     splitter->addWidget(text_palette);
 
-    splitter->setSizes({300, 200});
+    splitter->setSizes({400, 100});
 
     QHBoxLayout *layout = new QHBoxLayout(central);
 

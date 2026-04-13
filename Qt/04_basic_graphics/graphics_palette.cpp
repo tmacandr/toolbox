@@ -12,13 +12,21 @@
 GraphicsPalette::GraphicsPalette(QWidget *parent)
    : QWidget(parent)
 {
-   // Optional: give the widget a background colour
-   setAutoFillBackground(true);
-
    QPalette pal = palette();
 
-   pal.setColor(QPalette::Window, Qt::white);
+   // Optional:
+   //    The palette (by default) has a 'clear' background.  So
+   //    anything drawn in the main 'canvas' will show through
+   //    to the palette.  Thus, anything drawn in the 'canvas' AND
+   //    the 'palette' will both be shown.
+   //
+   //    But use the following to set a 'background' color that
+   //    is not 'clear'.
+   //          setAutoFillBackground(true);
+   //          pal.setColor(QPalette::Window, Qt::white);
+   //    For now, leave it 'clear'.
 
+   // Change the default application palette to 'pal'
    setPalette(pal);
 }
  
