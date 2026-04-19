@@ -54,9 +54,6 @@ private:
     GraphicsPalette *graphics_palette;
     TextPalette     *text_palette;
 
-    int x = 0;
-    int y = 0;
-
     bool draw_line      = false;
     bool draw_circle    = false;
     bool draw_oval      = false;

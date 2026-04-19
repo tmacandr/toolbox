@@ -245,6 +245,17 @@ void GraphicsPalette::paintEvent(QPaintEvent *event)
 
         painter.drawEllipse(rectangle);
     }
+
+    if (draw_sine)
+    {
+        painter.setPen(Qt::red);
+
+        x = width() / 2;
+        y = height() / 2;
+
+        painter.drawPoint(x,y);
+    }
+
 }
 
 /* EOF */
