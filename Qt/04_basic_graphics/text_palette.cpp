@@ -18,6 +18,20 @@ TextPalette::TextPalette(QWidget *parent)
     setPalette(pal);
 }
 
+void TextPalette::update_grid()
+{
+    if (draw_grid)
+    {
+        draw_grid = false;
+    }
+    else
+    {
+        draw_grid = true;
+    }
+
+    update();
+}
+
 void TextPalette::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
@@ -26,7 +40,14 @@ void TextPalette::paintEvent(QPaintEvent *event)
 
     painter.setRenderHint(QPainter::Antialiasing, true);
 
-    painter.drawText(5, 20, "text here");
+    if (draw_grid)
+    {
+        painter.drawText(5, 20, "GRID: ON");
+    }
+    else
+    {
+        painter.drawText(5, 20, "GRID: OFF");
+    }
 }
 
 /* EOF */

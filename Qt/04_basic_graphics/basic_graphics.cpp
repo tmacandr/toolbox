@@ -119,6 +119,8 @@ void basic_graphics_MainWindow::exit_action_slot()
 void basic_graphics_MainWindow::update_grid_action_slot()
 {
    graphics_palette->update_grid();
+
+   text_palette->update_grid();
 }
 
 void basic_graphics_MainWindow::draw_line_action_slot()
