@@ -3,8 +3,8 @@
 
 #include <QMainWindow>
 
-#include "graphics_palette.h"
-#include "text_palette.h"
+#include "graphics_window.h"
+#include "text_window.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -51,8 +51,8 @@ public slots:
 private:
     Ui::basic_graphics_MainWindow *ui;
 
-    GraphicsPalette *graphics_palette;
-    TextPalette     *text_palette;
+    GraphicsWindow  *graphics_window;
+    TextWindow      *text_window;
 
     bool draw_line      = false;
     bool draw_circle    = false;

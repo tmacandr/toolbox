@@ -18,13 +18,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     basic_graphics.cpp \
-    graphics_palette.cpp \
-    text_palette.cpp
+    graphics_window.cpp \
+    text_window.cpp
 
 HEADERS += \
     basic_graphics.h \
-    graphics_palette.h \
-    text_palette.h
+    graphics_window.h \
+    text_window.h
 
 FORMS += \
     basic_graphics.ui

@@ -1,3 +1,9 @@
+//============================================================================
+// FILE: main.cpp
+//
+// DESCRIPTION:
+//    Main entry point of Qt app to demo basics graphics operations.
+//============================================================================
 #include "basic_graphics.h"
 
 #include <QApplication>
@@ -9,3 +15,6 @@ int main(int argc, char *argv[])
     w.show();
     return a.exec();
 }
+
+/* EOF */
+

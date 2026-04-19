@@ -36,13 +36,13 @@ basic_graphics_MainWindow::basic_graphics_MainWindow(QWidget *parent)
 
     setCentralWidget(central);
 
-    graphics_palette = new GraphicsPalette(this);
-    text_palette     = new TextPalette(this);
+    graphics_window = new GraphicsWindow(this);
+    text_window     = new TextWindow(this);
 
     QSplitter *splitter = new QSplitter(Qt::Horizontal, this);
 
-    splitter->addWidget(graphics_palette);
-    splitter->addWidget(text_palette);
+    splitter->addWidget(graphics_window);
+    splitter->addWidget(text_window);
 
     splitter->setSizes({400, 100});
 
@@ -118,77 +118,77 @@ void basic_graphics_MainWindow::exit_action_slot()
 
 void basic_graphics_MainWindow::update_grid_action_slot()
 {
-    graphics_palette->update_grid();
+    graphics_window->update_grid();
 
-    int w = graphics_palette->width();
-    int h = graphics_palette->height();
+    int w = graphics_window->width();
+    int h = graphics_window->height();
 
-    text_palette->update_canvas_dim(w, h); 
+    text_window->update_canvas_dim(w, h); 
 
-    text_palette->update_grid();
+    text_window->update_grid();
 }
 
 void basic_graphics_MainWindow::draw_line_action_slot()
 {
-    graphics_palette->update_line();
+    graphics_window->update_line();
 
-    text_palette->update_line();
+    text_window->update_line();
 }
 
 void basic_graphics_MainWindow::draw_circle_action_slot()
 {
-    graphics_palette->update_circle();
+    graphics_window->update_circle();
 
-    text_palette->update_circle();
+    text_window->update_circle();
 }
 
 void basic_graphics_MainWindow::draw_oval_action_slot()
 {
-    graphics_palette->update_oval();
+    graphics_window->update_oval();
 
-    text_palette->update_oval();
+    text_window->update_oval();
 }
 
 void basic_graphics_MainWindow::draw_sine_action_slot()
 {
-    graphics_palette->update_sine();
+    graphics_window->update_sine();
 
-    text_palette->update_sine();
+    text_window->update_sine();
 }
 
 void basic_graphics_MainWindow::draw_cosine_action_slot()
 {
-    graphics_palette->update_cosine();
+    graphics_window->update_cosine();
 
-    text_palette->update_cosine();
+    text_window->update_cosine();
 }
 
 void basic_graphics_MainWindow::draw_tangent_action_slot()
 {
-    graphics_palette->update_tangent();
+    graphics_window->update_tangent();
 
-    text_palette->update_tangent();
+    text_window->update_tangent();
 }
 
 void basic_graphics_MainWindow::draw_cotangent_action_slot()
 {
-    graphics_palette->update_cotangent();
+    graphics_window->update_cotangent();
 
-    text_palette->update_cotangent();
+    text_window->update_cotangent();
 }
 
 void basic_graphics_MainWindow::draw_secant_action_slot()
 {
-    graphics_palette->update_secant();
+    graphics_window->update_secant();
 
-    text_palette->update_secant();
+    text_window->update_secant();
 }
 
 void basic_graphics_MainWindow::draw_cosecant_action_slot()
 {
-    graphics_palette->update_cosecant();
+    graphics_window->update_cosecant();
 
-    text_palette->update_cosecant();
+    text_window->update_cosecant();
 }
 
 /* EOF */
