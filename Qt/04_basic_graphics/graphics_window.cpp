@@ -201,11 +201,11 @@ void GraphicsWindow::paintEvent(QPaintEvent *event)
 
         QPolygonF polygon;
 
-        for (float rad = -TWO_PI; rad < TWO_PI; rad = rad + 0.4)
+        for (float rad = -TWO_PI; rad < TWO_PI; rad = rad + 0.030)
         {
             yf = std::sin(rad);
 
-            std::cout << "("  << rad << ", " << yf << ")\n";
+            //std::cout << "("  << rad << ", " << yf << ")\n";
 
             xf = (rad / TWO_PI) * (float) half_w;
             x = (int) xf + half_w;
@@ -222,6 +222,42 @@ void GraphicsWindow::paintEvent(QPaintEvent *event)
         painter.drawPolyline(polygon);
     }
 
+    if (draw_cosine)
+    {
+        painter.setPen(Qt::darkCyan);
+
+        // C++20 has std::numbers::pi
+
+        const float TWO_PI = 2.0 * 3.14159;
+
+        QPointF     nxt_point;
+        const int   half_w = width() / 2;
+        const float half_h = (float) height() / 2.0;
+        float       xf;
+        float       yf;
+
+        QPolygonF polygon;
+
+        for (float rad = -TWO_PI; rad < TWO_PI; rad = rad + 0.030)
+        {
+            yf = std::cos(rad);
+
+            //std::cout << "("  << rad << ", " << yf << ")\n";
+
+            xf = (rad / TWO_PI) * (float) half_w;
+            x = (int) xf + half_w;
+
+            yf = 1.0 - yf;
+            y = (int) (yf * half_h);
+
+            nxt_point.setX((float) x);
+            nxt_point.setY((float) y);
+            
+            polygon.push_back(nxt_point);
+        }
+        
+        painter.drawPolyline(polygon);
+    }
 }
 
 /* EOF */
