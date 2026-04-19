@@ -13,8 +13,6 @@
 #include <QWidget>
 #include <QHBoxLayout>
 
-#include "graphics_palette.h"
-#include "text_palette.h"
 #include "basic_graphics.h"
 #include "ui_basic_graphics.h"
 
@@ -38,8 +36,8 @@ basic_graphics_MainWindow::basic_graphics_MainWindow(QWidget *parent)
 
     setCentralWidget(central);
 
-    GraphicsPalette *graphics_palette = new GraphicsPalette(this);
-    TextPalette     *text_palette     = new TextPalette(this);
+    graphics_palette = new GraphicsPalette(this);
+    text_palette     = new TextPalette(this);
 
     QSplitter *splitter = new QSplitter(Qt::Horizontal, this);
 
@@ -60,7 +58,7 @@ basic_graphics_MainWindow::basic_graphics_MainWindow(QWidget *parent)
     connect(ui->actionGridButton,
             &QAction::triggered,
             this,
-            &basic_graphics_MainWindow::draw_grid_action_slot);
+            &basic_graphics_MainWindow::update_grid_action_slot);
 
     connect(ui->actionLineButton,
             &QAction::triggered,
@@ -118,14 +116,9 @@ void basic_graphics_MainWindow::exit_action_slot()
    std::exit(0);
 }
 
-void basic_graphics_MainWindow::draw_grid_action_slot()
+void basic_graphics_MainWindow::update_grid_action_slot()
 {
-   if (draw_grid)
-      draw_grid = false;
-   else
-      draw_grid = true;
-
-   update();
+   graphics_palette->update_grid();
 }
 
 void basic_graphics_MainWindow::draw_line_action_slot()
@@ -227,25 +220,6 @@ void basic_graphics_MainWindow::paintEvent(QPaintEvent *event)
     }
 
     QPainter painter(this);
-
-    if (draw_grid)
-    {
-        painter.setPen(Qt::blue);
-
-        x = ui->centralwidget->width() / 2;
-        y = ui->centralwidget->height();
-
-        const QLine x_axis(x, 0, x, y);
-
-        painter.drawLine(x_axis);
-
-        x = ui->centralwidget->width();
-        y = ui->centralwidget->height() / 2;
-
-        const QLine y_axis(0, y, x, y);
-
-        painter.drawLine(y_axis);
-    }
 
     if (draw_line)
     {

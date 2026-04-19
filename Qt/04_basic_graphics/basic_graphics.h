@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 
+#include "graphics_palette.h"
+#include "text_palette.h"
+
+
 QT_BEGIN_NAMESPACE
 namespace Ui
 {
@@ -24,7 +28,7 @@ public slots:
 
    void exit_action_slot();
 
-   void draw_grid_action_slot();
+   void update_grid_action_slot();
 
    void draw_line_action_slot();
 
@@ -51,10 +55,12 @@ protected:
 private:
     Ui::basic_graphics_MainWindow *ui;
 
+    GraphicsPalette *graphics_palette;
+    TextPalette     *text_palette;
+
     int x = 0;
     int y = 0;
 
-    bool draw_grid      = false;
     bool draw_line      = false;
     bool draw_circle    = false;
     bool draw_oval      = false;

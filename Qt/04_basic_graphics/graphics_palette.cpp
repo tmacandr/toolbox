@@ -12,7 +12,7 @@
 GraphicsPalette::GraphicsPalette(QWidget *parent)
    : QWidget(parent)
 {
-   QPalette pal = palette();
+   pal = palette();
 
    // Optional:
    //    The palette (by default) has a 'clear' background.  So
@@ -29,6 +29,20 @@ GraphicsPalette::GraphicsPalette(QWidget *parent)
    // Change the default application palette to 'pal'
    setPalette(pal);
 }
+
+void GraphicsPalette::update_grid()
+{
+    if (draw_grid)
+    {
+        draw_grid = false;
+    }
+    else
+    {
+        draw_grid = true;
+    }
+
+    update();
+}
  
 void GraphicsPalette::paintEvent(QPaintEvent *event)
 {
@@ -38,27 +52,24 @@ void GraphicsPalette::paintEvent(QPaintEvent *event)
 
     painter.setRenderHint(QPainter::Antialiasing, true);
 
-    // Example: draw a rectangle
-    painter.setPen(QPen(Qt::darkBlue, 2));
+    if (draw_grid)
+    {
+        painter.setPen(Qt::blue);
 
-    painter.setBrush(QBrush(Qt::cyan));
+        x = width() / 2;
+        y = height();
 
-    painter.drawRect(20, 20, width() / 2 - 40, height() / 2 - 40);
+        const QLine x_axis(x, 0, x, y);
 
-    // Example: draw an ellipse
-    painter.setPen(QPen(Qt::darkRed, 3));
+        painter.drawLine(x_axis);
 
-    painter.setBrush(QBrush(Qt::magenta));
+        x = width();
+        y = height() / 2;
 
-    painter.drawEllipse(width() / 2 + 10,
-                        height() / 2 + 10,
-                        width() / 2 - 30,
-                        height() / 2 - 30);
+        const QLine y_axis(0, y, x, y);
 
-    // Example: draw a line
-    painter.setPen(QPen(Qt::green, 4, Qt::DashLine));
-
-    painter.drawLine(0, height() - 1, width() - 1, 0);
+        painter.drawLine(y_axis);
+    }
 }
 
 /* EOF */
