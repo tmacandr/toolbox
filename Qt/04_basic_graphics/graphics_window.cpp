@@ -193,36 +193,24 @@ void GraphicsWindow::paintEvent(QPaintEvent *event)
 
         const float TWO_PI = 2.0 * 3.14159;
 
-        std::vector<QPointF> points;
-
-        QPointF nxt_point;
-
-        for (float rad = -TWO_PI; rad < TWO_PI; rad = rad + 0.4)
-        {
-            nxt_point.setX(rad);
-            nxt_point.setY(std::sin(rad));
-
-            points.push_back(nxt_point);
-        }
-
+        QPointF     nxt_point;
         const int   half_w = width() / 2;
         const float half_h = (float) height() / 2.0;
-        float xf;
-        float yf;
+        float       xf;
+        float       yf;
 
         QPolygonF polygon;
 
-        for (unsigned int i = 0; i < points.size(); i++)
+        for (float rad = -TWO_PI; rad < TWO_PI; rad = rad + 0.4)
         {
-            nxt_point = points[i];
+            yf = std::sin(rad);
 
-            std::cout << "[" << i << "] = (" << nxt_point.x()
-                      << ", " << nxt_point.y() << ")\n";
+            std::cout << "("  << rad << ", " << yf << ")\n";
 
-            xf = (nxt_point.x() / TWO_PI) * (float) half_w;
+            xf = (rad / TWO_PI) * (float) half_w;
             x = (int) xf + half_w;
 
-            yf = 1.0 - nxt_point.y();
+            yf = 1.0 - yf;
             y = (int) (yf * half_h); 
 
             nxt_point.setX((float) x);
