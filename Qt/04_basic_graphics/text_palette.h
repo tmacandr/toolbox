@@ -31,6 +31,8 @@ public:
 
     void update_cosecant();
 
+    void update_canvas_dim(const int w, const int h);
+
 protected:
 
    // Called whenever the widget needs to be repainted
@@ -39,6 +41,9 @@ protected:
 private:
 
     QPalette pal;
+
+    int graphics_width  = 0;
+    int graphics_height = 0;
 
     bool draw_grid      = false;
     bool draw_line      = false;

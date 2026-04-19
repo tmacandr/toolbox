@@ -120,6 +120,11 @@ void basic_graphics_MainWindow::update_grid_action_slot()
 {
     graphics_palette->update_grid();
 
+    int w = graphics_palette->width();
+    int h = graphics_palette->height();
+
+    text_palette->update_canvas_dim(w, h); 
+
     text_palette->update_grid();
 }
 
