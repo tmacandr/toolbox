@@ -10,9 +10,13 @@
 //    demo.
 //============================================================================
 #include <iostream>
+#include <cmath>
+#include <vector>
 
 #include <QPainter>
 #include <QPaintEvent>
+#include <QPointF>
+#include <QPolygonF>
 
 #include "graphics_window.h"
 
@@ -185,10 +189,49 @@ void GraphicsWindow::paintEvent(QPaintEvent *event)
     {
         painter.setPen(Qt::red);
 
-        x = width() / 2;
-        y = height() / 2;
+        // C++20 has std::numbers::pi
 
-        painter.drawPoint(x,y);
+        const float TWO_PI = 2.0 * 3.14159;
+
+        std::vector<QPointF> points;
+
+        QPointF nxt_point;
+
+        for (float rad = -TWO_PI; rad < TWO_PI; rad = rad + 0.4)
+        {
+            nxt_point.setX(rad);
+            nxt_point.setY(std::sin(rad));
+
+            points.push_back(nxt_point);
+        }
+
+        const int   half_w = width() / 2;
+        const float half_h = (float) height() / 2.0;
+        float xf;
+        float yf;
+
+        QPolygonF polygon;
+
+        for (unsigned int i = 0; i < points.size(); i++)
+        {
+            nxt_point = points[i];
+
+            std::cout << "[" << i << "] = (" << nxt_point.x()
+                      << ", " << nxt_point.y() << ")\n";
+
+            xf = (nxt_point.x() / TWO_PI) * (float) half_w;
+            x = (int) xf + half_w;
+
+            yf = 1.0 - nxt_point.y();
+            y = (int) (yf * half_h); 
+
+            nxt_point.setX((float) x);
+            nxt_point.setY((float) y);
+
+            polygon.push_back(nxt_point);   
+        }
+
+        painter.drawPolyline(polygon);
     }
 
 }
