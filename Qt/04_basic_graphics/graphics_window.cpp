@@ -189,10 +189,6 @@ void GraphicsWindow::paintEvent(QPaintEvent *event)
     {
         painter.setPen(Qt::red);
 
-        // C++20 has std::numbers::pi
-
-        const float TWO_PI = 2.0 * 3.14159;
-
         QPointF     nxt_point;
         const int   half_w = width() / 2;
         const float half_h = (float) height() / 2.0;
@@ -226,10 +222,6 @@ void GraphicsWindow::paintEvent(QPaintEvent *event)
     {
         painter.setPen(Qt::darkCyan);
 
-        // C++20 has std::numbers::pi
-
-        const float TWO_PI = 2.0 * 3.14159;
-
         QPointF     nxt_point;
         const int   half_w = width() / 2;
         const float half_h = (float) height() / 2.0;
@@ -258,6 +250,74 @@ void GraphicsWindow::paintEvent(QPaintEvent *event)
         
         painter.drawPolyline(polygon);
     }
+
+    if (draw_tangent)
+    {
+        painter.setPen(Qt::black);
+
+        QPointF     nxt_point;
+        const int   half_w = width() / 2;
+        const float half_h = (float) height() / 2.0;
+        float       xf;
+        float       yf;
+
+        QPolygonF polygon;
+
+        const float PI_over_2 = PI/2.0;
+
+        for (float rad = -(3.0 * PI_over_2);
+                   rad < -PI_over_2;
+                   rad = rad + 0.030)
+        {
+            yf = std::tan(rad);
+
+            if ( (yf > 1.0) or (yf < -1.0) ) continue;
+
+            //std::cout << "("  << rad << ", " << yf << ")\n";
+
+            xf = (rad / TWO_PI) * (float) half_w;
+
+            x = (int) xf + half_w;
+
+            yf = 1.0 - yf;
+
+            y = (int) (yf * half_h);
+
+            nxt_point.setX((float) x);
+            nxt_point.setY((float) y);
+            
+            polygon.push_back(nxt_point);
+        }
+
+        painter.drawPolyline(polygon);
+
+        polygon.clear();
+
+        for (float rad = -PI_over_2; rad < PI_over_2; rad = rad + 0.030)
+        {
+            yf = std::tan(rad);
+
+            if ( (yf > 1.0) or (yf < -1.0) ) continue;
+
+            //std::cout << "("  << rad << ", " << yf << ")\n";
+
+            xf = (rad / TWO_PI) * (float) half_w;
+
+            x = (int) xf + half_w;
+
+            yf = 1.0 - yf;
+
+            y = (int) (yf * half_h);
+
+            nxt_point.setX((float) x);
+            nxt_point.setY((float) y);
+
+            polygon.push_back(nxt_point);
+        }
+
+        painter.drawPolyline(polygon);
+    }
+ 
 }
 
 /* EOF */

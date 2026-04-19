@@ -66,6 +66,9 @@ private:
     bool draw_secant    = false;
     bool draw_cosecant  = false;
 
+    // C++20 has std::numbers::pi
+    const float PI     = 3.14159;
+    const float TWO_PI = 2.0 * PI;
 };
 
 #endif // GRAPHICS_WINDOW_H
