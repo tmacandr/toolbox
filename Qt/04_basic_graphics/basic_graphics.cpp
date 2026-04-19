@@ -78,7 +78,7 @@ basic_graphics_MainWindow::basic_graphics_MainWindow(QWidget *parent)
     connect(ui->actionSine_WaveButton,
             &QAction::triggered,
             this,
-            &basic_graphics_MainWindow::draw_sine__action_slot);
+            &basic_graphics_MainWindow::draw_sine_action_slot);
 
     connect(ui->actionCosine_WaveButton,
             &QAction::triggered,
@@ -118,144 +118,72 @@ void basic_graphics_MainWindow::exit_action_slot()
 
 void basic_graphics_MainWindow::update_grid_action_slot()
 {
-   graphics_palette->update_grid();
+    graphics_palette->update_grid();
 
-   text_palette->update_grid();
+    text_palette->update_grid();
 }
 
 void basic_graphics_MainWindow::draw_line_action_slot()
 {
-    if (draw_line)
-       draw_line = false;
-    else
-       draw_line = true;
+    graphics_palette->update_line();
 
-    update();
+    text_palette->update_line();
 }
 
 void basic_graphics_MainWindow::draw_circle_action_slot()
 {
-    if (draw_circle)
-       draw_circle = false;
-    else
-       draw_circle = true;
+    graphics_palette->update_circle();
 
-    update();
+    text_palette->update_circle();
 }
 
 void basic_graphics_MainWindow::draw_oval_action_slot()
 {
-    if (draw_oval)
-       draw_oval = false;
-    else
-       draw_oval = true;
+    graphics_palette->update_oval();
 
-    update();
+    text_palette->update_oval();
 }
 
-void basic_graphics_MainWindow::draw_sine__action_slot()
+void basic_graphics_MainWindow::draw_sine_action_slot()
 {
-    if (draw_sine)
-       draw_sine = false;
-    else
-       draw_sine = true;
+    graphics_palette->update_sine();
 
-    update();
+    text_palette->update_sine();
 }
 
 void basic_graphics_MainWindow::draw_cosine_action_slot()
 {
-    if (draw_cosine)
-       draw_cosine = false;
-    else
-       draw_cosine = true;
+    graphics_palette->update_cosine();
 
-    update();
+    text_palette->update_cosine();
 }
 
 void basic_graphics_MainWindow::draw_tangent_action_slot()
 {
-    if (draw_tangent)
-       draw_tangent = false;
-    else
-       draw_tangent = true;
+    graphics_palette->update_tangent();
 
-    update();
+    text_palette->update_tangent();
 }
 
 void basic_graphics_MainWindow::draw_cotangent_action_slot()
 {
-    if ( draw_cotangent)
-       draw_cotangent = false;
-    else
-       draw_cotangent = true;
+    graphics_palette->update_cotangent();
 
-    update();
+    text_palette->update_cotangent();
 }
 
 void basic_graphics_MainWindow::draw_secant_action_slot()
 {
-    if ( draw_secant )
-       draw_secant = false;
-    else
-       draw_secant = true;
+    graphics_palette->update_secant();
 
-    update();
+    text_palette->update_secant();
 }
 
 void basic_graphics_MainWindow::draw_cosecant_action_slot()
 {
-    if ( draw_cosecant )
-       draw_cosecant = false;
-    else
-       draw_cosecant = true;
+    graphics_palette->update_cosecant();
 
-    update();
-}
-
-void basic_graphics_MainWindow::paintEvent(QPaintEvent *event)
-{
-    if (!event)
-    {
-        std::cout << "ERROR - paint event is NULL\n";
-        return;
-    }
-
-    QPainter painter(this);
-
-    if (draw_line)
-    {
-        painter.setPen(Qt::red);
-
-        x = ui->centralwidget->width();
-        y = ui->centralwidget->height();
-
-        QPoint first(0, y);
-        QPoint last(x, 0);
-
-        painter.drawLine(first, last);
-
-        update();
-    }
-
-    if (draw_circle)
-    {
-        // There's no 'drawCircle()'.  Use 'drawEllipse()' whose
-        // rectangle is a square.
-        painter.setPen(Qt::green);
-
-        x = ui->centralwidget->width() / 2;
-        y = ui->centralwidget->height() / 2;
-
-        int width = x / 4;
-
-        QPoint upper_left(x - width, y - width);
-        QPoint lower_right(x + width, y + width);
-
-        QRectF rectangle(upper_left, lower_right); // a square
-
-        painter.drawEllipse(rectangle);
-    }
+    text_palette->update_cosecant();
 }
 
 /* EOF */

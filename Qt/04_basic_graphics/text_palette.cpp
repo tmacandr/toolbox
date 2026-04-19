@@ -32,6 +32,132 @@ void TextPalette::update_grid()
     update();
 }
 
+void TextPalette::update_line()
+{
+    if (draw_line)
+    {
+        draw_line = false;
+    }
+    else
+    {
+        draw_line = true;
+    }
+
+    update();
+}
+
+void TextPalette::update_circle()
+{
+    if (draw_circle)
+    {
+        draw_circle = false;
+    }
+    else
+    {
+        draw_circle = true;
+    }
+
+    update();
+}
+
+void TextPalette::update_oval()
+{
+    if (draw_oval)
+    {
+        draw_oval = false;
+    }
+    else
+    {
+        draw_oval = true;
+    }
+
+    update();
+}
+
+void TextPalette::update_sine()
+{   
+    if (draw_sine)
+    {   
+        draw_sine = false;
+    }
+    else
+    {   
+        draw_sine = true;
+    }
+
+    update();
+}
+
+void TextPalette::update_cosine()
+{   
+    if (draw_cosine)
+    {   
+        draw_cosine = false;
+    }
+    else
+    {   
+        draw_cosine = true;
+    }
+
+    update();
+}
+
+void TextPalette::update_tangent()
+{
+    if (draw_tangent)
+    {
+        draw_tangent = false;
+    }
+    else
+    {
+        draw_tangent = true;
+    }
+
+    update();
+}
+
+void TextPalette::update_cotangent()
+{
+    if (draw_cotangent)
+    {
+        draw_cotangent = false;
+    }
+    else
+    {
+        draw_cotangent = true;
+    }
+
+    update();
+}
+
+void TextPalette::update_secant()
+{
+    if (draw_secant)
+    {
+        draw_secant = false;
+    }
+    else
+    {
+        draw_secant = true;
+    }
+
+    update();
+}
+
+void TextPalette::update_cosecant()
+{
+    if (draw_cosecant)
+    {
+        draw_cosecant = false;
+    }
+    else
+    {
+        draw_cosecant = true;
+    }
+
+    update();
+}
+
 void TextPalette::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
@@ -47,6 +173,87 @@ void TextPalette::paintEvent(QPaintEvent *event)
     else
     {
         painter.drawText(5, 20, "GRID: OFF");
+    }
+
+    if (draw_line)
+    {
+        painter.drawText(5, 50, "LINE: ON");
+    }
+    else
+    {
+        painter.drawText(5, 50, "LINE: OFF");
+    }
+
+    if (draw_circle)
+    {
+        painter.drawText(5, 80, "CIRCLE: ON");
+    }
+    else
+    {
+        painter.drawText(5, 80, "CIRCLE: OFF");
+    }
+
+    if (draw_oval)
+    {
+        painter.drawText(5, 110, "OVAL: ON");
+    }
+    else
+    {
+        painter.drawText(5, 110, "OVAL: OFF");
+    }
+
+    if (draw_sine)
+    {
+        painter.drawText(5, 140, "SINE: ON");
+    }
+    else
+    {
+        painter.drawText(5, 140, "SINE: OFF");
+    }
+
+    if (draw_cosine)
+    {
+        painter.drawText(5, 170, "COSINE: ON");
+    }
+    else
+    {
+        painter.drawText(5, 170, "COSINE: OFF");
+    }
+
+    if (draw_tangent)
+    {
+        painter.drawText(5, 200, "TANGENT: ON");
+    }
+    else
+    {
+        painter.drawText(5, 200, "TANGENT: OFF");
+    }
+
+    if (draw_cotangent)
+    {
+        painter.drawText(5, 230, "COTANGENT: ON");
+    }
+    else
+    {
+        painter.drawText(5, 230, "COTANGENT: OFF");
+    }
+
+    if (draw_secant)
+    {
+        painter.drawText(5, 260, "SECANT: ON");
+    }
+    else
+    {
+        painter.drawText(5, 260, "SECANT: OFF");
+    }
+
+    if (draw_cosecant)
+    {
+        painter.drawText(5, 290, "COSECANT: ON");
+    }
+    else
+    {
+        painter.drawText(5, 290, "COSECANT: OFF");
     }
 }
 

@@ -13,6 +13,24 @@ public:
 
     void update_grid();
 
+    void update_line();
+
+    void update_circle();
+
+    void update_oval();
+
+    void update_sine();
+
+    void update_cosine();
+
+    void update_tangent();
+
+    void update_cotangent();
+
+    void update_secant();
+
+    void update_cosecant();
+
 protected:
 
    // Called whenever the widget needs to be repainted

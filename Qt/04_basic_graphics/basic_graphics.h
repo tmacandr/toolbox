@@ -36,7 +36,7 @@ public slots:
 
    void draw_oval_action_slot();
 
-   void draw_sine__action_slot();
+   void draw_sine_action_slot();
 
    void draw_cosine_action_slot();
 
@@ -47,10 +47,6 @@ public slots:
    void draw_secant_action_slot();
 
    void draw_cosecant_action_slot();
-
-protected:
-
-   void paintEvent(QPaintEvent *event);
 
 private:
     Ui::basic_graphics_MainWindow *ui;

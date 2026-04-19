@@ -43,6 +43,132 @@ void GraphicsPalette::update_grid()
 
     update();
 }
+
+void GraphicsPalette::update_line()
+{
+    if (draw_line)
+    {
+        draw_line = false;
+    }
+    else
+    {
+        draw_line = true;
+    }
+
+    update();
+}
+
+void GraphicsPalette::update_circle()
+{
+    if (draw_circle)
+    {
+        draw_circle = false;
+    }
+    else
+    {
+        draw_circle = true;
+    }
+
+    update();
+}
+
+void GraphicsPalette::update_oval()
+{
+    if (draw_oval)
+    {
+        draw_oval = false;
+    }
+    else
+    {
+        draw_oval = true;
+    }
+
+    update();
+}
+
+void GraphicsPalette::update_sine()
+{
+    if (draw_sine)
+    {
+        draw_sine = false;
+    }
+    else
+    {
+        draw_sine = true;
+    }
+
+    update();
+}
+
+void GraphicsPalette::update_cosine()
+{
+    if (draw_cosine)
+    {
+        draw_cosine = false;
+    }
+    else
+    {
+        draw_cosine = true;
+    }
+
+    update();
+}
+
+void GraphicsPalette::update_tangent()
+{
+    if (draw_tangent)
+    {
+        draw_tangent = false;
+    }
+    else
+    {
+        draw_tangent = true;
+    }
+
+    update();
+}
+
+void GraphicsPalette::update_cotangent()
+{
+    if (draw_cotangent)
+    {
+        draw_cotangent = false;
+    }
+    else
+    {
+        draw_cotangent = true;
+    }
+
+    update();
+}
+
+void GraphicsPalette::update_secant()
+{
+    if (draw_secant)
+    {
+        draw_secant = false;
+    }
+    else
+    {
+        draw_secant = true;
+    }
+
+    update();
+}
+
+void GraphicsPalette::update_cosecant()
+{
+    if (draw_cosecant)
+    {
+        draw_cosecant = false;
+    }
+    else
+    {
+        draw_cosecant = true;
+    }
+
+    update();
+}
  
 void GraphicsPalette::paintEvent(QPaintEvent *event)
 {
@@ -69,6 +195,55 @@ void GraphicsPalette::paintEvent(QPaintEvent *event)
         const QLine y_axis(0, y, x, y);
 
         painter.drawLine(y_axis);
+    }
+
+    if (draw_line)
+    {
+        painter.setPen(Qt::red);
+
+        x = width();
+        y = height();
+
+        QPoint first(0, y);
+        QPoint last(x, 0);
+
+        painter.drawLine(first, last);
+
+        update();
+    }
+
+    if (draw_circle)
+    {
+        // There's no 'drawCircle()'.  Use 'drawEllipse()' whose
+        // rectangle is a square.
+        painter.setPen(Qt::green);
+
+        x = width() / 2;
+        y = height() / 2;
+
+        int width = x / 4;
+
+        QPoint upper_left(x - width, y - width);
+        QPoint lower_right(x + width, y + width);
+
+        QRectF rectangle(upper_left, lower_right); // a square
+
+        painter.drawEllipse(rectangle);
+    }
+
+    if (draw_oval)
+    {
+        painter.setPen(Qt::magenta);
+
+        x = width() / 6;
+        y = height() / 6;
+
+        QPoint upper_left(x, y);
+        QPoint lower_right(x + 160, y + 290);
+
+        QRectF rectangle(upper_left, lower_right); // a rectangle 
+
+        painter.drawEllipse(rectangle);
     }
 }
 
