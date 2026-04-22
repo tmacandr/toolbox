@@ -253,6 +253,21 @@ void GraphicsWindow::paintEvent(QPaintEvent *event)
 
     if (draw_tangent)
     {
+        const float from_interval[5] = {
+                                         -(2.0f * PI),
+                                         -(3.0f * PI_over_2),
+                                         -PI_over_2,
+                                         PI_over_2,
+                                         (3.0f * PI_over_2)
+                                       };
+        const float to_interval[5] = {
+                                       -(3.0f * PI_over_2),
+                                       -PI_over_2,
+                                       PI_over_2,
+                                       (3.0f * PI_over_2),
+                                       (2.0f * PI)
+                                     };
+
         painter.setPen(Qt::black);
 
         QPointF     nxt_point;
@@ -263,61 +278,37 @@ void GraphicsWindow::paintEvent(QPaintEvent *event)
 
         QPolygonF polygon;
 
-        const float PI_over_2 = PI/2.0;
-
-        for (float rad = -(3.0 * PI_over_2);
-                   rad < -PI_over_2;
-                   rad = rad + 0.030)
+        for (unsigned int i = 0; i < 5; i++)
         {
-            yf = std::tan(rad);
+            for (float rad = from_interval[i];
+                       rad < to_interval[i];
+                       rad = rad + 0.030)
+            {
+                yf = std::tan(rad);
 
-            if ( (yf > 1.0) or (yf < -1.0) ) continue;
+                if ( (yf > 1.0) or (yf < -1.0) ) continue;
 
-            //std::cout << "("  << rad << ", " << yf << ")\n";
+                //std::cout << "("  << rad << ", " << yf << ")\n";
 
-            xf = (rad / TWO_PI) * (float) half_w;
+                xf = (rad / TWO_PI) * (float) half_w;
 
-            x = (int) xf + half_w;
+                x = (int) xf + half_w;
 
-            yf = 1.0 - yf;
+                yf = 1.0 - yf;
 
-            y = (int) (yf * half_h);
+                y = (int) (yf * half_h);
 
-            nxt_point.setX((float) x);
-            nxt_point.setY((float) y);
-            
-            polygon.push_back(nxt_point);
+                nxt_point.setX((float) x);
+                nxt_point.setY((float) y);
+
+                polygon.push_back(nxt_point);
+            }
+
+            painter.drawPolyline(polygon);
+
+            polygon.clear();
         }
-
-        painter.drawPolyline(polygon);
-
-        polygon.clear();
-
-        for (float rad = -PI_over_2; rad < PI_over_2; rad = rad + 0.030)
-        {
-            yf = std::tan(rad);
-
-            if ( (yf > 1.0) or (yf < -1.0) ) continue;
-
-            //std::cout << "("  << rad << ", " << yf << ")\n";
-
-            xf = (rad / TWO_PI) * (float) half_w;
-
-            x = (int) xf + half_w;
-
-            yf = 1.0 - yf;
-
-            y = (int) (yf * half_h);
-
-            nxt_point.setX((float) x);
-            nxt_point.setY((float) y);
-
-            polygon.push_back(nxt_point);
-        }
-
-        painter.drawPolyline(polygon);
     }
- 
 }
 
 /* EOF */
