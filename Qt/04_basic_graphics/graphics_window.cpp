@@ -253,20 +253,22 @@ void GraphicsWindow::paintEvent(QPaintEvent *event)
 
     if (draw_tangent)
     {
-        const float from_interval[5] = {
-                                         -(2.0f * PI),
-                                         -(3.0f * PI_over_2),
-                                         -PI_over_2,
-                                         PI_over_2,
-                                         (3.0f * PI_over_2)
-                                       };
-        const float to_interval[5] = {
-                                       -(3.0f * PI_over_2),
-                                       -PI_over_2,
-                                       PI_over_2,
-                                       (3.0f * PI_over_2),
-                                       (2.0f * PI)
-                                     };
+        typedef struct
+        {
+            float from;
+            float to;
+        } INTERVAL_T;
+
+        const unsigned int NUM_INTERVALS = 5;
+
+        const INTERVAL_T interval[NUM_INTERVALS] =
+                  {
+                       { -TWO_PI,             -(3.0f * PI_over_2) },
+                       { -(3.0f * PI_over_2), -PI_over_2          },
+                       { -PI_over_2,          PI_over_2           },
+                       { PI_over_2,           (3.0f * PI_over_2)  },
+                       { (3.0f * PI_over_2),  TWO_PI              }
+                  };
 
         painter.setPen(Qt::black);
 
@@ -278,10 +280,10 @@ void GraphicsWindow::paintEvent(QPaintEvent *event)
 
         QPolygonF polygon;
 
-        for (unsigned int i = 0; i < 5; i++)
+        for (unsigned int i = 0; i < NUM_INTERVALS; i++)
         {
-            for (float rad = from_interval[i];
-                       rad < to_interval[i];
+            for (float rad = interval[i].from;
+                       rad < interval[i].to;
                        rad = rad + 0.030)
             {
                 yf = std::tan(rad);
