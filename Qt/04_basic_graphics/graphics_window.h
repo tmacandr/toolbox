@@ -67,9 +67,10 @@ private:
     bool draw_cosecant  = false;
 
     // C++20 has std::numbers::pi
-    const float PI        = 3.14159;
-    const float TWO_PI    = 2.0 * PI;
-    const float PI_over_2 = PI / 2.0;
+    const float PI              = 3.14159;
+    const float TWO_PI          = 2.0 * PI;
+    const float PI_over_2       = PI / 2.0;
+    const float THREE_PI_over_2 = 3.0f * PI_over_2;
 };
 
 #endif // GRAPHICS_WINDOW_H

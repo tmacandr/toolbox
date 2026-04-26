@@ -263,11 +263,11 @@ void GraphicsWindow::paintEvent(QPaintEvent *event)
 
         const INTERVAL_T interval[NUM_INTERVALS] =
                   {
-                       { -TWO_PI,             -(3.0f * PI_over_2) },
-                       { -(3.0f * PI_over_2), -PI_over_2          },
-                       { -PI_over_2,          PI_over_2           },
-                       { PI_over_2,           (3.0f * PI_over_2)  },
-                       { (3.0f * PI_over_2),  TWO_PI              }
+                       { -TWO_PI,          -THREE_PI_over_2 },
+                       { -THREE_PI_over_2, -PI_over_2       },
+                       { -PI_over_2,       PI_over_2        },
+                       { PI_over_2,        THREE_PI_over_2  },
+                       { THREE_PI_over_2,  TWO_PI           }
                   };
 
         painter.setPen(Qt::black);
@@ -287,6 +287,66 @@ void GraphicsWindow::paintEvent(QPaintEvent *event)
                        rad = rad + 0.030)
             {
                 yf = std::tan(rad);
+
+                if ( (yf > 1.0) or (yf < -1.0) ) continue;
+
+                //std::cout << "("  << rad << ", " << yf << ")\n";
+
+                xf = (rad / TWO_PI) * (float) half_w;
+
+                x = (int) xf + half_w;
+
+                yf = 1.0 - yf;
+
+                y = (int) (yf * half_h);
+
+                nxt_point.setX((float) x);
+                nxt_point.setY((float) y);
+
+                polygon.push_back(nxt_point);
+            }
+
+            painter.drawPolyline(polygon);
+
+            polygon.clear();
+        }
+    }
+
+    if (draw_cotangent)
+    {
+        typedef struct
+        {
+            float from;
+            float to;
+        } INTERVAL_T;
+
+        const unsigned int NUM_INTERVALS = 4;
+
+        const INTERVAL_T interval[NUM_INTERVALS] =
+                  {
+                       { -TWO_PI, -PI },
+                       { -PI,     0.0f},
+                       { 0.0f,    PI},
+                       { PI,      TWO_PI}
+                  };
+
+        painter.setPen(Qt::darkCyan);
+
+        QPointF     nxt_point;
+        const int   half_w = width() / 2;
+        const float half_h = (float) height() / 2.0;
+        float       xf;
+        float       yf;
+
+        QPolygonF polygon;
+
+        for (unsigned int i = 0; i < NUM_INTERVALS; i++)
+        {
+            for (float rad = interval[i].from;
+                       rad < interval[i].to;
+                       rad = rad + 0.030)
+            {
+                yf = 1.0 / std::tan(rad);
 
                 if ( (yf > 1.0) or (yf < -1.0) ) continue;
 
