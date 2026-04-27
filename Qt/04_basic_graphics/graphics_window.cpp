@@ -253,12 +253,6 @@ void GraphicsWindow::paintEvent(QPaintEvent *event)
 
     if (draw_tangent)
     {
-        typedef struct
-        {
-            float from;
-            float to;
-        } INTERVAL_T;
-
         const unsigned int NUM_INTERVALS = 5;
 
         const INTERVAL_T interval[NUM_INTERVALS] =
@@ -314,12 +308,6 @@ void GraphicsWindow::paintEvent(QPaintEvent *event)
 
     if (draw_cotangent)
     {
-        typedef struct
-        {
-            float from;
-            float to;
-        } INTERVAL_T;
-
         const unsigned int NUM_INTERVALS = 4;
 
         const INTERVAL_T interval[NUM_INTERVALS] =
@@ -370,6 +358,113 @@ void GraphicsWindow::paintEvent(QPaintEvent *event)
 
             polygon.clear();
         }
+    }
+
+    if (draw_secant)
+    {
+        //
+        // Have to pivot for secant and cosecant.  All values are at or
+        // above, or at and below the cosine (for secant) and sine (for
+        // cosecant.  So the 'grid' range is exmpanded from [-1.0 .. 1.0]
+        // to [-15.0 .. 15.0].  So each (x, y) value has to be projected
+        // from the [-15.0 .. 15.0] grid space to the height of the
+        // widget window [0 .. height()].
+        //
+        // And so for 'secant' a reference 'cosine' is shown.  But the
+        // selecting the 'sine', 'cosine', 'tangent', and 'cotangent'
+        // functions won't have the same reference frame.
+        //
+        // Always hated how 'secant' is the inverse of the 'cosine' and
+        // 'cosecant' is the invese of the 'sine'.
+        //
+        const unsigned int NUM_INTERVALS = 5;
+
+        const INTERVAL_T interval[NUM_INTERVALS] =
+                  {
+                       { -TWO_PI,          -THREE_PI_over_2 },
+                       { -THREE_PI_over_2, -PI_over_2       },
+                       { -PI_over_2,       PI_over_2        },
+                       { PI_over_2,        THREE_PI_over_2  },
+                       { THREE_PI_over_2,  TWO_PI           }
+                  };
+
+        painter.setPen(Qt::red);
+
+        QPointF     nxt_point;
+        const float window_height = (float) height();
+        const float grid_height = 30.0f;
+        const float half_grid_height = grid_height / 2.0f;
+        const int   half_w = width() / 2;
+        float       xf;
+        float       yf;
+
+        QPolygonF polygon;
+
+        for (unsigned int i = 0; i < NUM_INTERVALS; i++)
+        {
+            //std::cout << "------- interval " << i << " ----------\n";
+
+            for (float rad = interval[i].from;
+                       rad < interval[i].to;
+                       rad = rad + 0.030)
+            {
+                yf =  1.0 / std::cos(rad);
+
+                //std::cout << "("  << rad << ", " << yf << ")\n";
+
+                if ( (yf > 20.0) or (yf < -20.0) ) continue;
+
+                xf = (rad / TWO_PI) * (float) half_w;
+
+                x = (int) xf + half_w;
+
+                yf = ((half_grid_height - yf) / grid_height) * window_height;
+
+                y = (int) yf;
+
+                nxt_point.setX((float) x);
+                nxt_point.setY((float) y);
+
+                polygon.push_back(nxt_point);
+            }
+
+            painter.drawPolyline(polygon);
+
+            polygon.clear();
+        }
+
+        //
+        // draw sin() for reference
+        //
+        painter.setPen(Qt::blue);
+
+        for (float rad = -TWO_PI; rad < TWO_PI; rad = rad + 0.030)
+        {
+            yf =  std::cos(rad);
+
+            //std::cout << "("  << rad << ", " << yf << ")\n";
+
+            xf = (rad / TWO_PI) * (float) half_w;
+
+            x = (int) xf + half_w;
+
+            yf = ((half_grid_height - yf) / grid_height) * window_height;
+
+            y = (int) yf;
+
+            nxt_point.setX((float) x);
+            nxt_point.setY((float) y);
+
+            polygon.push_back(nxt_point);
+        }
+
+        painter.drawPolyline(polygon);
+
+        polygon.clear();
+    }
+
+    if (draw_cosecant)
+    {
     }
 }
 

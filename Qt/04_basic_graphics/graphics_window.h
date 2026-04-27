@@ -71,6 +71,13 @@ private:
     const float TWO_PI          = 2.0 * PI;
     const float PI_over_2       = PI / 2.0;
     const float THREE_PI_over_2 = 3.0f * PI_over_2;
+
+    typedef struct
+    {
+        float from;
+        float to;
+    } INTERVAL_T;
+
 };
 
 #endif // GRAPHICS_WINDOW_H
