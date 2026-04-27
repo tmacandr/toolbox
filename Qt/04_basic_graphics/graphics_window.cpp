@@ -434,7 +434,7 @@ void GraphicsWindow::paintEvent(QPaintEvent *event)
         }
 
         //
-        // draw sin() for reference
+        // draw cos() for reference
         //
         painter.setPen(Qt::blue);
 
@@ -465,6 +465,94 @@ void GraphicsWindow::paintEvent(QPaintEvent *event)
 
     if (draw_cosecant)
     {
+        //
+        // See comment about 'secant' above ... same applies ... except
+        // applies to 'cosecant' (1/sin)
+        //
+        const unsigned int NUM_INTERVALS = 4;
+
+        const INTERVAL_T interval[NUM_INTERVALS] =
+                  {
+                       { -TWO_PI, -PI },
+                       { -PI,     0.0f},
+                       { 0.0f,    PI},
+                       { PI,      TWO_PI}
+                  };
+
+        painter.setPen(Qt::magenta);
+
+        QPointF     nxt_point;
+        const float window_height = (float) height();
+        const float grid_height = 30.0f;
+        const float half_grid_height = grid_height / 2.0f;
+        const int   half_w = width() / 2;
+        float       xf;
+        float       yf;
+
+        QPolygonF polygon;
+
+        for (unsigned int i = 0; i < NUM_INTERVALS; i++)
+        {
+            //std::cout << "------- interval " << i << " ----------\n";
+
+            for (float rad = interval[i].from;
+                       rad < interval[i].to;
+                       rad = rad + 0.030)
+            {
+                yf =  1.0 / std::sin(rad);
+
+                //std::cout << "("  << rad << ", " << yf << ")\n";
+
+                if ( (yf > 20.0) or (yf < -20.0) ) continue;
+
+                xf = (rad / TWO_PI) * (float) half_w;
+
+                x = (int) xf + half_w;
+
+                yf = ((half_grid_height - yf) / grid_height) * window_height;
+
+                y = (int) yf;
+
+                nxt_point.setX((float) x);
+                nxt_point.setY((float) y);
+
+                polygon.push_back(nxt_point);
+            }
+
+            painter.drawPolyline(polygon);
+
+            polygon.clear();
+        }
+
+        //
+        // draw sin() for reference
+        //
+        painter.setPen(Qt::darkGreen);
+
+        for (float rad = -TWO_PI; rad < TWO_PI; rad = rad + 0.030)
+        {
+            yf =  std::sin(rad);
+
+            //std::cout << "("  << rad << ", " << yf << ")\n";
+
+            xf = (rad / TWO_PI) * (float) half_w;
+
+            x = (int) xf + half_w;
+
+            yf = ((half_grid_height - yf) / grid_height) * window_height;
+
+            y = (int) yf;
+
+            nxt_point.setX((float) x);
+            nxt_point.setY((float) y);
+
+            polygon.push_back(nxt_point);
+        }
+
+        painter.drawPolyline(polygon);
+
+        polygon.clear();
+
     }
 }
 
