@@ -1,3 +1,9 @@
+//============================================================================
+// FILE: main.cpp
+//
+// DESCRIPTION:
+//    Main entry point for 'pop up' demo.
+//============================================================================
 #include "pop_up_demo_main_window.h"
 
 #include <QApplication>
@@ -9,3 +15,6 @@ int main(int argc, char *argv[])
     w.show();
     return a.exec();
 }
+
+/* EOF */
+

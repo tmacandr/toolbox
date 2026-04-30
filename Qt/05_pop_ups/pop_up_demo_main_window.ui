@@ -14,7 +14,7 @@
    <string>pop_up_demo_Main_Window</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="pop_up_3_pushButton">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -130,7 +130,7 @@
   </action>
   <action name="actionPop_Up_2">
    <property name="text">
-    <string>Pop Up 2</string>
+    <string>Pop Up 2 ...</string>
    </property>
   </action>
   <action name="actionExit">
