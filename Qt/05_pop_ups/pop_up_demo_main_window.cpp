@@ -10,9 +10,10 @@
 
 #include "pop_up_demo_main_window.h"
 #include "ui_pop_up_demo_main_window.h"
+#include "dialog_1_window.h"
 
+static Dialog_1_Window *dialog_1 = NULL;
 
-static QDialog *dialog_1 = NULL;
 static QDialog *dialog_2 = NULL;
 static QDialog *dialog_3 = NULL;
 
@@ -58,10 +59,8 @@ void pop_up_demo_Main_Window::pop_up_1_action_slot()
 
     if ( ! dialog_1 )
     {
-        dialog_1 = new QDialog(ui->centralwidget, Qt::Dialog);
+        dialog_1 = new Dialog_1_Window(ui->centralwidget);
     }
-
-    dialog_1->setVisible(true);
 
     dialog_1->show();
 }

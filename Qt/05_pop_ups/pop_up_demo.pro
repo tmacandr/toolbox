@@ -17,15 +17,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    pop_up_demo_main_window.cpp
+    pop_up_demo_main_window.cpp \
+    dialog_1_window.cpp
 
 HEADERS += \
-    pop_up_demo_main_window.h
+    pop_up_demo_main_window.h \
+    dialog_1_window.h
 
 FORMS += \
-    pop_up_demo_main_window.ui
+    pop_up_demo_main_window.ui \
+    dialog_1.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
