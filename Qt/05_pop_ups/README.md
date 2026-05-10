@@ -6,10 +6,10 @@ dialog windows from a main GUI display.
 I thought it wouldn't be too bad, using that **Qt Creator** tool.
 But it quickly spun out of control.
 
-## First Attempt - Qt Creator
+## Attempt  1 - Qt Creator
 
-The approach was to define a base GUI using the **QT Creator** tool.  It
-had a base button and a couple of menu-bar buttons.  Each of the `slot`
+The first approach was to define a base GUI using the **QT Creator** tool.
+It had a base button and a couple of menu-bar buttons.  Each of the `slot`
 functions for the buttons would pop-up a different dialog.  Each dialog
 in turn would have a button or two ... do some 'dilly-dally' work, and
 then have an `exit` button.
@@ -24,13 +24,31 @@ The **Qt Creator** tool has no intuitive mechanism to create dialogs.  Well,
 I at least struggled mightily to find some mechanism, and couldn't find
 any.
 
-## Second Attempt - Copy the .ui File
+## Attempt 2 - QDialog
+
+I did a *google* query on how to pop-up a dialog in **Qt**.  It came back
+with some example code using a class called **QDialog**.  So, following
+the demo (bare-bones) code, and without doing any real (in-depth) research
+about this class, I just *went for it*.
+
+And sure enough I got three little dialogs to pop-up when each of the three
+buttons were selected.
+
+Yay!
+
+But there was nothing there.  They were empty shells.  There was a banner
+at the top (with no title) and the standar **X** exit button at the upper
+left ... but that was it.
+
+It was looking like a really tough job to keep going.
+
+## Attempt 3 - Copy the .ui File
 
 So I thought I'll just copy the **.ui** file that defies the  base window
 and implement the first dialog window by editing the contents from the
 base window.
 
-The **.ui** file is a quasi **Xml** file that declares and defines the
+The **.ui** file is a quasi **XML** file that declares and defines the
 base **widget** and attributes of a window.
 
 This was where **X/Xt/Xm** was heading when I bailed on GUI programming
@@ -40,7 +58,7 @@ files was all that was need to define even the most sophisticated
 GUIs.  I saw the *writing on the wall*.
 
 So, 25 years later, I'm full circle and trying to define a GUI using
-**Xml**.
+**XML**.
 
 And after coming up with (admittedly) an ugly dialog definition, and
 named the file `dialog_1_window.ui`, the next step was to figure out
@@ -69,12 +87,14 @@ is the latest and *google* assumes everybody is using.  But I installed
 But still **QUiLoader** is still in **Qt 5**.  But it's part of an *off*
 area of the base installation.  And I couldn't figure it out.
 
-## Attempt 3 - All Programmatically
+## Attempt 4  - All Programmatically
 
 I thought, "OK ... I'll go dinasaur" and write gobs of code to both
 define/create the dialogs, the sub-widgets (including the buttons), then
 pop-up the dialogs, respond to user operations (button clicks), and then
 finally `exit`.
+
+This was to be `Attempt 1 - QDialog` on steriods ...
 
 I was all prepared to go this approach and then thought this is just **not**
 the right approach.  While I'm sure it would work, the amount of time it
@@ -83,7 +103,7 @@ tool would probably take me months before I was *done*.
 
 So I gave up on this approach before even really trying.
 
-## Attempt 4 - Back to QUiLoader
+## Attempt 5 - Back to QUiLoader
 
 And so after giving up on #4 I thought I'd better give that **QUiLoader**
 thing another try.  There must've been something (or several?) that I
