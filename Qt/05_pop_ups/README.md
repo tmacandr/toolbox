@@ -24,15 +24,75 @@ The **Qt Creator** tool has no intuitive mechanism to create dialogs.  Well,
 I at least struggled mightily to find some mechanism, and couldn't find
 any.
 
-## Second Attempt - Programmatic
+## Second Attempt - Copy the .ui File
 
-So I went to `google` and asked how to implement dialogs *programmatically*.
+So I thought I'll just copy the **.ui** file that defies the  base window
+and implement the first dialog window by editing the contents from the
+base window.
+
+The **.ui** file is a quasi **Xml** file that declares and defines the
+base **widget** and attributes of a window.
+
+This was where **X/Xt/Xm** was heading when I bailed on GUI programming
+back in the 1990s.  It was getting to the point where one didn't need
+to be an *engineer* to do GUI applications.  Some editing of template
+files was all that was need to define even the most sophisticated
+GUIs.  I saw the *writing on the wall*.
+
+So, 25 years later, I'm full circle and trying to define a GUI using
+**Xml**.
+
+And after coming up with (admittedly) an ugly dialog definition, and
+named the file `dialog_1_window.ui`, the next step was to figure out
+how to *load* this file, process the contents, attach the needed
+*slot* functions, and actually pop it up at run time.
+
+So I went to `google` and asked how to load **.ui** files *programmatically*.
+It gave some example code on how to load the *.ui* file and render it.
+
+But all I got was misery.  I tried to use the C++ code for the base window
+as a *template* (so to speak) assuming the class definition and the naming
+convention in the *.ui* file should be the same.  This gave me a bevy of
+compilation errors.
+
+Also, **google** gave some example code that uses these two classes
+called **QUiLoader** and **QFile**.  These are the base mechanisms to load
+the **.ui** file, parse the (quasi XML) content, and then render the
+contents.
+
+And I struggled mightily to figure out why the compiler couldn't find the
+**QUiLoader** class.  It turned out the first problem was that when I asked
+the question to *google*, then answer came back for *Qt* **Version 6**, which
+is the latest and *google* assumes everybody is using.  But I installed
+*Qt* **Version 5**.  Ug.
+
+But still **QUiLoader** is still in **Qt 5**.  But it's part of an *off*
+area of the base installation.  And I couldn't figure it out.
+
+## Attempt 3 - All Programmatically
 
 I thought, "OK ... I'll go dinasaur" and write gobs of code to both
 define/create the dialogs, the sub-widgets (including the buttons), then
 pop-up the dialogs, respond to user operations (button clicks), and then
 finally `exit`.
 
-So **google** dumps out some example code that uses these two classes
-called **QUiLoader** and **QFile**.
+I was all prepared to go this approach and then thought this is just **not**
+the right approach.  While I'm sure it would work, the amount of time it
+would take me to read all the `help` information from the **Qt Assistant**
+tool would probably take me months before I was *done*.
+
+So I gave up on this approach before even really trying.
+
+## Attempt 4 - Back to QUiLoader
+
+And so after giving up on #4 I thought I'd better give that **QUiLoader**
+thing another try.  There must've been something (or several?) that I
+missed.
+
+So this is where I am ...
+
+# Implemention
+
+If I get through Attemp 4 then I'll describe that actual mechanics here.
+
 
