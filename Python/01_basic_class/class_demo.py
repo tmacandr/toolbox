@@ -3,6 +3,9 @@
 #
 # DESCRIPTION:
 #    Demo of Python 'object oriented' mechanics.
+#
+#    NOTE - even though the name of the 'class' is the same as the file
+#           Python does not require that ... i.e. they can be different.
 #=============================================================================
 
 import os
