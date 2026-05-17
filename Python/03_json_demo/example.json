@@ -1,0 +1,11 @@
+{
+   "DATA" : {
+       "Name"    : "Bill Clay",
+       "Address" : "123 Natatome Plaze",
+       "City"    : "Century City",
+       "State"   : "CA",
+       "Zip"     : 91234,
+       "Age"     : 32
+   }
+}
+
