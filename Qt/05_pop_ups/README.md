@@ -228,9 +228,13 @@ The specific steps are as follows:
               Finish>
       ```
 
+      Note - compile errors and/or warnings will probably be shown in the
+      generated code.  Ignore for now.
+
    2. Build main GUI window
       ```
-      (a) In the "Projects" pane expand the "pop_up_demo [main]"
+      (a) In the "Projects" pane expand the "pop_up_demo [main]" (it may
+          already be expanded).
 
       (b) Select/expand "Forms"
 
@@ -319,7 +323,7 @@ The specific steps are as follows:
 
              pop_up_demo
 
-          Verify GUI ... e.g. output from Dialog 3 button, etc
+          Verify GUI ... e.g. output from Dialog 3 button (only), etc
       ```
 
    7. Implement **action** functions:
@@ -463,7 +467,7 @@ The specific steps are as follows:
           ```
              Select the 'canvas' and the select 'Change objectName...'
 
-             Set name to: Dialog_1
+             Set name to: Dialog_1_Window
 
              Add "Push Button" from palette (drag-and-drop)
 
@@ -507,6 +511,9 @@ The specific steps are as follows:
           of my frustration with the **Qt Creator** tool.
 
    10. Clean and re-build the project
+
+       Must invoke **build.sh** so the `ui_dialog_1.h` is generated.
+
        ```
        (i) make clean
 
@@ -552,7 +559,7 @@ The specific steps are as follows:
        private slots:
 
        private:
-           Ui_Dialog_1 *ui;   // <--- Class declared in 'ui_dialog_1.h
+           Ui_Dialog_1_Window *ui;   // <--- Class declared in 'ui_dialog_1.h
        };
        #endif // DIALOG_1_WINDOW_H
        ------------------------------------------------
@@ -570,7 +577,7 @@ The specific steps are as follows:
        Dialog_1_Window::Dialog_1_Window(QWidget *parent)
 
            : QDialog(parent),
-             ui(new Ui_Dialog_1)  // <-- Again, no 'namespace' stuff
+             ui(new Ui_Dialog_1_Window)  // <-- Again, no 'namespace' stuff
 
        {
            ui->setupUi(this);
@@ -609,7 +616,7 @@ The specific steps are as follows:
 
        Verify no compile errors or undefined symbols.
 
-       But don't _run_ ... nothing is connected yet ...
+       But don't need to _run_ ... nothing is connected yet ...
 
    13. Add the **Dialog_1_Window** class to the `pop_up_demo_Main_Window`.
 
@@ -630,6 +637,9 @@ The specific steps are as follows:
        ```
 
        Edit: **pop_up_demo_main_window.cpp**
+
+       Add the following to the **destructor**.
+
        ```
        ------------------------------------------------
        pop_up_demo_Main_Window::~pop_up_demo_Main_Window()
@@ -641,7 +651,12 @@ The specific steps are as follows:
 
            delete ui;
        }
+       ------------------------------------------------
+       ```
 
+       Then add the following **action** function.
+       ```
+       ------------------------------------------------
        void pop_up_demo_Main_Window::dialog_1_action_slot()
        {
            std::cout << "pop up 1\n";
@@ -689,6 +704,7 @@ The specific steps are as follows:
 
           void dialog_1_push_1_clicked();
        ------------------------------------------------
+       ```
 
        Implement the **slot** function as follows: 
      
@@ -739,10 +755,112 @@ The specific steps are as follows:
  
    15. How to handle the "Cancel" and "OK" buttons.
 
-       **FIX ME**
-       **FIX ME**
-       **FIX ME**
+       A) There is a class/widget hierarchy defined for the **Cancel** and
+       **OK** buttons on `Dialog_1_Window`.  Each button is _contained_
+       in what is called a **QDialogButtonBox** widget (class).  A **slot**
+       function can be attached to either or both buttons, programmatically
+       that is.  The _connect()_ mechanism (as was shown above) is used.
 
+       The _trick_ here is that the the default behavior of the **Cancel**
+       and **Ok** buttons is still enabled.  A **slot** function is _added_
+       to the behavior of the buttons.  This means that while the **slot**
+       function is invoked, the pop-up dialog is still _dismissed_.
+
+       The following is how to _attach_ a **slot** function to the **Ok**
+       button on `Dialog_1_Window`.
+
+       Edit: **dialog_1.h**
+
+       Add the declaration of a new **slot** function for the **Ok**
+       button:
+
+       ```
+       ------------------------------------------------
+       private slots:
+
+              .
+              .
+              .
+
+           void dialog_1_OK_button_clicked();
+       ------------------------------------------------
+       ```
+
+       B) Edit: **dialog_1.cpp**
+
+       Implement the **connect()** mechanism for the **slot** function
+       for the **Ok** button:
+
+       ```
+       ------------------------------------------------
+              .
+              .
+              .
+       #include <QDialogButtonBox>
+              .
+              .
+              .
+
+       Dialog_1_Window::Dialog_1_Window(QWidget *parent)
+
+             : QDialog(parent),
+               ui(new Ui_Dialog_1_Window)  // <-- Again, no 'namespace' stuff
+
+       {
+           ui->setupUi(this);
+
+              .
+              .
+              .
+
+           QDialogButtonBox *btn_box;
+
+           btn_box = ui->buttonBox;
+
+           QPushButton *ok_btn = btn_box->button(QDialogButtonBox::Ok);
+
+           connect(ok_btn,
+                   &QPushButton::clicked,
+                   this,
+                   &Dialog_1_Window::dialog_1_OK_button_clicked);
+       }
+       ------------------------------------------------
+       ```
+
+       C) Implement the **connect()** mechanism for the **slot** function
+       for the **Ok** button:
+
+       ```
+       ------------------------------------------------
+       void Dialog_1_Window::dialog_1_OK_button_clicked()
+       {
+           std::cout << "Dialog 1 - OK button\n";
+       }
+       ------------------------------------------------
+       ```
+
+       D) Build
+
+       Only the `make` is needed to build.
+
+
+       ```
+          make clean
+
+          make
+       ```       
+
+       E) Run
+
+       ```
+       Select "File-->Dialog 1"
+
+       Select the "Ok" button
+       ```
+
+       Verify that both the `dialog_1_OK_button_clicked()` function is
+       invoked **and** that `Dialog 1` window is dismissed.
+ 
    16. Implement **Dialog 2** and **Dialog 3**
 
        With all due respect, to implement **Dialog 2** repeat steps
