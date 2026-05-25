@@ -32,6 +32,16 @@ pop_up_demo_Main_Window::~pop_up_demo_Main_Window()
         delete dialog_1;
     }
 
+    if (dialog_2)
+    {
+        delete dialog_2;
+    }
+
+    if (dialog_3)
+    {
+        delete dialog_3;
+    }
+
     delete ui;
 }
 
@@ -39,6 +49,13 @@ pop_up_demo_Main_Window::~pop_up_demo_Main_Window()
 void pop_up_demo_Main_Window::on_dialog_3_button_clicked()
 {
     std::cout << "dialog 3 button\n";
+
+    if ( not dialog_3 )
+    {
+        dialog_3 = new Dialog_3_Window(this);
+    }
+
+    dialog_3->show();
 }
 
 void pop_up_demo_Main_Window::dialog_1_action_slot()
@@ -61,6 +78,13 @@ void pop_up_demo_Main_Window::exit_action_slot()
 void pop_up_demo_Main_Window::dialog_2_action_slot()
 {
     std::cout << "pop up 2\n";
+
+    if ( not dialog_2 )
+    {
+        dialog_2 = new Dialog_2_Window(this);
+    }
+
+    dialog_2->show();
 }
 
 /* EOF */

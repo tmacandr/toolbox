@@ -18,14 +18,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     pop_up_demo_main_window.cpp \
-    dialog_1.cpp
+    dialog_1.cpp \
+    dialog_2.cpp \
+    dialog_3.cpp
 
 HEADERS += \
     pop_up_demo_main_window.h \
-    dialog_1.h
+    dialog_1.h \
+    dialog_2.h \
+    dialog_3.h
 
 FORMS += \
     dialog_1.ui \
+    dialog_2.ui \
+    dialog_3.ui \
     pop_up_demo_main_window.ui
 
 # Default rules for deployment.
