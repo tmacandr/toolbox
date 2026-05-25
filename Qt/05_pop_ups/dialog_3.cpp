@@ -27,7 +27,13 @@ Dialog_3_Window::~Dialog_3_Window()
 
 void Dialog_3_Window::dialog_3_radio_button_clicked()
 {
-   std::cout << "Dialog 3 radio button\n";
+   QRadioButton *rb = ui->dialog_3_radio_button;
+    
+   bool ON = rb->isChecked();
+
+   std::string state = (ON ? "ON" : "OFF");
+
+   std::cout << "Dialog 3 radio button: " << state << "\n";
 }
 
 /* EOF */
