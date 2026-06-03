@@ -86,7 +86,7 @@ Steps are:
    cd $HOME/.ssh
    vim config
       -----------------------------------------------
-      Host gitlag
+      Host gitlab
          Hostname gitlab.<IP-addr>
          User git
          Port 32222
