@@ -97,7 +97,7 @@ Steps are:
 
     chmod 644 config
     cd
-    ssh-keygne -t rsa -b 4096 -C "${USER}@<svr-IP-addr>" -f ~/.ssh/gitlab
+    ssh-keygen -t rsa -b 4096 -C "${USER}@<svr-IP-addr>" -f ~/.ssh/gitlab
     cat ~.ssh/gitlab.pub
 
     Copy/paste the key 'gobble-dee-gook' to:
