@@ -1,9 +1,10 @@
 # Linux Commands and Utilities
 
-Boot configuration
+Old **Linux 6** Boot configuration defined/set in:
 ```
    /etc/inittab
 ```
+Not sure about Red Hat 7.0 and later.
 
 ## User Commands
 
