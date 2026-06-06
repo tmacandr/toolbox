@@ -107,7 +107,6 @@ Edit Commands:
    I - insert at beginning of line
    a - insert after current pos
    A - insert at end-of-line
-   <esc> - go to command mode 
    x - delete current char
    cw - delete word and enter insert mode
    dw - delete word
