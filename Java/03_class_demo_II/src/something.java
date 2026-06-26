@@ -10,7 +10,7 @@
  *--------------------------------------------------------------------------*/
 package src;
 
-class something 
+public class something 
 {
     /* private parameter */
     private int some_value = 0;
@@ -62,7 +62,8 @@ class something
      * METHOD: do_one_thing
      *
      * DESCRIPTION:
-     *    A class 'public' function.
+     *    A class 'public' function.  Calls the
+     *    'private' function 'do_one_thing()'.
      *-------------------------------------------*/
     public void do_something()
     {
@@ -76,7 +77,8 @@ class something
      * METHOD: do_another_thing
      *
      * DESCRIPTION:
-     *    Another class 'public' function.
+     *    Another 'public' function.  Calls the
+     *    'private' function 'do_add()'.
      *-------------------------------------------*/
     public int do_another_thing(int num)
     {
