@@ -5,6 +5,7 @@
  *    Manages the 'data-entry' panel.  Extracts the data from the
  *    text-fiels and writes them (as ASCII text) to a file.
  *--------------------------------------------------------------------------*/
+package src;
 
 import java.awt.Color;
 import java.awt.Container;
@@ -16,119 +17,185 @@ import javax.swing.BorderFactory;
 //import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 
 public class data_entry extends JFrame 
 {
+    /*-------------------------------------------
+     * METHOD: data_entry
+     *
+     * DESCRIPTION:
+     *    Class constructor.
+     *-------------------------------------------*/
     public data_entry()
     {
-        init();
+        data_entry_init();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         setSize(300, 725);
     
         setVisible(true);
-     }
+    }
 
+    /*
+     * Display objects:
+     *    1) Three buttons for "Save", "Cancel", and "Exit".
+     *    2) Labels and text-fields for the following
+     *       data-entry items:
+     *          Name
+     *          Address
+     *          City
+     *          State
+     *          ZIP
+     *          Phone
+     */ 
      private JButton save_button   = new JButton("Save");
      private JButton cancel_button = new JButton("Cancel");
      private JButton exit_button   = new JButton("Exit");
 
-     private JLabel name_label    = new JLabel("Name", 20, 20);
-     private JLabel address_label = new JLabel("Address", 30, 20);
-     private JLabel city_label    = new JLabel("City", 40, 20);
-     private JLabel state_label   = new JLabel("State", 50, 20);
-     private JLabel zip_label     = new JLabel("ZIP", 60, 20);
-     private JLabel phone_label   = new JLabel("Phone", 80, 20);
+     private JLabel name_label    = new JLabel("Name");
+     private JLabel address_label = new JLabel("Address");
+     private JLabel city_label    = new JLabel("City");
+     private JLabel state_label   = new JLabel("State");
+     private JLabel zip_label     = new JLabel("ZIP");
+     private JLabel phone_label   = new JLabel("Phone");
 
-     private JTextArea name_textarea     = new JTextArea("", 1, 20);
-     private JTextArea address_text_area = new JTextArea("", 4, 20);
-     private JTextArea city_text_area    = new JTextArea("", 1, 20);
-     private JTextArea state_text_area   = new JTextArea("", 10, 10);
-     private JTextArea zip_text_area     = new JTextArea("", 4, 20);
-     private JTextArea phone_text_area   = new JTextArea("", 10, 10);
+     int num_columns = 20;
 
-     class B1L implements ActionListener
+     private JTextField name_textfield     = new JTextField("", num_columns);
+     private JTextField address_text_area = new JTextField("", num_columns);
+     private JTextField city_text_area    = new JTextField("", num_columns);
+     private JTextField state_text_area   = new JTextField("", num_columns);
+     private JTextField zip_text_area     = new JTextField("", num_columns);
+     private JTextField phone_text_area   = new JTextField("", num_columns);
+
+     /*
+      * Button 'callbacks' in Java are implemented as 'instances' of
+      * the 'ActionListener' class.
+      *
+      * Need one each for "Save", "Cancel", and "Exit"
+      */
+     class Save_Button_Lister implements ActionListener
      {
+         /*-------------------------------------------
+          * METHOD: actionPerformed 
+          *
+          * DESCRIPTION:
+          *    Handler when 'Save' is selected.
+          *-------------------------------------------*/
          public void actionPerformed(ActionEvent e)
          {
-             String s = name_textarea.getText() + "\n";
+             String s = name_textfield.getText() + "\n";
 
-             zip_text_area.append(s);
+             zip_text_area.setText(s);
          }
      }
 
-     class B2L implements ActionListener
+     class Cancel_Button_Listener implements ActionListener
      {
+         /*-------------------------------------------
+          * METHOD: actionPerformed 
+          *
+          * DESCRIPTION:
+          *    Handler when 'Cancel' is selected.
+          *-------------------------------------------*/
          public void actionPerformed(ActionEvent e)
          {
-             address_text_area.setText("Inserted by Button 2");
-             address_text_area.append(": " + name_textarea.getText());
+             String s = "Cancel not implmented";
 
-             zip_text_area.append(address_text_area.getText() + "\n");
+             name_textfield.setText(s);
+             address_text_area.setText(s);
+             city_text_area.setText(s);
+             state_text_area.setText(s);
+             zip_text_area.setText(s);
+
+             s = "phone # here";
+
+             phone_text_area.setText(s);
          }
      }
 
-     class B3L implements ActionListener
+     class Exit_Button_Listener implements ActionListener
      {
+         /*-------------------------------------------
+          * METHOD: actionPerformed 
+          *
+          * DESCRIPTION:
+          *    Handler when 'Exit' is selected.
+          *-------------------------------------------*/
           public void actionPerformed(ActionEvent e)
           {
-              String s = " Replacement ";
-              address_text_area.replaceRange(s, 3, 3 + s.length());
+              String s = " Fooled ya - Exit not implemented";
+              address_text_area.setText(s);
           }
      }
 
-     class B4L implements ActionListener
+
+    /*-------------------------------------------
+     * METHOD: data_entry
+     *
+     * DESCRIPTION:
+     *    Instantiate the GUI components, format
+     *    the layout, and connect the 'callbacks'.
+     *-------------------------------------------*/
+     private void data_entry_init()
      {
-         public void actionPerformed(ActionEvent e)
-         {
-             address_text_area.insert(" Inserted ", 10);
-         }
-     }
+         Container container = getContentPane();
 
-     private void init()
-     {
-         Container cp = getContentPane();
+         FlowLayout flow = new FlowLayout();
 
-         cp.setLayout(new FlowLayout());
+         container.setLayout(flow);
 
-         // Create Borders for components:
-         Border brd = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK);
+         // Create a Border object of 1 pixel width/height/etc
+         // that will be applied to each text-field object.
+         Border border = BorderFactory.createMatteBorder
+                                       (1, 1, 1, 1, Color.BLACK);
 
-         name_textarea.setBorder(brd);
+         name_textfield.setBorder(border);
+         address_text_area.setBorder(border);
+         city_text_area.setBorder(border);
+         state_text_area.setBorder(border);
+         zip_text_area.setBorder(border);
+         phone_text_area.setBorder(border);
 
-         address_text_area.setBorder(brd);
+         // 'Add' each of the base objects to the 'container'
+         container.add(name_label);
+         container.add(address_label);
+         container.add(city_label);
+         container.add(state_label);
+         container.add(zip_label);
+         container.add(phone_label);
 
-         sp3.setBorder(brd);
-         sp4.setBorder(brd);
-         sp5.setBorder(brd);
-         sp6.setBorder(brd);
+         container.add(name_textfield);
+         container.add(address_text_area);
+         container.add(city_text_area);
+         container.add(state_text_area);
+         container.add(zip_text_area);
+         container.add(phone_text_area);
 
-         // Initialize listeners and add components:
-         B1L save_callback = new B1L();
+         container.add(save_button);
+         container.add(cancel_button);
+         container.add(exit_button);
 
-         save_button.addActionListener(save_callback);
+         // Create 'listener' objecs and connect to the buttons:
+         //        Save
+         //        Cancel
+         //        Exit
+         Save_Button_Lister save_listener = new Save_Button_Lister();
 
-         cp.add(save_button);
+         save_button.addActionListener(save_listener);
 
-         cp.add(name_textarea);
+         Cancel_Button_Listener cancel_listener = new Cancel_Button_Listener();
 
-         cancel_button.addActionListener(new B2L());
+         cancel_button.addActionListener(cancel_listener);
 
-         cp.add(cancel_button);
-         cp.add(address_text_area);
+         Exit_Button_Listener exit_listener = new Exit_Button_Listener();
 
-         exit_button.addActionListener(new B3L());
-
-         cp.add(exit_button);
-         cp.add(sp3);
-         cp.add(sp4);
-         cp.add(sp5);
-         cp.add(sp6);
+         exit_button.addActionListener(exit_listener);
      }
 };
 

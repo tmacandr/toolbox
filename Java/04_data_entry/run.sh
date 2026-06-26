@@ -3,11 +3,11 @@
 # *  FILE: run.sh
 # * 
 # *  DESCRIPTION:
-# *     Script to run the "JScrollPanes" Java program
+# *     Script to run the "data_entry" Java program
 # ******************************************************************
 
 HERE=`pwd`
 
-CLASSPATH=$HERE
+CLASSPATH="$HERE;src"
 
-java JScrollPanes
+java main
