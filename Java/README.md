@@ -12,7 +12,9 @@
  10. 09_image_viwer
 
 # REFERENCES:
-  1. https://courses.cs.washington.edu/courses/cse341/98au/java/
+  1. NO GOOD ANYMORE - they put up a firewall
+
+     https://courses.cs.washington.edu/courses/cse341/98au/java/
 
   2. https://www.cs.dartmouth.edu/~cs10/notes4.html
 
