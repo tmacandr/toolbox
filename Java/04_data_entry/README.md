@@ -9,7 +9,6 @@ This is essentially a duplicate of the 'data-entry' demo
 in the **Qt** area.  The following entries are to be processed:
 ```
    Name:
-   Age:
    Address:
    City:
    State:
