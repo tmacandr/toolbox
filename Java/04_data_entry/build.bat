@@ -41,5 +41,19 @@ javac %SRC%
 
 cd %HERE%
 
+set SRC=main.src
+set OBJ=main.class
+
+IF EXIST %OBJ% (
+
+    echo ^-^-^-^> Delete old %OBJ%
+
+    del %OBJ%
+)
+
+echo ^-^-^-^> Compile: %SRC%
+
+javac %SRC%
+
 echo Done ...
 
