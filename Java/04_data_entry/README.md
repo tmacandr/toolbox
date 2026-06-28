@@ -95,7 +95,7 @@ GUI development.
 So I guess there's a bit of `cognitive dissonance` going on here.  While
 I downloaded/installed the **qtcreator** tool for the **Qt** version of
 the `data_entry` demo, I'm not doing so here.  I'm going to try to push
-my through a programmatic implementation of the **Spring** mechanism
+my way through a programmatic implementation of the **Spring** mechanism
 for the GUI alignment/presentation.
 
 
