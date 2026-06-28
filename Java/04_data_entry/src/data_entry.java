@@ -37,7 +37,7 @@ public class data_entry
     {
         data_entry_init();
 
-        frame.setSize(300, 725);
+        //frame.setSize(300, 725);
     
         frame.setVisible(true);
     }
@@ -361,6 +361,17 @@ public class data_entry
                   (SpringLayout.NORTH, exit_button,
                    6,
                    SpringLayout.SOUTH, phone_label);
+
+        // attach exit button to bottom of container
+        layout.putConstraint
+                  (SpringLayout.EAST, container,
+                   5,
+                   SpringLayout.EAST, exit_button);
+
+        layout.putConstraint
+                  (SpringLayout.SOUTH, container,
+                   5,
+                   SpringLayout.SOUTH, exit_button);
 
          frame.pack();
      }
