@@ -98,6 +98,83 @@ the `data_entry` demo, I'm not doing so here.  I'm going to try to push
 my way through a programmatic implementation of the **Spring** mechanism
 for the GUI alignment/presentation.
 
+## Attempt 1 
+
+The first attempt was to go for it all in one push.  The `data_entry` class
+did an inheritcance (`extends`) a **JFrame** as the parent widget.  Is
+the term _widget_ used in Java?
+
+It then just plowed through and created `Jbutton` objects for the `Save`,
+`Reset` and `Exit` buttons.  Then it created `JLabel` and `JTextField`
+pairs for the `Name`, `Address`, `City`, `State`, `ZIP`, and `Phone`
+entry fields.
+
+Then it implemented instances of the abstract class called `ActionListener`.
+This is how button `callbacks` are implemented in Java.  I found this
+clunky ... to instantiate an _abstract_ class and then implement the
+_virtual_ method **actionPerformed()**.  This acts as the `callback` for
+a button.
+
+A _constructor_ method (`data_entry()`) was implemented.  It called an
+initialization function (`init()`), set the size of the **JFrame** and
+then invoked `setVisable()` to render the GUI.
+
+The `init()` did most of the work.  It created at `Container` from the
+`JFrame`.  All objects would be _in_ the `Container`.  A `FlowLayout`
+was instantiated under the assumption that this would make it easy to
+control/define the layout (per the window above).
+ 
+So far so good ...
+
+And then everyting fell apart.
+
+All the GUI components were jumbled in a heap in the upper left corner
+of the window.  And the only reason why the windows was even shown
+was because the `size` was set to 300x725 pixels.
+
+## Attempt 2
+
+So I stumbled around the Web and came upon the **Spring** class [1].  So
+I continued on the _do everything_ based on the demo mechanics, particularly
+the function:
+```
+   <layout-obj>.putConstraint
+                   (<direction>, <from-obj>
+                    <padding>,
+                    <direction>, <to-obj>);
+```
+
+The attachment mechanism didn't seem to make sense.  The first case where
+the WEST (left) of the `name_label` was attached to the WEST (left?) of
+the `container`.  This made no sense.  But the WEST of the `name_textfield`
+attached to the EAST of the `name_label`.  This made sense.
+
+But after plowing through as much as I could figure, trial-and-error of
+different combinations, nothing was working.
+
+## Attempt 3
+
+So an attempt to _go small_ was made.  In this case, the GUI was reduced
+to one `JLabel`, one `JTextField` and one `JButton`.
+
+The alignment was to be as follows:
+
+scan-of-simple-GUI-image-here
+
+After more trial-and-error ... and then, by happenstance, remembering some
+more of the mechanics offered in **X/Xt/Xm** the following connections
+were made:
+
+scan-of-simple-attach-that-worked
+
+## Attempt 4
+
+Returning to the full data-entry panel, the following **attachment**
+mechanism was implemented.
+
+scan-of-full-up-attachment-plan
+
+And of course, at this point, the call to `setSize()` isn't needed anymore.
 
 # REFERENCES
 
